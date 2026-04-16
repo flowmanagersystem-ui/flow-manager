@@ -1,0 +1,38 @@
+services:
+
+  backend:
+    build: ./backend
+    container_name: FM-backend
+    ports:
+      - "8080:8080"
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: FM-frontend
+    ports:
+      - "4200:80"
+
+  database:
+    image: mysql:8.0.35
+    container_name: FM-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: flow_manager
+    ports:
+      - "5004:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-init/:/docker-entrypoint-initdb.d/
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    hostname: adminer
+    restart: always
+    ports:
+      - "5005:8080"
+
+volumes:
+  db-data:
