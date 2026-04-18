@@ -1,0 +1,101 @@
+<div class="app">
+    <div class="sidebar" [class.collapsed]="!toggleSidebar">
+        <button matButton class="toggle-btn" (click)="onToggleSidebar()">
+            <mat-icon class="icon-outlined">{{ toggleSidebarIcon }}</mat-icon>
+        </button>
+        <div class="sidebar-logo">
+            <div class="logo-icon">
+                <img src="assets/logo-branca.svg" alt="Logo">
+            </div>
+            <span class="logo-text">Flow Manager</span>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-label" [class.hidden]="!toggleSidebar">Principal</div>
+            <div class="nav-item" #dashboard>           
+                <a class="nav-link" routerLinkActive="active" routerLink="dashboard">
+                <mat-icon class="icon icon-outlined">dashboard_2</mat-icon>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            <div class="nav-item" #agenda>                          
+                <a class="nav-link" routerLinkActive="active" routerLink="agenda">
+                    <mat-icon class="icon icon-outlined">calendar_today</mat-icon>
+                    <span>Agenda</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-label" [class.hidden]="!toggleSidebar">Gestão</div>
+            <div class="nav-item" #agendamentos>           
+                <a class="nav-link" routerLinkActive="active" routerLink="agendamentos">
+                <mat-icon class="icon icon-outlined">schedule</mat-icon>
+                    <span>Agendamentos</span>
+                </a>
+            </div>                
+            <div class="nav-item" #clientes>           
+                <a class="nav-link" routerLinkActive="active" routerLink="clientes">
+                <mat-icon class="icon icon-outlined">group</mat-icon>
+                    <span>Clientes</span>
+                </a>
+            </div>                
+            <div class="nav-item" #profissionais>           
+                <a class="nav-link" routerLinkActive="active" routerLink="profissionais">
+                <mat-icon class="icon icon-outlined">assignment_ind</mat-icon>
+                    <span>Profissionais</span>
+                </a>
+            </div>                
+            <div class="nav-item" #servicos>           
+                <a class="nav-link" routerLinkActive="active" routerLink="servicos">
+                <mat-icon class="icon icon-outlined">layers</mat-icon>
+                    <span>Serviços</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div id="userName" class="user-name">{{ userName }}</div>
+                <div id="userRole" class="user-role">{{ role }}</div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+
+        <header class="topbar">
+            <div class="breadcrumb">
+               <ng-container *ngIf="breadcrumbService.breadcrumbs$ | async as breadcrumbs">
+                    <ng-container *ngFor="let bc of breadcrumbs; let last = last">
+                        <span>{{ bc }}</span>
+                        <span *ngIf="!last"> > </span>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+            <div class="topbar-search">
+                <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
+                <input matInput placeholder="Pesquisar...">
+            </div>
+
+            <div class="topbar-actions">
+                <button class="icon-btn" (click)="toggleTheme()">
+                    <mat-icon class="icon-outlined">{{ theme }}</mat-icon>
+                </button>
+                <button class="icon-btn">
+                    <mat-icon class="icon-outlined">notifications</mat-icon>
+                </button>
+                <button class="icon-btn btn-danger btn-sm">Sair</button>
+            </div> 
+        </header>
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <footer class="footer">
+            <span>Flow Manager v1.0 - {{ year }}</span>
+        </footer>
+    </main>
+</div> 
+

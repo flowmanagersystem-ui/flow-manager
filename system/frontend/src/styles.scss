@@ -1,1 +1,372 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$flow-manager-primary: mat.define-palette(mat.$indigo-palette);
+$flow-manager-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$flow-manager-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$flow-manager-theme: mat.define-light-theme((
+  color: (
+    primary: $flow-manager-primary,
+    accent: $flow-manager-accent,
+    warn: $flow-manager-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($flow-manager-theme);
+
 /* You can add global styles to this file, and also import other style files */
+$bg: #f7e7d3;
+$sidebar-w: 240px;
+$surface: #FFFFFF;
+$border: #e0dbd4;
+$text: #474546;
+$text-muted: #888;
+$primary: #4FBF9B;
+$primary-light: #e1f5ee;
+$radius: 8px;
+$danger: #e53935;
+$danger-light: #fdecea;
+$sidebar-w-sm: 60px;
+
+:root{
+  background-color: $bg;
+}
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: "Segoe_UI" system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.icon-outlined {
+  font-family: 'Material Icons Outlined';
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+// ********************************************************************************
+// ****************************** SIDEBAR STYLES **********************************
+// ********************************************************************************
+.sidebar{
+  width: $sidebar-w;
+  background: $surface;
+  border-right: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  transition: width .2s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+
+  &.collapsed {
+    width: $sidebar-w-sm;
+  }
+}
+
+.toggle-btn{
+  position: absolute;
+  right: -12px;
+  top: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: $surface;
+  border: 1px solid $border;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+
+  .mat-icon{
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    color: $text-muted;
+    fill: none;
+    transition: all .2s;
+  }
+}
+
+.sidebar-logo {
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid $border;
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: $primary;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon img {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 16px;
+    color: $text;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid $border;
+
+  .nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: $text-muted;
+    padding: 8px 16px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .nav-item {    
+      color: $text-muted;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+      overflow: hidden;
+      border-left: 3px solid transparent;
+      border-left-color: transparent;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      color: inherit;
+      text-decoration: none;
+
+      .icon {
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        flex-shrink: 0;
+      }
+
+      span {
+        overflow: hidden;
+      }
+
+      &:hover {
+        background-color: $primary-light;
+        color: $primary;
+        border-left-color: $primary;
+      }
+    }
+
+    &:has(.active) {
+      background-color: $primary-light;
+      color: $primary;
+      border-left-color: $primary;
+      font-weight: 600;
+    }
+  }
+}
+
+.sidebar-footer{
+  margin-top: auto;
+  padding: 12px 16px;
+  border-top: 1px solid $border;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+
+  .user-info{
+    overflow: hidden;
+  }
+
+  .user-name{
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role {
+    font-size: 11px;
+    color: $text-muted;
+  }
+}
+
+// ********************************************************************************
+// ******************************** MAIN STYLES ***********************************
+// ********************************************************************************
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+
+  .topbar {
+    height: 56px;
+    background: $surface;
+    border-bottom: 1px solid $border;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    flex-shrink: 0;
+
+      .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      font-size: 13px;
+      color: $text-muted;
+
+      a{
+        color: $primary;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .breadcrumb-sep{
+        color: $border;
+      }
+    }
+
+    .topbar-search {
+      display: flex;
+      align-items: center;
+      background: $bg;
+      border: 1px solid $border;
+      border-radius: $radius;
+      padding: 6px 12px;
+      gap: 8px;
+      min-width: 200px;
+
+      input {
+        border: none;
+        background: transparent;
+        outline: none;
+        color: $text;
+        font-size: 13px;
+        flex: 1;
+      }
+
+      .search-icon {
+        color: #1565c0;
+        flex-shrink: 0;
+      }
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: $radius;
+        border: 1px solid $border;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-muted;
+        transition: all .15s;
+      }
+
+      .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .btn-danger {
+        background: $danger;
+        color: #fff;
+
+        &:hover {
+          background: darken($danger, 10%);
+        }
+      }    
+    }
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer {
+    height: 40px;
+    background: $surface;
+    border-top: 1px solid $border;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 11px;
+    color: $text-muted;
+    flex-shrink: 0;
+  }
+
+}
