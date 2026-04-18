@@ -36,18 +36,8 @@ $flow-manager-theme: mat.define-light-theme((
 @include mat.all-component-themes($flow-manager-theme);
 
 /* You can add global styles to this file, and also import other style files */
-$bg: #f7e7d3;
-$sidebar-w: 240px;
-$surface: #FFFFFF;
-$border: #e0dbd4;
-$text: #474546;
-$text-muted: #888;
-$primary: #4FBF9B;
-$primary-light: #e1f5ee;
-$radius: 8px;
-$danger: #e53935;
-$danger-light: #fdecea;
-$sidebar-w-sm: 60px;
+
+@import 'variables';
 
 :root{
   background-color: $bg;

@@ -1,0 +1,60 @@
+<div class="screen">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Cadastrar Cliente</div>
+            <div class="page-subtitle">Preencha os dados do novo cliente</div>
+        </div>
+    </div>
+
+    <mat-card class="card" appearance="outlined">
+        <mat-card-content>
+            <div class="form-row">
+                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
+                    <mat-label class="form-label">Nome <span class="req">*</span></mat-label>
+                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: Ana Silva" />
+                    <mat-hint align="end"></mat-hint>
+                </mat-form-field>
+                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
+                    <mat-label class="form-label">Sobrenome <span class="req">*</span></mat-label>
+                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: Santos" />
+                    <mat-hint align="end"></mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
+                    <mat-label class="form-label">E-mail <span class="req">*</span></mat-label>
+                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: ana@email.com" />
+                    <mat-hint align="end"></mat-hint>
+                </mat-form-field>
+                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
+                    <mat-label class="form-label">Telefone <span class="req">*</span></mat-label>
+                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: (11) 9 9999-9999" />
+                    <mat-hint align="end"></mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field class="form-group" hintLabel="Mínimo 6 caracteres" appearance="outline">
+                    <mat-label class="form-label">Senha <span class="req">*</span></mat-label>
+                    <input class="form-control" matInput #input minlength="6" type="password"
+                        placeholder="********" />
+                    <mat-hint align="end"></mat-hint>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label class="form-label">Status <span class="req">*</span></mat-label>
+                    <mat-select>
+                        <mat-option value="option">Ativo</mat-option>
+                        <mat-option value="option">Inativo</mat-option>
+                    </mat-select>
+                    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+                </mat-form-field>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions class="form-actions">
+            <button class="btn btn-cancel" matButton="filled">Cancelar</button>
+            <button class="btn btn-confirm" matButton="filled">Salvar Cliente</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

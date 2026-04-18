@@ -1,0 +1,94 @@
+@import '../../../../../variables';
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    
+    .page-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: $text;
+    }
+
+    .page-subtitle {
+        font-size: 13px;
+        color: $text-muted;
+        margin-top: 2px;
+    }
+   }
+
+    .card {
+        background: $surface;
+        border: 1px solid $border;
+        border-radius: $radius;
+        padding: 20px;
+        transition: box-shadow .15s;
+        max-width: 640px;
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+
+            .form-group {
+                margin-bottom: 16px;   
+                
+                .form-control {
+                    width: 100%;
+                    border: 1px solid $border;
+                    border-radius: $radius;
+                    background: $surface;
+                    color: $text;
+                    font-size: 15px;
+                    transition: border-color .15s;
+                }
+
+                .form-label {
+                    .req {
+                    color: $danger;
+                    }
+                }
+            }
+        }        
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid $border;
+
+            .btn-cancel {
+                background: $danger;
+                color: #fff;
+            }  
+            .btn-confirm {
+                background: $success;
+                color: #fff;
+            }
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 9px 18px;
+                border-radius: $radius;
+                border: none;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 500;
+                transition: all .15s;
+                text-decoration: none;
+            }
+        }
+
+        
+    }
+}
