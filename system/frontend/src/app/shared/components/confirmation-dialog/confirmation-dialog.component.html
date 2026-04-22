@@ -1,0 +1,11 @@
+<mat-dialog-content class="confirmation-dialog-content">
+  <div class="modal-icon">
+    <mat-icon class="icon-outlined">{{ data.icon }}</mat-icon>
+  </div>
+  <div class="modal-title"><strong>{{ data.title }}</strong></div>
+  <div class="modal-body">{{ data.msg }}</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onConfirm(false)">Não</button>
+  <button  mat-stroked-button color="primary" (click)="onConfirm(true)">Sim</button>
+</mat-dialog-actions>

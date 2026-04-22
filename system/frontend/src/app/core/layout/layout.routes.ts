@@ -10,13 +10,18 @@ export const LayoutRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'inicio'
+                redirectTo: 'clientes'
             },
+            // {
+            //     path: 'inicio',
+            //     component: DashboardComponent,
+            //     data: { breadcrumb: 'Dashboard' } 
+            // },
             {
-                path: 'inicio',
-                component: DashboardComponent,
-                data: { breadcrumb: 'Dashboard' } 
-            },
+                path: 'clientes',
+                loadChildren: () => import('../../features/clientes/cliente.routes').then(m => m.ClientesRoutes),
+                data: { breadcrumb: 'Clientes' }
+            },        
         ]
     }
-];
+]

@@ -36,18 +36,8 @@ $flow-manager-theme: mat.define-light-theme((
 @include mat.all-component-themes($flow-manager-theme);
 
 /* You can add global styles to this file, and also import other style files */
-$bg: #f7e7d3;
-$sidebar-w: 240px;
-$surface: #FFFFFF;
-$border: #e0dbd4;
-$text: #474546;
-$text-muted: #888;
-$primary: #4FBF9B;
-$primary-light: #e1f5ee;
-$radius: 8px;
-$danger: #e53935;
-$danger-light: #fdecea;
-$sidebar-w-sm: 60px;
+
+@import 'variables';
 
 :root{
   background-color: $bg;
@@ -308,7 +298,7 @@ body {
       }
 
       .search-icon {
-        color: #1565c0;
+        color: $icon-info-color;
         flex-shrink: 0;
       }
     }
@@ -369,4 +359,281 @@ body {
     flex-shrink: 0;
   }
 
+}
+
+
+
+// ********************************************************************************
+// *********************************** TELAS **************************************
+// ********************************************************************************
+.screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 20px;
+  transition: box-shadow .15s;
+}
+// ******************************* CABEÇALHO *********************************************
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  
+  .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: $text;
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+    color: $text-muted;
+    margin-top: 2px;
+  }
+}
+// ******************************* FORMULÁRIOS *********************************************
+.form-row {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  gap: 16px;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // gap: 16px;
+
+  .form-group {
+    margin-bottom: 16px;   
+    width: 100%;
+    
+    .form-control {
+      border: 1px solid $border;
+      border-radius: $radius;
+      background: $surface;
+      color: $text;
+      font-size: 15px;
+      transition: border-color .15s;
+    }
+  }
+
+  .hint{
+    font-size: 12px;
+    color: #9ca3af;
+    line-height: 1.5; 
+  }
+}        
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid $border;
+}
+// ******************************* BOTÕES *********************************************
+.btn-cancel {
+  background: $danger;
+  color: #fff;
+} 
+.btn-confirm {
+  background: $success;
+  color: #fff;
+}
+.btn-primary {
+  background: $primary;
+  color: #fff;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: $radius;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all .15s;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: $radius;
+  border: 1px solid $border;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  transition: all .15s;
+  position: relative;
+}
+
+// ******************************* TABELAS *********************************************  
+.table-wrap {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid $border;
+  flex-wrap: wrap;
+}
+
+.table-toolbar-search {
+  display: flex;
+  align-items: center;
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 7px 12px;
+  gap: 8px;
+  flex: 1;
+  min-width: 180px;
+  color: $icon-info-color;
+}
+.table-toolbar-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: $text;
+  font-size: 13px;
+  flex: 1;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tbl th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: $text-muted;
+  border-bottom: 1px solid $border;
+  background: $bg;
+}
+
+.tbl td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid $border;
+
+  a{
+    color: inherit;
+  }
+}
+.tbl-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+
+  button:last-child {
+    color: $danger;
+  }
+}
+
+.pagination{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid $border;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-info {
+  background: $badge-info-bgcolor;
+  color: $badge-info-color;
+}
+.badge-success {
+  background: $success-light; 
+  color: darken($color: $primary, $amount: 15%);
+}
+
+.badge-gray {
+  background: $bg;
+  color: $text-muted;
+  border: 1px solid $border;
+}
+
+// ******************************* SNACKBAR *********************************************
+
+.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    border-radius: $radius-lg;
+    background: $surface !important;
+    border-left: 4px solid $border !important;
+  }
+
+  .mdc-snackbar__label {
+    color: $text !important; 
+    font-weight: 500;
+  }
+
+  .mat-mdc-snack-bar-action {
+    color: $primary !important; 
+  }
+}
+
+// ******************************* DIALOGS *********************************************
+.dialog-header{
+  background-color: $bg;
+  padding: 20px 36px;
+  margin: 0;
+}
+
+// ******************************* BREAKPOINTS *********************************************
+// celular 
+@media (max-width: 600px) {
+  .content {
+    font-size:  calc(100% - 8px);
+  }
+  .form-row {
+    flex-wrap: wrap;
+    gap: 0px;
+  }
+  .page-header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    .btn{
+      align-self: self-end;
+    }
+  }
 }
