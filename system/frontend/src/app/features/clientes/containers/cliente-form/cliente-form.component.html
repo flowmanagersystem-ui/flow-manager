@@ -1,60 +1,64 @@
-<div class="screen">
-    <div class="page-header">
-        <div>
-            <div class="page-title">Cadastrar Cliente</div>
-            <div class="page-subtitle">Preencha os dados do novo cliente</div>
-        </div>
-    </div>
-
-    <mat-card class="card" appearance="outlined">
-        <mat-card-content>
+<mat-card class="card" appearance="outlined">
+    <mat-card-content>
+        <form [formGroup]="formulario">
             <div class="form-row">
-                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
-                    <mat-label class="form-label">Nome <span class="req">*</span></mat-label>
-                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: Ana Silva" />
-                    <mat-hint align="end"></mat-hint>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Nome</mat-label>
+                    <input class="form-control" matInput #input placeholder="Ex: Ana" formControlName="nome" />
+                    <mat-error [control]="$any(formulario.get('nome'))" [label]="'nome'">  </mat-error>
                 </mat-form-field>
-                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
-                    <mat-label class="form-label">Sobrenome <span class="req">*</span></mat-label>
-                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: Santos" />
-                    <mat-hint align="end"></mat-hint>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Sobrenome</mat-label>
+                    <input class="form-control" matInput #input placeholder="Ex: Santos" formControlName="sobrenome" />
+                    <mat-error [control]="$any(formulario.get('sobrenome'))" [label]="'sobrenome'">  </mat-error>
+                    
                 </mat-form-field>
             </div>
-
             <div class="form-row">
-                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
-                    <mat-label class="form-label">E-mail <span class="req">*</span></mat-label>
-                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: ana@email.com" />
-                    <mat-hint align="end"></mat-hint>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">E-mail</mat-label>
+                    <input class="form-control" matInput #input type="email" placeholder="Ex: ana@email.com" formControlName="email" />
+                    <mat-hint align="start" class="hint">O e-mail deve ser único.</mat-hint>
+                    <mat-error [control]="$any(formulario.get('email'))" [label]="'email'">  </mat-error>                      
+                    
                 </mat-form-field>
-                <mat-form-field class="form-group" hintLabel="Mínimo 3 caracteres" appearance="outline">
-                    <mat-label class="form-label">Telefone <span class="req">*</span></mat-label>
-                    <input class="form-control" matInput #input minlength="3" placeholder="Ex: (11) 9 9999-9999" />
-                    <mat-hint align="end"></mat-hint>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Telefone</mat-label>
+                    <input class="form-control" matInput #input maxlength="15" placeholder="Ex: (11) 9 9999-9999" formControlName="telefone" telFormat />
+                    <mat-error [control]="$any(formulario.get('telefone'))" [label]="'telefone'">  </mat-error>
                 </mat-form-field>
             </div>
-
             <div class="form-row">
-                <mat-form-field class="form-group" hintLabel="Mínimo 6 caracteres" appearance="outline">
-                    <mat-label class="form-label">Senha <span class="req">*</span></mat-label>
-                    <input class="form-control" matInput #input minlength="6" type="password"
-                        placeholder="********" />
-                    <mat-hint align="end"></mat-hint>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Senha</mat-label>
+                    <input class="form-control" matInput #input minlength="6" maxlength="21" [type]="hideSenha ? 'password' : 'text'" placeholder="********" formControlName="senha" />
+
+                    <button mat-icon-button matSuffix (click)="hideSenha = !hideSenha" [attr.aria-label]="'Senha oculta'"
+                        [attr.aria-pressed]="hideSenha">
+                        <mat-icon class="icon-outlined">{{hideSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+
+
+
+                    <mat-error [control]="$any(formulario.get('senha'))" [label]="'senha'">  </mat-error>
+                    <mat-hint align="start" class="hint">Deve conter no mínimo 6 caracteres.</mat-hint>
+
                 </mat-form-field>
-                <mat-form-field class="form-group">
-                    <mat-label class="form-label">Status <span class="req">*</span></mat-label>
-                    <mat-select>
-                        <mat-option value="option">Ativo</mat-option>
-                        <mat-option value="option">Inativo</mat-option>
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Status</mat-label>
+                    <mat-select formControlName="status" >
+                            <mat-option *ngFor="let option of status" [value]="option">
+                            {{ option }}
+                        </mat-option>
                     </mat-select>
-                    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+                    <mat-error [control]="$any(formulario.get('status'))" [label]="'status'">  </mat-error>
                 </mat-form-field>
             </div>
+        </form>
 
-        </mat-card-content>
-        <mat-card-actions class="form-actions">
-            <button class="btn btn-cancel" matButton="filled">Cancelar</button>
-            <button class="btn btn-confirm" matButton="filled">Salvar Cliente</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+    </mat-card-content>
+    <mat-card-actions class="form-actions">
+        <button class="btn btn-cancel" matButton="filled" (click)="onCancel()">Cancelar</button>
+        <button class="btn btn-confirm" matButton="filled" (click)="onSubmit()">Salvar Cliente</button>
+    </mat-card-actions>
+</mat-card>

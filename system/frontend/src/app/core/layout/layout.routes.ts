@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from '../../features/dashboard/dashboard/dashboard.component';
-import { ClienteFormComponent } from '../../features/clientes/containers/cliente-form/cliente-form.component';
 
 export const LayoutRoutes: Routes = [
     {
@@ -11,7 +10,7 @@ export const LayoutRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'inicio'
+                redirectTo: 'clientes'
             },
             // {
             //     path: 'inicio',
@@ -19,10 +18,10 @@ export const LayoutRoutes: Routes = [
             //     data: { breadcrumb: 'Dashboard' } 
             // },
             {
-                path: 'inicio',
-                component: ClienteFormComponent,
+                path: 'clientes',
+                loadChildren: () => import('../../features/clientes/cliente.routes').then(m => m.ClientesRoutes),
                 data: { breadcrumb: 'Clientes' }
-            }
+            },        
         ]
     }
-];
+]
