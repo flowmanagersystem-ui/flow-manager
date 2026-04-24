@@ -25,7 +25,7 @@ import { ErrorDialogComponent } from '../../../../shared/components/error-dialog
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ClientesListComponent } from '../../components/clientes-list/clientes-list.component';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
-import { FormDialogComponent } from '../../../../shared/components/form-dialog/form-dialog.component';
+import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-clientes',
@@ -52,7 +52,7 @@ export class ClientesComponent {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private clientesService: ClientesService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(){
@@ -61,17 +61,14 @@ export class ClientesComponent {
 
   onAdd(){
     // this.router.navigate(['novo'], { relativeTo: this.route })
-    // if(this.authService.isAdmin()){
-      const dialogRef = this.dialog.open(FormDialogComponent, {
-        enterAnimationDuration: '400ms', 
-        exitAnimationDuration: '300ms',
-        data: {
-          title: 'Cadastrar Cliente',
-          subtitle: 'Preencha os campos abaixo para cadastrar um novo cliente.',
-          component: ClienteFormComponent,
-          modo: 'criar'
-        }
-      })  
+    // if(this.authService.isAdmin()){    
+    
+      const dialogRef = FormDialogComponent.open<Cliente>(this.dialog, {
+        title: 'Novo Cliente',
+        subtitle: 'Preencha os campos abaixo para cadastrar um novo cliente.',
+        modo: ModoFormT.CRIAR,
+        component: ClienteFormComponent,
+      })
   
       dialogRef.afterClosed().subscribe(result => {
         if(result){
@@ -86,18 +83,13 @@ export class ClientesComponent {
   }
 
   onEdit(cliente: Cliente){
-    // this.router.navigate(['edit', cliente.id], { relativeTo: this.route })
-    // if(this.authService.isAdmin()){
-      const dialogRef = this.dialog.open(FormDialogComponent, {      
-        enterAnimationDuration: '400ms', 
-        exitAnimationDuration: '300ms',  
-        data: {
-          title: 'Editar Cliente',
-          subtitle: 'Preencha os campos abaixo para editar o cliente.',
-          component: ClienteFormComponent,
-          cliente: cliente,
-          modo: 'editar'
-        }
+
+      const dialogRef = FormDialogComponent.open<Cliente>(this.dialog, {
+        title: 'Editar Cliente',
+        subtitle: 'Preencha os campos abaixo para editar o cliente.',
+        modo: ModoFormT.EDITAR,
+        record: cliente,
+        component: ClienteFormComponent,
       })
   
       dialogRef.afterClosed().subscribe(result => {
@@ -156,11 +148,8 @@ export class ClientesComponent {
   }
 
   onError(errorMsg: string, redirectTo?: string) {
-    const dialogRef = this.dialog.open(ErrorDialogComponent, {
-      enterAnimationDuration: '400ms', 
-      exitAnimationDuration: '300ms',
-      data: { message: errorMsg, redirectTo }
-    })
+
+    const dialogRef = ErrorDialogComponent.open(this.dialog, { message: errorMsg, redirectTo })
 
     dialogRef.afterClosed().subscribe(confirmed => {      
       this.router.navigate([''], { relativeTo: this.route }) // Mudar para rota home ou outra rota adequada

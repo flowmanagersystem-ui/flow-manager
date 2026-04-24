@@ -65,6 +65,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ClienteFormComponent {
   formulario!: FormGroup
+  cliente: Cliente;
   title = 'Cadastro de Cliente'
   subtitle = 'Preencha os campos abaixo para cadastrar um novo cliente.'   
   hideSenha = true
@@ -80,18 +81,18 @@ export class ClienteFormComponent {
     private clientesService: ClientesService,
     private loadingService: LoadingService,    
     private dialogRef: MatDialogRef<FormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { cliente: Cliente, modo: 'criar' | 'editar' }
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: { record: Cliente }
+  ) { this.cliente = data.record; }
 
   ngOnInit(){
     this.formulario = this.fb.group({
-      id: this.data.cliente?.id || '',
-      nome: [this.data.cliente?.nome || '', [Validators.required, Validators.minLength(3)]],
-      sobrenome: [this.data.cliente?.sobrenome || '', [Validators.required, Validators.minLength(3)]],
-      email: [this.data.cliente?.email || '', [Validators.required, Validators.email], this.validarEmailDuplicado.bind(this)],
-      telefone: [this.data.cliente?.telefone || '', [Validators.required, FormValidations.telMinLength, FormValidations.telMaxLength]],
-      senha: [this.data.cliente?.senha || '', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      status: [this.data.cliente?.status || '', [Validators.required]],
+      id: this.cliente?.id || '',
+      nome: [this.cliente?.nome || '', [Validators.required, Validators.minLength(3)]],
+      sobrenome: [this.cliente?.sobrenome || '', [Validators.required, Validators.minLength(3)]],
+      email: [this.cliente?.email || '', [Validators.required, Validators.email], this.validarEmailDuplicado.bind(this)],
+      telefone: [this.cliente?.telefone || '', [Validators.required, FormValidations.telMinLength, FormValidations.telMaxLength]],
+      senha: [this.cliente?.senha || '', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      status: [this.cliente?.status || '', [Validators.required]],
     })    
   }  
 
@@ -130,10 +131,8 @@ export class ClienteFormComponent {
   }
 
   onError(errorMsg: string, redirectTo?: string) {
-    const dialogRef = this.dialog.open(ErrorDialogComponent, {
-      data: { message: errorMsg, redirectTo }
-    })
-
+    const dialogRef = ErrorDialogComponent.open(this.dialog, { message: errorMsg, redirectTo })
+    
     dialogRef.afterClosed().subscribe(confirmed => {      
       this.router.navigate([''], { relativeTo: this.route })
     })

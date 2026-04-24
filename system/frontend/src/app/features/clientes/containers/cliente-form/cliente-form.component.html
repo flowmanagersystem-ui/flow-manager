@@ -24,7 +24,7 @@
                 </mat-form-field>
                 <mat-form-field class="form-group" appearance="outline">
                     <mat-label class="form-label">Telefone</mat-label>
-                    <input class="form-control" matInput #input maxlength="15" placeholder="Ex: (11) 9 9999-9999" formControlName="telefone" telFormat />
+                    <input class="form-control" type="tel" matInput #input maxlength="15" placeholder="Ex: (11) 9 9999-9999" formControlName="telefone" telFormat />
                     <mat-error [control]="$any(formulario.get('telefone'))" [label]="'telefone'">  </mat-error>
                 </mat-form-field>
             </div>
@@ -38,8 +38,6 @@
                         <mat-icon class="icon icon-outlined">{{hideSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
 
-
-
                     <mat-error [control]="$any(formulario.get('senha'))" [label]="'senha'">  </mat-error>
                     <mat-hint align="start" class="hint">Deve conter no mínimo 6 caracteres.</mat-hint>
 
@@ -47,7 +45,7 @@
                 <mat-form-field class="form-group" appearance="outline">
                     <mat-label class="form-label">Status</mat-label>
                     <mat-select formControlName="status" >
-                            <mat-option *ngFor="let option of status" [value]="option">
+                        <mat-option *ngFor="let option of status" [value]="option">
                             {{ option }}
                         </mat-option>
                     </mat-select>
