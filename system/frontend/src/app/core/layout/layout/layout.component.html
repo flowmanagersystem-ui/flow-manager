@@ -73,16 +73,16 @@
                 </ng-container>
             </div>
 
-            <div class="topbar-search">
+            <div class="topbar-search" style="display: none;">
                 <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
                 <input matInput placeholder="Pesquisar...">
             </div>
 
             <div class="topbar-actions">
-                <button class="icon-btn" (click)="toggleTheme()">
-                    <mat-icon class="icon-outlined">{{ theme }}</mat-icon>
+                <button class="icon-btn" (click)="toggleTheme()" [matTooltip]="themeService.isCurrentThemeDark() ? 'Claro' : 'Escuro'"  style="display: none;">
+                    <mat-icon class="icon-outlined">{{ themeIcon }}</mat-icon>
                 </button>
-                <button class="icon-btn">
+                <button class="icon-btn"  style="display: none;">
                     <mat-icon class="icon-outlined">notifications</mat-icon>
                 </button>
                 <button class="icon-btn btn-danger btn-sm">Sair</button>

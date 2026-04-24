@@ -63,6 +63,8 @@ export class ClientesComponent {
     // this.router.navigate(['novo'], { relativeTo: this.route })
     // if(this.authService.isAdmin()){
       const dialogRef = this.dialog.open(FormDialogComponent, {
+        enterAnimationDuration: '400ms', 
+        exitAnimationDuration: '300ms',
         data: {
           title: 'Cadastrar Cliente',
           subtitle: 'Preencha os campos abaixo para cadastrar um novo cliente.',
@@ -86,7 +88,9 @@ export class ClientesComponent {
   onEdit(cliente: Cliente){
     // this.router.navigate(['edit', cliente.id], { relativeTo: this.route })
     // if(this.authService.isAdmin()){
-      const dialogRef = this.dialog.open(FormDialogComponent, {        
+      const dialogRef = this.dialog.open(FormDialogComponent, {      
+        enterAnimationDuration: '400ms', 
+        exitAnimationDuration: '300ms',  
         data: {
           title: 'Editar Cliente',
           subtitle: 'Preencha os campos abaixo para editar o cliente.',
@@ -109,6 +113,8 @@ export class ClientesComponent {
 
   onRemove(cliente: Cliente){
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      enterAnimationDuration: '400ms', 
+      exitAnimationDuration: '300ms',
       data: {
         msg: `Tem certeza que deseja remover o cliente "${cliente.nome} ${cliente.sobrenome}"? Esta ação não pode ser desfeita.`,
         icon: 'delete_forever',
@@ -151,6 +157,8 @@ export class ClientesComponent {
 
   onError(errorMsg: string, redirectTo?: string) {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      enterAnimationDuration: '400ms', 
+      exitAnimationDuration: '300ms',
       data: { message: errorMsg, redirectTo }
     })
 

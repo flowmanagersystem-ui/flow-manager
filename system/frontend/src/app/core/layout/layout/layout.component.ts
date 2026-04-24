@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLinkActive, RouterLink, RouterOutlet } from "@angular/router";
 
 import {MatDrawerMode, MatSidenavModule} from '@angular/material/sidenav';
@@ -9,11 +9,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbService } from '../breadcrumb.service';
+import { ThemeService } from '../../../shared/services/theme.service';
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [    
+  imports: [
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
@@ -23,31 +25,39 @@ import { BreadcrumbService } from '../breadcrumb.service';
     FormsModule,
     CommonModule,
     RouterLink,
-    RouterOutlet
-  ],
+    RouterOutlet,
+    MatTooltip
+],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit{
+  public themeService = inject(ThemeService)
+
   userName: string = 'Admin Demo';
   role: string = 'Administrator';
-  theme: string = 'light_mode';
+  themeIcon: string = 'light_mode';
   toggleSidebar: boolean = true;
   toggleSidebarIcon: string = 'arrow_back_ios';
   year: number = new Date().getFullYear();
 
   constructor(public breadcrumbService: BreadcrumbService) {}
 
+  ngOnInit(): void {
+    const currentcolorTheme = this.themeService.getPreferredColorTheme()
+
+    this.themeService.setColorTheme(currentcolorTheme)
+  }
+
   toggleTheme() {
-    if (this.theme === 'light_mode') {
-      this.theme = 'dark_mode';
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-    } else {
-      this.theme = 'light_mode';
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
+    if(this.themeService.getPreferredColorTheme() == 'light'){      
+      this.themeIcon = 'light_mode'
     }
+    else{      
+      this.themeIcon = 'dark_mode'
+    }
+
+    this.themeService.toggleColorTheme()
   }
 
   onToggleSidebar() {
