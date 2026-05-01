@@ -1,38 +1,52 @@
-services:
+  services:
 
-  backend:
-    build: ./backend
-    container_name: FM-backend
-    ports:
-      - "8080:8080"
-    restart: always
+    backend:
+      build: ./backend
+      container_name: FM-backend
+      ports:
+        - "8080:8080"
+      restart: always
+      depends_on:
+        database:
+          condition: service_healthy
+      environment:
+        SPRING_PROFILES_ACTIVE: prod
+        SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/flow_manager
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: rootpassword
 
-  frontend:
-    build: ./frontend
-    container_name: FM-frontend
-    ports:
-      - "4200:80"
+    frontend:
+      build: ./frontend
+      container_name: FM-frontend
+      ports:
+        - "4200:80"
 
-  database:
-    image: mysql:8.0.35
-    container_name: FM-database
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: flow_manager
-    ports:
-      - "5004:3306"
-    volumes:
-      - db-data:/var/lib/mysql
-      - ./mysql-init/:/docker-entrypoint-initdb.d/
+    database:
+      image: mysql:8.0.35
+      container_name: FM-database
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: rootpassword
+        MYSQL_DATABASE: flow_manager
+      ports:
+        - "5004:3306"
+      volumes:
+        - db-data:/var/lib/mysql
+        - ./mysql-init/:/docker-entrypoint-initdb.d/
+      healthcheck:                               # ← MySQL pronto para conexões
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+        start_period: 30s
 
-  adminer:
-    image: adminer
-    container_name: adminer
-    hostname: adminer
-    restart: always
-    ports:
-      - "5005:8080"
+    adminer:
+      image: adminer
+      container_name: adminer
+      hostname: adminer
+      restart: always
+      ports:
+        - "5005:8080"
 
-volumes:
-  db-data:
+  volumes:
+    db-data:

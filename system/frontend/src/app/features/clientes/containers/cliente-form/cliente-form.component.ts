@@ -58,7 +58,6 @@ import { MatIconModule } from '@angular/material/icon';
     InputErroMsgComponent,
     // Diretivas
     TelFormatDirective,
-
   ],
   templateUrl: './cliente-form.component.html',
   styleUrl: './cliente-form.component.scss'
@@ -91,7 +90,7 @@ export class ClienteFormComponent {
       sobrenome: [this.cliente?.sobrenome || '', [Validators.required, Validators.minLength(3)]],
       email: [this.cliente?.email || '', [Validators.required, Validators.email], this.validarEmailDuplicado.bind(this)],
       telefone: [this.cliente?.telefone || '', [Validators.required, FormValidations.telMinLength, FormValidations.telMaxLength]],
-      senha: [this.cliente?.senha || '', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      senha: [this.cliente?.senha || '', [Validators.required, Validators.minLength(6), Validators.maxLength(20), FormValidations.validarCaracterESpaco]],
       status: [this.cliente?.status || '', [Validators.required]],
     })    
   }  
@@ -99,7 +98,14 @@ export class ClienteFormComponent {
   onSubmit(){
     if(this.formulario.valid){           
       this.loadingService.show()
-      this.clientesService.save(this.formulario.value as Cliente)
+      const payload = {
+        ...this.formulario.value,
+        nome: this.camelCase(this.formulario.value.nome.trim()),
+        sobrenome: this.camelCase(this.formulario.value.sobrenome.trim()),
+        email: this.formulario.value.email.toLowerCase().trim(),
+      } as Cliente
+      
+      this.clientesService.save(payload)
       .pipe(          
         finalize(() => this.loadingService.hide())
       )
@@ -150,6 +156,10 @@ export class ClienteFormComponent {
         return of(null)
       })
     )    
+  }
+
+  private camelCase(texto: string): string{
+    return TextFormatted.toTitleCase(texto)
   }
 
   private formatarTelefone(telefone: string): string{

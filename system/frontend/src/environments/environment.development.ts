@@ -1,4 +1,4 @@
-const IP_LOCAL = 'http://192.168.0.105'
+const IP_LOCAL = 'http://localhost'
 
 export const environment = {
   production: false,

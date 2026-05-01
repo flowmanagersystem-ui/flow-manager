@@ -5,7 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 // RxJS
-import { Observable, of, catchError, delay, finalize } from 'rxjs';
+import { Observable, of, catchError, delay, finalize, map, tap } from 'rxjs';
 
 // Interfaces
 import { Cliente } from '../../cliente.interface';
@@ -26,6 +26,7 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/confi
 import { ClientesListComponent } from '../../components/clientes-list/clientes-list.component';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-clientes',
@@ -45,6 +46,8 @@ import { FormDialogComponent, ModoFormT } from '../../../../shared/components/fo
 })
 export class ClientesComponent {
   clientes$: Observable<Cliente[]> | null = null
+  totalElements = 0
+  paginaAtual = 0
 
   constructor(
     private router: Router,
@@ -83,24 +86,23 @@ export class ClientesComponent {
   }
 
   onEdit(cliente: Cliente){
+    const dialogRef = FormDialogComponent.open<Cliente>(this.dialog, {
+      title: 'Editar Cliente',
+      subtitle: 'Preencha os campos abaixo para editar o cliente.',
+      modo: ModoFormT.EDITAR,
+      record: cliente,
+      component: ClienteFormComponent,
+    })
 
-      const dialogRef = FormDialogComponent.open<Cliente>(this.dialog, {
-        title: 'Editar Cliente',
-        subtitle: 'Preencha os campos abaixo para editar o cliente.',
-        modo: ModoFormT.EDITAR,
-        record: cliente,
-        component: ClienteFormComponent,
-      })
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if(result){
-          this.refresh()
-        }
-      })
-    // }
-    // else{
-    //   this.onError('Você não tem permissão para editar usuários.')
-    // }
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.refresh()
+      }
+    })
+  // }
+  // else{
+  //   this.onError('Você não tem permissão para editar usuários.')
+  // }
   }
 
   onRemove(cliente: Cliente){
@@ -137,14 +139,21 @@ export class ClientesComponent {
     }) 
   }
 
-  refresh() {
-    this.clientes$ = this.clientesService.listAll()
+  refresh(page = 0) {
+    this.paginaAtual = page
+    this.clientes$ = this.clientesService.listAll(page)
     .pipe(
+      tap(response => this.totalElements = response.totalElements), 
+      map(response => response.content),                           
       catchError(error => {
-        this.onError('Erro ao carregar clientes.')
-        return of([])
+        this.onError('Erro ao carregar clientes.');
+        return of([]);
       })
-    )      
+    )
+  }
+
+  onPageChange(event: PageEvent) {
+    this.refresh(event.pageIndex)
   }
 
   onError(errorMsg: string, redirectTo?: string) {
