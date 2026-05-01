@@ -1,5 +1,8 @@
 <app-clientes-list
   *ngIf="clientes$ | async as clientes; else loading" [clientes]="clientes"
+  [totalElements]="totalElements"
+  [paginaAtual]="paginaAtual"
+  (pageChange)="onPageChange($event)"
   (add)="onAdd()"
   (edit)="onEdit($event)"
   (remove)="onRemove($event)">

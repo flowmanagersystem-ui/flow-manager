@@ -5,6 +5,7 @@ import { first, delay, tap, map } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 import { Cliente } from './cliente.interface';
+import { Page } from '../../shared/interfaces/page.interface';
 
 
 @Injectable({
@@ -13,16 +14,15 @@ import { Cliente } from './cliente.interface';
 export class ClientesService {
 
   private readonly API = `${environment.apiUrl}api/clientes`
-  //npx json-server --host 0.0.0.0 --watch db/db.json --port 8080 --routes db/routes.json
 
   constructor(private http: HttpClient) { }
 
-  listAll(){
-    return this.http.get<Cliente[]>(this.API)
+  listAll(page: number = 0, size: number = 10) {
+    return this.http.get<Page<Cliente>>(`${this.API}?page=${page}&size=${size}`)
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console
-      // tap(data => console.log(data))
+      //tap(data => console.log(data))
       // Simular atraso de resposta do servidor
       // delay(15000),
     )
@@ -51,18 +51,12 @@ export class ClientesService {
     return this.http.get<Cliente>(`${this.API}/${id}`)
   }
 
-  validarEmailExistente(email: string, clienteId: string){
-    return this.http.get(this.API)
-    .pipe(
-      map((clientes: any) => {
-        return clientes.map((cliente: Cliente) => ({ id: cliente.id, email: cliente.email }))
-      }),
-      // tap(console.log),
-      map((clientes: any[]) => {
-        // Verifica se o email está cadastrado, excluindo o usuário com o ID especificado
-        return clientes.some((cliente: Cliente) => cliente.email === email && String(cliente.id) !== String(clienteId))
-      }),
-      // tap(console.log)
-    )
+  validarEmailExistente(email: string, clienteId: string) {
+    const params = clienteId
+      ? `?email=${email}&excludeId=${clienteId}`
+      : `?email=${email}`
+
+    return this.http.get<{ existe: boolean }>(`${this.API}/verificar-email${params}`)
+      .pipe(map(res => res.existe))
   }
 }

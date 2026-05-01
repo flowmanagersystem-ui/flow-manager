@@ -7,7 +7,7 @@
   import { MatButtonModule } from '@angular/material/button';
   import { MatIconModule } from '@angular/material/icon';
   import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-  import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+  import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
   import { MatSort, MatSortModule } from '@angular/material/sort';
 
   // Formats
@@ -43,11 +43,10 @@
     dataSource: MatTableDataSource<Cliente>
     @ViewChild(MatPaginator) paginator!: MatPaginator
     @ViewChild(MatSort) sort!: MatSort
-    @Input() set clientes(data: Cliente[]) {
-      this.dataSource.data = data
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort
-    }
+    @Input() totalElements = 0
+    @Input() paginaAtual = 0
+    @Input() set clientes(data: Cliente[]) { this.dataSource.data = data}
+    @Output() pageChange = new EventEmitter<PageEvent>()
     @Output() add: EventEmitter<boolean> = new EventEmitter(false)
     @Output() edit: EventEmitter<Cliente> = new EventEmitter(false)
     @Output() remove: EventEmitter<Cliente> = new EventEmitter(false)
@@ -59,7 +58,6 @@
     }
 
     ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort
     }
 

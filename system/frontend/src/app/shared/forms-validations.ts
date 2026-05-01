@@ -239,6 +239,14 @@ export class FormValidations{
     return null;
   }
 
+  static validarCaracterESpaco(control: FormControl){
+    const valor = control.value
+    if (valor && /\s/.test(valor)) {
+      return { caracterEspaco: true };
+    }
+    return null;
+  }
+
   static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any){
 
     fieldName = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
@@ -259,9 +267,11 @@ export class FormValidations{
       'cnpjInvalido': `CNPJ inválido.`,
       'minCpfCnpj': '11 números para CPF ou 14 para CNPJ',
       'requiredMinCheckbox': `Selecione ${ validatorValue } ${ validatorValue > 1 ? 'opções' : 'opção'}.`,
-      'pattern': `Você deve concordar antes de enviar.`
+      'pattern': `Você deve concordar antes de enviar.`,
+      'caracterEspaco': `${ fieldName } não pode conter espaços .`
     }
 
     return config[validatorName]
   }
+
 }

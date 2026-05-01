@@ -77,6 +77,11 @@
                 </tr> 
             </table>
         </div>
-        <mat-paginator class="pagination" [length]="dataSource.filteredData.length" [pageSize]="10" aria-label="Navegação da tabela"></mat-paginator>
+        <mat-paginator class="pagination" aria-label="Navegação da tabela"
+            [length]="totalElements" 
+            [pageSize]="10" 
+            [pageIndex]="paginaAtual"
+            (page)="pageChange.emit($event)">
+        </mat-paginator>
     </div>
 </div>
