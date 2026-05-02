@@ -692,11 +692,7 @@ body {
 }
 
 // ******************************* DIALOGS *********************************************
-.dialog-header{
-  background-color: var(--bg);
-  padding: 20px 36px;
-  margin: 0;
-}
+
 
 // ******************************* LOADING SPINNER *******************************************
 .loading-spinner{
@@ -796,41 +792,3 @@ body {
 //     }
 //   }
 // }
-
-// ***************************************************************************
-// *************************SHARED CONFIRMATION DIALOG ***********************
-// ***************************************************************************
-
-.confirmation-dialog-content{
-  max-width: 460px;
-}
-.modal-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--danger-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-    color: var(--danger);
-
-    .icon-outlined {
-        font-size: 35px;
-        width: 35px;
-        height: 35px;
-    }
-}
-
-.modal-title {
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.modal-body {
-  color: var(--text-muted);
-  text-align: center;
-  margin-bottom: 24px;
-}
