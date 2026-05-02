@@ -1,0 +1,19 @@
+.form-dialog-header{display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--bg);
+  padding: 20px 36px;
+  margin: 0;
+
+  .form-dialog-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .form-dialog-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+}
