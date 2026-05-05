@@ -1,0 +1,24 @@
+<app-profissionais-list
+  *ngIf="profissionais$ | async as profissionais; else loading" [profissionais]="profissionais"
+  
+  [totalElements]="totalElements"
+  [paginaAtual]="paginaAtual"
+  [totalAtivos]="totalAtivos"
+  [totalEspecialidades]="totalEspecialidades"
+  (pageChange)="onPageChange($event)"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onRemove($event)">
+
+</app-profissionais-list>
+
+
+<mat-card>
+
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+</mat-card>

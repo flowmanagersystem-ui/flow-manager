@@ -47,6 +47,11 @@ export class LayoutComponent implements OnInit{
     const currentcolorTheme = this.themeService.getPreferredColorTheme()
 
     this.themeService.setColorTheme(currentcolorTheme)
+
+    if(window.innerWidth <= 768){
+      this.toggleSidebar = false;
+      this.toggleSidebarIcon = 'arrow_forward_ios';
+    }
   }
 
   toggleTheme() {

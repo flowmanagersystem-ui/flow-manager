@@ -57,33 +57,56 @@ html.dark {
 
 // ─── Suas variáveis CSS ───
 :root {
+  --primary: #4FBF9B;
+  --primary-light: #e1f5ee;
+  --color-primary-dark:#3aa882;
+  --color-primary-mid:#9FE1CB;
+
+  --color-purple:#634986;
+  --color-purple-light:#EEEDFE;
+
+  --color-orange:#FF6400;
+  --color-orange-light:#fff3e0;
+
   --bg: #FFF9F1;
   --surface: #FFFFFF;
   --border: #e0dbd4;
   --text: #474546;
   --text-muted: #888;
-  --primary: #4FBF9B;
-  --primary-light: #e1f5ee;
   --danger: #e53935;
-  --danger-light: #fdecea;
+  --danger-light: #f0a3a2;
+  // --danger-dark: #b71c1c;
   --success: #4FBF9B;
   --success-light: #e1f5ee;
   --badge-info-color: #1565c0;
   --badge-info-bgcolor: #e3f2fd;
+  --icon-info-color: #1565c0;
   --sidebar-w: 240px;
   --sidebar-w-sm: 60px;
   --radius: 8px;
   --radius-lg: 12px;
+
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --padding-md: 10px;
+  --gap-md: 10px;
 }
 
 html.dark {
+
+  --color-purple: #B39CD0;
+  --color-purple-light: #1F1B3D;
+
+  --color-orange: #FFA726;
+  --color-orange-light: #382c23;
+
   --bg: #1a1a1e;
   --surface: #24242a;
   --border: #3a3a42;
   --text: #f0ece8;
   --text: #f0ece8;
   --primary-light: #1a3d31;
-  --danger-light: #2d1515;
+  --danger-light: #f56562;
   --success-light: #1a3d31;
   --badge-info-color: #90caf9;
   --badge-info-bgcolor: #0d2a4a;
@@ -103,6 +126,9 @@ html.dark {
   margin: 0;
   padding: 0;
   text-decoration: none;
+}
+a{
+  color: inherit;
 }
 html, body { height: 100%; }
 body { 
@@ -712,6 +738,10 @@ body {
   margin: auto;
 }
 
+.display-none{
+  display: inherit;
+}
+
 // ******************************* BREAKPOINTS *********************************************
 // celular 
 @media (max-width: 600px) {
@@ -719,14 +749,6 @@ body {
     .content {
       font-size:  calc(100% - 10px);
       padding: 8px;
-    }
-  }
-
-  .sidebar{
-    width: var(--sidebar-w-sm);
-
-    &.collapsed {
-      width: var(--sidebar-w);
     }
   }
 
@@ -769,10 +791,15 @@ body {
     display: none;
   }
 
+  .display-none{
+    display: none;  
+  }
+
 }
 
-// // /* Tablets (md) */
-// @media (max-width: 768px) {
+/* Tablets (md) */
+@media (max-width: 768px) {
+  
 //   .sidebar{
 //     width: var(--sidebar-w-sm);
 
@@ -791,4 +818,4 @@ body {
 //       width: var(--sidebar-w-sm);
 //     }
 //   }
-// }
+}
