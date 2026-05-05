@@ -10,7 +10,7 @@ export const LayoutRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'clientes'
+                redirectTo: 'profissionais'
             },
             // {
             //     path: 'inicio',
@@ -21,7 +21,12 @@ export const LayoutRoutes: Routes = [
                 path: 'clientes',
                 loadChildren: () => import('../../features/clientes/cliente.routes').then(m => m.ClientesRoutes),
                 data: { breadcrumb: 'Clientes' }
-            },        
+            },
+            {
+                path: 'profissionais',
+                loadChildren: () => import('../../features/profissionais/profissinal.routes').then(m => m.ProfissinalRoutes),
+                data: { breadcrumb: 'Profissionais' }
+            },
         ]
     }
 ]
