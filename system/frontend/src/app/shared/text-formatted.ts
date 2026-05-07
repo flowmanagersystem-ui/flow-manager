@@ -51,5 +51,11 @@ export class TextFormatted {
       .replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
   }
 
+  // Formato Horas e minutos (HH:mm)
+  static timeFormat(value: string): string {
+    const digitsOnly = value.replace(/\D/g, '')
+    const [hours, minutes] = digitsOnly.match(/(\d{2})(\d{2})/)?.slice(1).map(Number) || [0, 0]
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+  }
 }
 

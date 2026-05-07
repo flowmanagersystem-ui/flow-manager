@@ -1,5 +1,8 @@
 package br.edu.ifba.flowmanager.modules.servico;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -56,5 +59,19 @@ public class ServicoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         servicoService.delete(id);
+    }
+
+    @GetMapping("/verificar-duplicidade")
+    public Map<String, Boolean> verificarDuplicidade(
+        @RequestParam String campo,
+        @RequestParam String valor,
+        @RequestParam(required = false) Long excludeId
+    ) {
+        return Map.of("existe", servicoService.campoJaExiste(campo, valor, excludeId));
+    }
+
+    @GetMapping("/categorias")
+    public List<String> getCategorias() {
+        return servicoService.getCategorias();
     }
 }

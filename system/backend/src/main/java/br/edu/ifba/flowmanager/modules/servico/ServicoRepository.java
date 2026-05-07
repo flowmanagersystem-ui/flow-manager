@@ -1,5 +1,7 @@
 package br.edu.ifba.flowmanager.modules.servico;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +25,12 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
         @Param("categoria") String categoria,
         Pageable pageable
     );
+
+    @Query("SELECT DISTINCT s.categoria FROM Servico s ORDER BY s.categoria")
+        List<String> findCategorias();
+
+    boolean existsByNomeIgnoreCase(String nome);
+    boolean existsByNomeIgnoreCaseAndIdNot(String nome, Long id);
+    boolean existsByCategoriaIgnoreCase(String categoria);
+    boolean existsByCategoriaIgnoreCaseAndIdNot(String categoria, Long id);
 }

@@ -1,5 +1,7 @@
 package br.edu.ifba.flowmanager.modules.servico;
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,10 @@ public class ServicoService {
 
     public ServicoResponseDTO findById(Long id) {
         return toDTO(buscarOuLancar(id));
+    }
+
+    public List<String> getCategorias() {
+        return servicoRepository.findCategorias();
     }
 
     @Transactional
@@ -65,6 +71,19 @@ public class ServicoService {
     private Servico buscarOuLancar(Long id) {
         return servicoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado."));
+    }
+
+    public boolean campoJaExiste(String campo, String valor, Long excludeId) {
+        return switch (campo) {
+            case "nome"      -> excludeId != null
+                ? servicoRepository.existsByNomeIgnoreCaseAndIdNot(valor, excludeId)
+                : servicoRepository.existsByNomeIgnoreCase(valor);
+            case "categoria" -> excludeId != null
+                ? servicoRepository.existsByCategoriaIgnoreCaseAndIdNot(valor, excludeId)
+                : servicoRepository.existsByCategoriaIgnoreCase(valor);
+            default -> throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Campo inválido para verificação: " + campo);
+        };
     }
 
     private void preencher(Servico servico, ServicoRequestDTO dto) {

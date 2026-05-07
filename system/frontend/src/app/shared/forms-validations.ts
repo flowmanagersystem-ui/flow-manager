@@ -262,6 +262,7 @@ export class FormValidations{
       'emailJaCadastrado': `${ fieldName } já cadastrado.`,
       'cpfJaCadastrado': `${ fieldName } já cadastrado.`,
       'telJaCadastrado': `${ fieldName } já cadastrado.`,
+      'duplicado': `Já cadastrado.`,
       'equalsTo': `Campos não são iquais.`,
       'cpfInvalido': `CPF inválido.`,
       'cnpjInvalido': `CNPJ inválido.`,

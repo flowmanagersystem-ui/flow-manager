@@ -10,7 +10,7 @@ export const LayoutRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'profissionais'
+                redirectTo: 'servicos'
             },
             // {
             //     path: 'inicio',
@@ -27,6 +27,11 @@ export const LayoutRoutes: Routes = [
                 loadChildren: () => import('../../features/profissionais/profissinal.routes').then(m => m.ProfissinalRoutes),
                 data: { breadcrumb: 'Profissionais' }
             },
+            {
+                path: 'servicos',
+                loadChildren: () => import('../../features/servicos/servico.routes').then(m => m.servicosRoutes),
+                data: { breadcrumb: 'Serviços' }
+            }
         ]
     }
 ]
