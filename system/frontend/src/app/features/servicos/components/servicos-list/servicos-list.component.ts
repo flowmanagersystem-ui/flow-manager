@@ -1,15 +1,21 @@
+// Angular
 import { Component, EventEmitter, Input, Output, ViewChild, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
-import { Servico } from '../../servico.interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+
+// Shared
+import { TextFormatted } from '../../../../shared/text-formatted';
+
+// Interfaces
+import { Servico } from '../../servico.interface';
 
 @Component({
   selector: 'app-servicos-list',
@@ -69,7 +75,7 @@ export class ServicosListComponent {
     }
   }  
 
-   onAdd(){
+  onAdd(){
     this.add.emit(true)
   }
 
@@ -90,17 +96,11 @@ export class ServicosListComponent {
   }
 
   secondsToTime(totalSeconds: number): string {
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
-
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    return TextFormatted.secondsToTime(totalSeconds)
   }
 
   textToCurrency(value: number): string {
-    return value.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    })
+    return TextFormatted.textToCurrency(value)
   }
 
 }

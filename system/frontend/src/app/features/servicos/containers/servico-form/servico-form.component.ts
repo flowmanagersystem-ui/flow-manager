@@ -202,7 +202,7 @@ export class ServicoFormComponent {
   }
 
   private camelCase(texto: string): string{
-    return TextFormatted.toTitleCase(texto)
+    return TextFormatted.capitalizarTexto(texto)
   }
 
   private timeToSeconds(value: string): number {

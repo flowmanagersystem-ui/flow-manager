@@ -28,11 +28,6 @@
       environment:
         MYSQL_ROOT_PASSWORD: rootpassword
         MYSQL_DATABASE: flow_manager
-      #   MYSQL_CHARSET: utf8mb4              
-      #   MYSQL_COLLATION: utf8mb4_unicode_ci
-      # command: 
-      #   --character-set-server=utf8mb4
-      #   --collation-server=utf8mb4_unicode_ci
       ports:
         - "5004:3306"
       volumes:

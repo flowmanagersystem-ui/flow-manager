@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // Angular Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
-import { Profissional, Tipo, Status } from '../../profissional.interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+
+// Interfaces
+import { Profissional } from '../../profissional.interface';
 
 @Component({
   selector: 'app-profissionais-list',
@@ -17,7 +19,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
   imports: [
     // Angular
     CommonModule,
-
     // Angular Material
     MatIconModule,
     MatInputModule,

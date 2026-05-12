@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageEvent } from '@angular/material/paginator';
 import { Observable, catchError, map, tap, of, finalize } from 'rxjs';
 
 // Material
@@ -11,11 +10,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PageEvent } from '@angular/material/paginator';
 
 // Components
 import { ProfissionaisListComponent } from '../../components/profissionais-list/profissionais-list.component';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
-import { LoadingService } from '../../../../shared/services/loading.service';
 import { ProfissionalFormComponent } from '../profissional-form/profissional-form.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -24,8 +23,8 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/confi
 import { Profissional, Status } from '../../profissional.interface';
 
 // Services
+import { LoadingService } from '../../../../shared/services/loading.service';
 import { ProfissionaisService } from '../../profissionais.service';
-
 
 
 @Component({
