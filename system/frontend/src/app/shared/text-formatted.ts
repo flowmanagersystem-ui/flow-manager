@@ -1,6 +1,7 @@
 export class TextFormatted {
 
   static telFormat(numero: string): string{
+    // Entrada -> "11987654321" -- Saída: "(11) 98765-4321"
     const digitsOnly = numero.replace(/\D/g, '')
 
     if(digitsOnly.length === 10) {
@@ -11,12 +12,14 @@ export class TextFormatted {
   }
 
   static cpfFormat(numero: string): string{
+    // Entrada -> "12345678901" -- Saída: "123.456.789-01"
     const digitsOnly = numero.replace(/\D/g, '')
 
     return digitsOnly.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
   }
 
   static cpfCpnjFormat(numero: string): string{
+    // Entrada -> "12345678901234" -- Saída: "12.345.678/9012-34"
 
     const digitsOnly = numero.replace(/\D/g, '')
 
@@ -28,28 +31,42 @@ export class TextFormatted {
   }
 
   static capitalizarTexto(texto: string) {
-    texto = texto.trim()
-
-    let palavras = texto.split(' ')
-
-    for(let i = 0; i < palavras.length; i++){
-      palavras[i] = palavras[i].charAt(0).toUpperCase() + palavras[i].slice(1).toLowerCase()
-    }
-
-    return palavras.join(' ')
+    // Entrada -> "joão da silva" -- Saída: "João da Silva"
+    return texto
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .replace(/(?:^|\s)\S/g, char => char.toUpperCase());
   }
 
   static removerNaoNumericos(valor: string): string {
-    valor = valor.replace(/\D/g, '').trim()
-
+    // Entrada -> "(11) 98765-4321" -- Saída: "11987654321"
     return valor
+      .replace(/\D/g, '')
+      .trim()    
   }
 
-  static toTitleCase(value: string): string {
-    return value
-      .toLowerCase()
-      .replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
+  static textToHourMinute(value: string): string {
+    // Entrada -> "2359" -- Saída: "23:59"
+    const digitsOnly = value.replace(/\D/g, '')
+    const [hours, minutes] = digitsOnly.match(/(\d{2})(\d{2})/)?.slice(1).map(Number) || [0, 0]
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
   }
 
+  static secondsToTime(totalSeconds: number): string {
+    // Entrada -> 125 -- Saída: "02:05" (representa 2 minutos e 5 segundos)
+    const minutes = Math.floor(totalSeconds / 60)
+    const seconds = totalSeconds % 60
+
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+  }
+
+  static textToCurrency(value: number): string {
+    // Entrada -> 150.5 -- Saída: "R$ 150,50"
+    return value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
+  }
 }
 

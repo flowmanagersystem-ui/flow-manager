@@ -159,10 +159,7 @@ export class ClienteFormComponent {
   }
 
   private camelCase(texto: string): string{
-    return TextFormatted.toTitleCase(texto)
+    return TextFormatted.capitalizarTexto(texto)
   }
 
-  private formatarTelefone(telefone: string): string{
-    return TextFormatted.telFormat(telefone)
-  }
 }

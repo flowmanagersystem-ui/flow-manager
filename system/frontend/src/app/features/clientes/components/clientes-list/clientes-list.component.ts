@@ -1,5 +1,5 @@
   // Angular
-  import { Component, EventEmitter, Input, Output, output, ViewChild } from '@angular/core';
+  import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
   import { CommonModule } from '@angular/common';
   import { FormsModule } from '@angular/forms';
 
@@ -9,9 +9,6 @@
   import {MatTableDataSource, MatTableModule} from '@angular/material/table';
   import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
   import { MatSort, MatSortModule } from '@angular/material/sort';
-
-  // Formats
-  import { TextFormatted } from '../../../../shared/text-formatted.js';
 
   // Interfaces
   import { Cliente } from '../../cliente.interface';
@@ -79,9 +76,5 @@
 
     onRemove(cliente: Cliente){
       this.remove.emit(cliente)
-    }
-
-    private formatarTelefone(telefone: string): string{
-      return TextFormatted.telFormat(telefone)
     }
   }

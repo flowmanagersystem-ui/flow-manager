@@ -1,0 +1,57 @@
+<mat-card class="card" appearance="outlined">
+    <mat-card-content>
+        <form [formGroup]="formulario">
+            <div class="form-row">
+
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Nome</mat-label>
+                    <input class="form-control" matInput #input placeholder="Ex: Corte Feminino" formControlName="nome"/>
+                    <mat-error class="input-message" [control]="$any(formulario.get('nome'))" [label]="'nome'">  </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Categoria</mat-label>
+                    <mat-select formControlName="categoria" placeholder="Selecione a categoria">
+                        <mat-option *ngFor="let categoria of categorias" [value]="categoria" (click)="onSelecionarCategoria()">
+                            {{ categoria }}
+                        </mat-option>
+                        <mat-option value="__outra__" (click)="onOutraCategoria()">Outra</mat-option>
+                        </mat-select>
+                    <mat-error class="input-message" [control]="$any(formulario.get('categoria'))" [label]="'categoria'"></mat-error>                    
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" *ngIf="outraCategoria">
+                    <mat-label>Nova Categoria</mat-label>
+                    <input matInput formControlName="novaCategoria" placeholder="Digite a nova categoria"/>
+                    <mat-error [control]="$any(formulario.get('novaCategoria'))" [label]="'categoria'"></mat-error>
+                </mat-form-field>                
+
+            </div>
+            <div class="form-row">
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Descrição</mat-label>
+                    <textarea class="form-control" rows="3" placeholder="Descrição do serviço oferecido" formControlName="descricao" matInput #input ></textarea>
+                    <mat-error class="input-message" [control]="$any(formulario.get('descricao'))" [label]="'descricao'">  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Duração</mat-label>
+                    <input class="form-control" type="text" minlength="5" maxlength="5" placeholder="HH:mm" formControlName="duracao" matInput #input timeFormat />
+                    <mat-error class="input-message" [control]="$any(formulario.get('duracao'))" [label]="'duracao'">  </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field class="form-group" appearance="outline">
+                    <mat-label class="form-label">Valor</mat-label>
+                    <input class="form-control" matInput #input type="text"  placeholder="Ex: 80.00" formControlName="valor" currencyFormat />
+                    <mat-error class="input-message" [control]="$any(formulario.get('valor'))" [label]="'valor'">  </mat-error>
+                </mat-form-field>                
+            </div>
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions class="form-actions">
+        <button class="btn btn-cancel" matButton="filled" (click)="onCancel()">Cancelar</button>
+        <button class="btn btn-confirm" matButton="filled" (click)="onSubmit()">Salvar Serviço</button>
+    </mat-card-actions>
+</mat-card>

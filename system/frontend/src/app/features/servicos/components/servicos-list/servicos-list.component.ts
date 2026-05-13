@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+// Angular
+import { Component, EventEmitter, Input, Output, ViewChild, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Angular Material
@@ -10,15 +11,19 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 
+// Shared
+import { TextFormatted } from '../../../../shared/text-formatted';
+
 // Interfaces
-import { Profissional } from '../../profissional.interface';
+import { Servico } from '../../servico.interface';
 
 @Component({
-  selector: 'app-profissionais-list',
+  selector: 'app-servicos-list',
   standalone: true,
   imports: [
     // Angular
     CommonModule,
+
     // Angular Material
     MatIconModule,
     MatInputModule,
@@ -27,47 +32,39 @@ import { Profissional } from '../../profissional.interface';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule
-
   ],
-  templateUrl: './profissionais-list.component.html',
-  styleUrl: './profissionais-list.component.scss'
+  templateUrl: './servicos-list.component.html',
+  styleUrl: './servicos-list.component.scss'
 })
-export class ProfissionaisListComponent {
-  title = 'Profissionais'
-  subtitle = 'Lista de Profissionais cadastrados'
-  info = 'profissional'
-  listaVazia = 'Não há profissionais cadastrados neste momento.'
+export class ServicosListComponent {
+  title = 'Serviços'
+  subtitle = 'Lista de Serviços cadastrados'
+  info = 'serviço'
+  listaVazia = 'Não há serviços cadastrados neste momento.'
   noResults = `Nenhum resultado encontrado com o filtro `
   viewMode: boolean = false
 
   selectedAZ = 'nome'
   selectedEspecialidade = 'todas'
   selectedStatus = 'todos'
-  mediaServicos = 3
 
-  readonly displayedColumns = ['nome', 'email', 'telefone', 'status', 'actions']
+  readonly displayedColumns = ['nome', 'categoria', 'descricao', 'duracao', 'valor', 'actions']
 
-  dataSource: MatTableDataSource<Profissional>
+  dataSource: MatTableDataSource<Servico>
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
   @Input() totalElements = 0
   @Input() paginaAtual = 0
-  @Input() totalAtivos = 0
-  @Input() totalEspecialidades = 0
-  @Input() set profissionais(data: Profissional[]) { this.dataSource.data = data}
+  @Input() totalCategorias = 0
+  @Input() ticketMedio = 0
+  @Input() set servicos(data: Servico[]) { this.dataSource.data = data}
   @Output() pageChange = new EventEmitter<PageEvent>()
   @Output() add: EventEmitter<boolean> = new EventEmitter(false)
-  @Output() edit: EventEmitter<Profissional> = new EventEmitter(false)
-  @Output() remove: EventEmitter<Profissional> = new EventEmitter(false)
-
-  // Para os cards
-  // profissionais: Profissional[] = []
-  // @Input() set profissionaisInput(data: Profissional[]) {
-  //   this.profissionais = data;
-  // }
+  @Output() edit: EventEmitter<Servico> = new EventEmitter(false)
+  @Output() remove: EventEmitter<Servico> = new EventEmitter(false)
 
   constructor(private renderer: Renderer2) {
-    this.dataSource = new MatTableDataSource(this.profissionais)
+    this.dataSource = new MatTableDataSource(this.servicos)
   }
 
   applyFilter(event: Event) {
@@ -82,19 +79,28 @@ export class ProfissionaisListComponent {
     this.add.emit(true)
   }
 
-  onDetails(profissional: Profissional){
-    this.edit.emit(profissional)
+  onDetails(servico: Servico){
+    this.edit.emit(servico)
   }
 
-  onEdit(profissional: Profissional){
-    this.edit.emit(profissional)
+  onEdit(servico: Servico){
+    this.edit.emit(servico)
   }
 
-  onRemove(profissional: Profissional){
-    this.remove.emit(profissional)
+  onRemove(servico: Servico){
+    this.remove.emit(servico)
   }
 
   onToggleViewNode(){
     this.viewMode = !this.viewMode
   }
+
+  secondsToTime(totalSeconds: number): string {
+    return TextFormatted.secondsToTime(totalSeconds)
+  }
+
+  textToCurrency(value: number): string {
+    return TextFormatted.textToCurrency(value)
+  }
+
 }

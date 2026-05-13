@@ -28,7 +28,7 @@ import { TextFormatted } from '../../../../shared/text-formatted';
 import { TelFormatDirective } from '../../../../shared/directives/telFormat.directive';
 
 // Interfaces
-import { Profissional, Status } from '../../profissional.interface';
+import { Profissional } from '../../profissional.interface';
 
 // Services
 import { ProfissionaisService } from '../../profissionais.service';
@@ -159,7 +159,7 @@ export class ProfissionalFormComponent {
   }
 
   private camelCase(texto: string): string{
-    return TextFormatted.toTitleCase(texto)
+    return TextFormatted.textToHourMinute(texto)
   }
 
 }

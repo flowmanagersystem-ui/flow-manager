@@ -1,31 +1,38 @@
+// Angular
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLinkActive, RouterLink, RouterOutlet } from "@angular/router";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-import {MatDrawerMode, MatSidenavModule} from '@angular/material/sidenav';
+// Angular Material
+import { MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { MatTooltip } from "@angular/material/tooltip";
+
+// Services
 import { BreadcrumbService } from '../breadcrumb.service';
 import { ThemeService } from '../../../shared/services/theme.service';
-import { MatTooltip } from "@angular/material/tooltip";
+
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [
-    MatSidenavModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatFormFieldModule,
+    // Angular
     RouterLinkActive,
     FormsModule,
     CommonModule,
     RouterLink,
     RouterOutlet,
+    // Angular Material
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
     MatTooltip
 ],
   templateUrl: './layout.component.html',

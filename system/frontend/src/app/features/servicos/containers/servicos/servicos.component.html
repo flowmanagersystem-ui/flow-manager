@@ -1,0 +1,24 @@
+<app-servicos-list
+  *ngIf="servicos$ | async as servicos; else loading" [servicos]="servicos"
+  
+  [totalElements]="totalElements"
+  [paginaAtual]="paginaAtual"
+  [totalCategorias]="totalCategorias"
+  [ticketMedio]="ticketMedio"
+  (pageChange)="onPageChange($event)"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onRemove($event)">
+
+</app-servicos-list>
+
+
+<mat-card>
+
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+</mat-card>

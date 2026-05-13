@@ -11,9 +11,9 @@
           condition: service_healthy
       environment:
         SPRING_PROFILES_ACTIVE: prod
-        SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/flow_manager
-        SPRING_DATASOURCE_USERNAME: root
-        SPRING_DATASOURCE_PASSWORD: rootpassword
+        SPRING_DATASOURCE_URL: ${BASE_URL}
+        SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+        SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
 
     frontend:
       build: ./frontend
@@ -26,15 +26,15 @@
       container_name: FM-database
       restart: always
       environment:
-        MYSQL_ROOT_PASSWORD: rootpassword
-        MYSQL_DATABASE: flow_manager
+        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+        MYSQL_DATABASE: ${DATABASE}
       ports:
         - "5004:3306"
       volumes:
         - db-data:/var/lib/mysql
         - ./mysql-init/:/docker-entrypoint-initdb.d/
-      healthcheck:                               # ← MySQL pronto para conexões
-        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
+      healthcheck:                               
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_PASSWORD}"]
         interval: 10s
         timeout: 5s
         retries: 5

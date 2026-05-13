@@ -7,14 +7,12 @@ import { CommonModule } from '@angular/common';
 // RxJS
 import { Observable, of, catchError, delay, finalize, map, tap } from 'rxjs';
 
-// Interfaces
-import { Cliente } from '../../cliente.interface';
-
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PageEvent } from '@angular/material/paginator';
 
 // Services
 import { ClientesService } from '../../clientes.service';
@@ -26,7 +24,9 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/confi
 import { ClientesListComponent } from '../../components/clientes-list/clientes-list.component';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
-import { PageEvent } from '@angular/material/paginator';
+
+// Interfaces
+import { Cliente } from '../../cliente.interface';
 
 @Component({
   selector: 'app-clientes',
