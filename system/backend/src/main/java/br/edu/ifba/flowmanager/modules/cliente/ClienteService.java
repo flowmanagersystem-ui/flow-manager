@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteResponseDTO;
+import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteUpdateDTO;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import br.edu.ifba.flowmanager.modules.usuario.UsuarioRepository;
 import br.edu.ifba.flowmanager.modules.usuario.enums.PerfilUsuario;
@@ -49,7 +50,7 @@ public class ClienteService {
     }
 
     @Transactional
-    public ClienteResponseDTO update(Long id, ClienteRequestDTO dto) {
+    public ClienteResponseDTO update(Long id, ClienteUpdateDTO dto) {
         Cliente cliente = buscarOuLancar(id);
         Usuario usuario = cliente.getUsuario();
 
@@ -58,11 +59,6 @@ public class ClienteService {
         }
 
         preencherUsuario(usuario, dto);
-
-        // só atualiza senha se vier preenchida
-        if (dto.senha() != null && !dto.senha().isBlank()) {
-            usuario.setSenha(dto.senha());
-        }
 
         return toDTO(clienteRepository.save(cliente));
     }
@@ -93,6 +89,18 @@ public class ClienteService {
         usuario.setSenha(dto.senha()); 
     }
 
+    private void preencherUsuario(Usuario usuario, ClienteUpdateDTO dto) {
+        usuario.setNome(dto.nome());
+        usuario.setSobrenome(dto.sobrenome());
+        usuario.setEmail(dto.email());
+        usuario.setTelefone(dto.telefone());
+        usuario.setAtivo(dto.status() == StatusUsuario.Ativo);
+
+        if (senhaValida(dto.senha())) {
+            usuario.setSenha(dto.senha());
+        }
+    }
+
     private ClienteResponseDTO toDTO(Cliente cliente) {
         Usuario u = cliente.getUsuario();
         return new ClienteResponseDTO(
@@ -103,5 +111,9 @@ public class ClienteService {
             u.getTelefone(),
             u.isAtivo() ? StatusUsuario.Ativo : StatusUsuario.Inativo
         );
+    }
+
+    private boolean senhaValida(String senha) {
+        return senha != null && !senha.isBlank() && senha.length() >= 6;
     }
 }
