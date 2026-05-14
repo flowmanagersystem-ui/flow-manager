@@ -1,5 +1,6 @@
 package br.edu.ifba.flowmanager.modules.profissional;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalRequestDTO;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalResponseDTO;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalUpdateDTO;
+import br.edu.ifba.flowmanager.modules.servico.dto.ServicoResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -65,6 +67,30 @@ public class ProfissionalController {
         @RequestParam(required = false) Long excludeId
     ) {
         return Map.of("existe", profissionalService.emailExiste(email, excludeId));
+    }
+
+    // Serviços
+    @PostMapping("/{profissionalId}/servicos/{servicoId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void adicionarServico(
+        @PathVariable Long profissionalId,
+        @PathVariable Long servicoId
+    ) {
+        profissionalService.adicionarServico(profissionalId, servicoId);
+    }
+
+    @DeleteMapping("/{profissionalId}/servicos/{servicoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerServico(
+        @PathVariable Long profissionalId,
+        @PathVariable Long servicoId
+    ) {
+        profissionalService.removerServico(profissionalId, servicoId);
+    }
+
+    @GetMapping("/{profissionalId}/servicos")
+    public List<ServicoResponseDTO> listarServicos(@PathVariable Long profissionalId) {
+        return profissionalService.listarServicos(profissionalId);
     }
 
     // Especialidades

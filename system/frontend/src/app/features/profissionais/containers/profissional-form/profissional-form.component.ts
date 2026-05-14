@@ -100,7 +100,6 @@ export class ProfissionalFormComponent {
   }
 
   onSubmit(){
-    console.log(this.formulario.value)
     if(this.formulario.valid){           
       this.loadingService.show()
       const payload = {

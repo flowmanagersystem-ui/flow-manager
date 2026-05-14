@@ -31,4 +31,7 @@ public class Profissional {
 
     @OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProfissionalEspecialidade> especialidades = new HashSet<>();
+
+    @OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProfissionalServico> servicos = new HashSet<>();
 }

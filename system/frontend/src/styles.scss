@@ -698,6 +698,10 @@ body {
   border: 1px solid var(--border);
 }
 
+.badge-danger {
+  background: var(--danger-light);
+  color: var(--danger);
+}
 // ******************************* SNACKBAR *********************************************
 
 .mat-mdc-snack-bar-container {

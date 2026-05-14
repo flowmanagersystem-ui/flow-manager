@@ -167,10 +167,27 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell style="text-align: center;" *matHeaderCellDef> Ações </th>
                 <td mat-cell class="tbl-actions" style="justify-content: center;" *matCellDef="let  profissional">
-                    <button class="btn-icon" (click)="onEdit(profissional)">
+                    <button class="btn-icon"
+                        [matTooltip]="'Editar profissional'" 
+                        (click)="onEdit(profissional)">
                         <mat-icon class="icon-outlined">edit</mat-icon>
                     </button>
-                    <button class="btn-icon" (click)="onRemove(profissional)">
+                    
+                    <button class="btn-icon"
+                        [matTooltip]="'Gerenciar serviços'"
+                        (click)="onManageServices(profissional)">
+                        <mat-icon class="icon-outlined">build</mat-icon>
+                    </button>
+
+                    <button class="btn-icon" 
+                        [matTooltip]="'Horários'" 
+                        (click)="onManageSchedules(profissional)">
+                        <mat-icon class="icon-outlined">calendar_month</mat-icon>
+                    </button>
+
+                    <button class="btn-icon"
+                        [matTooltip]="'Remover profissional'"
+                        (click)="onRemove(profissional)">
                         <mat-icon class="icon-outlined">delete</mat-icon>
                     </button>
                 </td>

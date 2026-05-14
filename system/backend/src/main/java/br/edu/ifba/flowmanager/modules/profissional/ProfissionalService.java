@@ -1,5 +1,7 @@
 package br.edu.ifba.flowmanager.modules.profissional;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -9,6 +11,9 @@ import br.edu.ifba.flowmanager.modules.especialidade.EspecialidadeRepository;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalRequestDTO;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalResponseDTO;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalUpdateDTO;
+import br.edu.ifba.flowmanager.modules.servico.Servico;
+import br.edu.ifba.flowmanager.modules.servico.ServicoRepository;
+import br.edu.ifba.flowmanager.modules.servico.dto.ServicoResponseDTO;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import br.edu.ifba.flowmanager.modules.usuario.UsuarioRepository;
 import br.edu.ifba.flowmanager.modules.usuario.enums.PerfilUsuario;
@@ -27,6 +32,8 @@ public class ProfissionalService {
     private final UsuarioRepository usuarioRepository;
     private final EspecialidadeRepository especialidadeRepository;
     private final ProfissionalEspecialidadeRepository profissionalEspecialidadeRepository;
+    private final ProfissionalServicoRepository profissionalServicoRepository;
+    private final ServicoRepository servicoRepository;
 
     public Page<ProfissionalResponseDTO> listAll(Pageable pageable) {
         return profissionalRepository.findAllWithUsuario(pageable)
@@ -111,6 +118,54 @@ public class ProfissionalService {
     @Transactional
     public void removerEspecialidade(Long profissionalId, Long especialidadeId) {
         profissionalEspecialidadeRepository.deleteByProfissionalIdAndEspecialidadeId(profissionalId, especialidadeId);
+    }
+
+    // Serviços
+    @Transactional
+    public void adicionarServico(Long profissionalId, Long servicoId) {
+        Profissional profissional = buscarOuLancar(profissionalId);
+        Servico servico = servicoRepository.findById(servicoId)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Serviço não encontrado."));
+
+        ProfissionalServicoId id = new ProfissionalServicoId(profissionalId, servicoId);
+
+        if (profissionalServicoRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.CONFLICT, "Serviço já vinculado a este profissional.");
+        }
+
+        ProfissionalServico ps = new ProfissionalServico();
+        ps.setId(id);
+        ps.setProfissional(profissional);
+        ps.setServico(servico);
+
+        profissionalServicoRepository.save(ps);
+    }
+
+    @Transactional
+    public void removerServico(Long profissionalId, Long servicoId) {
+        ProfissionalServicoId id = new ProfissionalServicoId(profissionalId, servicoId);
+        if (!profissionalServicoRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Vínculo não encontrado.");
+        }
+        profissionalServicoRepository.deleteById(id);
+    }
+
+    public List<ServicoResponseDTO> listarServicos(Long profissionalId) {
+        buscarOuLancar(profissionalId);
+        return profissionalServicoRepository.findByProfissionalId(profissionalId)
+            .stream()
+            .map(ps -> new ServicoResponseDTO(
+                ps.getServico().getId(),
+                ps.getServico().getNome(),
+                ps.getServico().getDescricao(),
+                ps.getServico().getCategoria(),
+                ps.getServico().getDuracao(),
+                ps.getServico().getValor()
+            ))
+            .toList();
     }
 
     private Profissional buscarOuLancar(Long id) {

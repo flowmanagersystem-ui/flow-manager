@@ -1,0 +1,90 @@
+<div class="form-dialog-header">
+  <div>
+    <div  class="form-dialog-title">Horários de atendimento</div>
+    <div class="form-dialog-subtitle">{{ data.nomeProfissional }}</div>
+  </div>
+  <button mat-icon-button mat-dialog-close class="btn-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+
+  <div class="loading-wrap" *ngIf="carregando">
+    <mat-spinner diameter="36" />
+    <span>Carregando horários...</span>
+  </div>
+
+  <ng-container *ngIf="!carregando">
+    <div class="dia-row" *ngFor="let dia of dias; let last = last">
+
+      <div class="dia-label">
+        <span class="dia-nome">{{ dia.label }}</span>
+      </div>
+
+      <div class="dia-slots">
+
+        <ng-container *ngFor="let slot of dia.slots">
+
+          <div class="slot" *ngIf="!slot.editando">
+            <span class="slot-time">
+              <mat-icon class="slot-icon">schedule</mat-icon>
+              {{ slot.horaInicio }} – {{ slot.horaFim }}
+            </span>
+            <div class="slot-actions">
+              <button class="btn-sm" matTooltip="Editar" (click)="iniciarEdicao(slot)">
+                <mat-icon class="icon-outlined icons">edit</mat-icon>
+              </button>
+              <button class="btn-sm btn-danger" matTooltip="Remover" (click)="remover(dia, slot)">
+                <mat-icon class="icon-outlined icons">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="slot-form" *ngIf="slot.editando">
+            <input type="time" [(ngModel)]="slot.horaInicioEdit" />
+            <span class="ate">até</span>
+            <input type="time" [(ngModel)]="slot.horaFimEdit" />
+            <button class="btn-confirm" matTooltip="Confirmar" (click)="confirmarEdicao(dia, slot)">
+              <mat-icon class="icons">check</mat-icon>
+            </button>
+            <button class="btn-sm" matTooltip="Cancelar" (click)="cancelarEdicao(slot)">
+              <mat-icon class="icons">close</mat-icon>
+            </button>
+          </div>
+
+        </ng-container>
+
+        <span class="badge-off" *ngIf="!temHorarios(dia) && !dia.adicionando">
+          sem atendimento
+        </span>
+
+        <div class="slot-form" *ngIf="dia.adicionando">
+          <input type="time" [(ngModel)]="dia.novoInicio" />
+          <span class="ate">até</span>
+          <input type="time" [(ngModel)]="dia.novoFim" />
+          <button class="btn-confirm" matTooltip="Confirmar" (click)="confirmarAdicionar(dia)">
+            <mat-icon class="icons">check</mat-icon> 
+          </button>
+          <button class="btn-sm" matTooltip="Cancelar" (click)="cancelarAdicionar(dia)">
+            <mat-icon class="icons">close</mat-icon>
+          </button>
+        </div>
+
+        <button class="btn-add" *ngIf="!dia.adicionando" (click)="iniciarAdicionar(dia)">
+          <mat-icon class="icon-outlined icon-add">add</mat-icon>
+          adicionar horário
+        </button>
+
+      </div>
+
+      <div class="divider" *ngIf="!last"></div>
+
+    </div>
+  </ng-container>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="" mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

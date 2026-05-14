@@ -53,12 +53,19 @@ export class TextFormatted {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
   }
 
-  static secondsToTime(totalSeconds: number): string {
-    // Entrada -> 125 -- Saída: "02:05" (representa 2 minutos e 5 segundos)
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
+  static secondsToTime(totalMinutes: number): string {
+    if (totalMinutes < 60) {
+      return `${totalMinutes} min`
+    }
 
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    const hours = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+
+    if(minutes === 0) {
+      return `${hours} h`
+    }    
+
+    return `${hours}:${minutes.toString().padStart(2, '0')} h`
   }
 
   static textToCurrency(value: number): string {

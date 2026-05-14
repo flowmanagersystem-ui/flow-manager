@@ -18,6 +18,8 @@ import { ErrorDialogComponent } from '../../../../shared/components/error-dialog
 import { ProfissionalFormComponent } from '../profissional-form/profissional-form.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ProfissionalServicosDialogComponent } from '../profissional-servicos/profissional-servicos-dialog.component';
+import { HorarioAtendimentoDialogComponent } from '../profissionais-horarios/horario-atendimento-dialog.component';
 
 // Interfaces
 import { Profissional, Status } from '../../profissional.interface';
@@ -25,7 +27,6 @@ import { Profissional, Status } from '../../profissional.interface';
 // Services
 import { LoadingService } from '../../../../shared/services/loading.service';
 import { ProfissionaisService } from '../../profissionais.service';
-
 
 @Component({
   selector: 'app-profissionais',
@@ -158,6 +159,36 @@ export class ProfissionaisComponent {
 
   onPageChange(event: PageEvent) {
     this.refresh(event.pageIndex)
+  }
+
+  onManageServices(profissional: Profissional) {
+    const dialogRef = this.dialog.open(ProfissionalServicosDialogComponent, {
+      width: '560px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
+      data: {
+        profissionalId: profissional.id,
+        nomeProfissional: `${profissional.nome} ${profissional.sobrenome}`
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(alterado => {
+      if (alterado) {
+        this.snackBar.open('Serviços atualizados com sucesso!', '', { duration: 4000 });
+      }
+    })
+  }
+
+  onManageSchedules(profissional: Profissional) {
+    this.dialog.open(HorarioAtendimentoDialogComponent, {
+      width: '520px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
+      data: {
+        profissionalId: profissional.id,
+        nomeProfissional: `${profissional.nome} ${profissional.sobrenome}`
+      }
+    });
   }
 
   onError(errorMsg: string, redirectTo?: string) {  

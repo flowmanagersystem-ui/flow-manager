@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Interfaces
 import { Profissional } from '../../profissional.interface';
@@ -26,7 +27,8 @@ import { Profissional } from '../../profissional.interface';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule,
 
   ],
   templateUrl: './profissionais-list.component.html',
@@ -58,6 +60,8 @@ export class ProfissionaisListComponent {
   @Output() pageChange = new EventEmitter<PageEvent>()
   @Output() add: EventEmitter<boolean> = new EventEmitter(false)
   @Output() edit: EventEmitter<Profissional> = new EventEmitter(false)
+  @Output() manageServices: EventEmitter<Profissional> = new EventEmitter(false)
+  @Output() manageSchedules: EventEmitter<Profissional> = new EventEmitter(false)
   @Output() remove: EventEmitter<Profissional> = new EventEmitter(false)
 
   // Para os cards
@@ -92,6 +96,14 @@ export class ProfissionaisListComponent {
 
   onRemove(profissional: Profissional){
     this.remove.emit(profissional)
+  }
+
+  onManageServices(profissional: Profissional) {
+    this.manageServices.emit(profissional)
+  }
+
+  onManageSchedules(profissional: Profissional) {
+    this.manageSchedules.emit(profissional)
   }
 
   onToggleViewNode(){

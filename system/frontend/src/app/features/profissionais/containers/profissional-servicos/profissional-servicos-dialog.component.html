@@ -1,0 +1,80 @@
+<div class="form-dialog-header">
+  <div>
+    <div  class="form-dialog-title">Serviços Vinculados</div>
+    <div class="form-dialog-subtitle">{{ data.nomeProfissional }}</div>
+  </div>
+  <button mat-icon-button mat-dialog-close class="btn-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+
+  <div class="loading-wrap" *ngIf="carregando">
+    <mat-spinner diameter="36" />
+    <span>Carregando serviços...</span>
+  </div>
+
+  <ng-container *ngIf="!carregando">
+
+    <div class="resumo">
+      <span class="badge badge-info">
+        {{ selecionados.length }} {{ pluralizeServico(selecionados.length) }}
+      </span>
+      <span class="badge badge-gray" *ngIf="totalAlteracoes > 0">
+        {{ totalAlteracoes }} {{ pluralizeAlteracao(totalAlteracoes) }}
+      </span>
+    </div>
+
+    <div class="categoria-grupo" *ngFor="let categoria of categorias()">
+      <div class="categoria-header">
+        <mat-icon class="categoria-icon ">label</mat-icon>
+        <span>{{ categoria }}</span>
+      </div>
+
+      <mat-selection-list class="servicos-list" [multiple]="true">
+        <mat-list-option
+          *ngFor="let servico of servicosPorCategoria(categoria)"
+          [selected]="servico.selecionado"
+          (click)="toggleServico(servico)"
+          class="servico-item">
+
+          <div class="servico-info">
+            <span class="servico-nome">{{ servico.nome }}</span>
+            <div class="servico-meta">
+              <span class="servico-valor">{{ textToCurrency(servico.valor) }}</span>
+              <span class="servico-duracao">
+                <mat-icon>schedule</mat-icon>
+                {{ secondsToTime(servico.duracao) }}
+              </span>
+            </div>
+          </div>
+
+          <span class="badge-alteracao badge-success"
+            *ngIf="servico.selecionado && !servico.jaVinculado">
+            + novo
+          </span>
+          <span class="badge-alteracao badge-danger"
+            *ngIf="!servico.selecionado && servico.jaVinculado">
+            - remover
+          </span>
+
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
+  </ng-container>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close [disabled]="salvando">
+    Cancelar
+  </button>
+  <button mat-flat-button color="primary"
+    [disabled]="salvando || totalAlteracoes === 0"
+    (click)="salvar()">
+    <mat-spinner diameter="18" *ngIf="salvando" />
+    <span *ngIf="!salvando">Salvar alterações</span>
+  </button>
+</mat-dialog-actions>
