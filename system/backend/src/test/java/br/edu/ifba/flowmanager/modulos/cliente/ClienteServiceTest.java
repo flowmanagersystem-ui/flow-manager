@@ -16,6 +16,7 @@ import br.edu.ifba.flowmanager.modules.cliente.ClienteService;
 
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteResponseDTO;
+import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestUpdateDTO;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import br.edu.ifba.flowmanager.modules.usuario.UsuarioRepository;
 import br.edu.ifba.flowmanager.modules.usuario.enums.StatusUsuario;
@@ -43,6 +44,7 @@ class ClienteServiceTest {
 
     private Cliente cliente;
     private ClienteRequestDTO requestDTO;
+    private ClienteRequestUpdateDTO updateDTO;
 
     @BeforeEach
     void setUp() {
@@ -66,6 +68,16 @@ class ClienteServiceTest {
             "joao@email.com",
             "(71) 9 9999-9999",
             "senha123",
+            StatusUsuario.Ativo
+        );
+
+        updateDTO = new ClienteRequestUpdateDTO(
+            1L,
+            "João",
+            "Silva",
+            "joao@email.com",
+            "(71) 9 9999-9999",
+            null,  // ← senha vazia no update é válido
             StatusUsuario.Ativo
         );
     }
@@ -109,7 +121,7 @@ class ClienteServiceTest {
         when(usuarioRepository.existsByEmailAndIdNot(anyString(), anyLong())).thenReturn(false);
         when(clienteRepository.save(any())).thenReturn(cliente);
 
-        ClienteResponseDTO response = clienteService.update(1L, requestDTO);
+        ClienteResponseDTO  response = clienteService.update(1L, updateDTO);
 
         assertThat(response).isNotNull();
         verify(clienteRepository, times(1)).save(any());
@@ -121,7 +133,7 @@ class ClienteServiceTest {
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
         when(usuarioRepository.existsByEmailAndIdNot(anyString(), anyLong())).thenReturn(true);
 
-        assertThatThrownBy(() -> clienteService.update(1L, requestDTO))
+        assertThatThrownBy(() -> clienteService.update(1L, updateDTO))
             .isInstanceOf(ResponseStatusException.class)
             .hasMessageContaining("Email já cadastrado");
     }
@@ -129,7 +141,7 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Não deve alterar senha se vier vazia no update")
     void naoDeveAlterarSenhaSeVierVazia() {
-        ClienteRequestDTO dtoSemSenha = new ClienteRequestDTO(
+        ClienteRequestUpdateDTO dtoSemSenha = new ClienteRequestUpdateDTO(
             1L, "João", "Silva", "joao@email.com",
             "(71) 9 9999-9999", "", StatusUsuario.Ativo
         );

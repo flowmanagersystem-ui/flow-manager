@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteResponseDTO;
-import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteUpdateDTO;
+import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestUpdateDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -49,7 +49,7 @@ public class ClienteController {
     }
 
     @PatchMapping("/{id}")
-    public ClienteResponseDTO update(@PathVariable Long id, @RequestBody @Validated ClienteUpdateDTO dto) {
+    public ClienteResponseDTO update(@PathVariable Long id, @RequestBody @Validated ClienteRequestUpdateDTO dto) {
         return clienteService.update(id, dto);
     }
 

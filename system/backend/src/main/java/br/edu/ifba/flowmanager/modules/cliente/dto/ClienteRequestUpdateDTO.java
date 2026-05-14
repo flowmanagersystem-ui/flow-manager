@@ -5,7 +5,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record ClienteUpdateDTO(
+public record ClienteRequestUpdateDTO(
     Long id,
     @NotBlank String nome,
     @NotBlank String sobrenome,

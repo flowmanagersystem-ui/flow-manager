@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifba.flowmanager.modules.cliente.Cliente;
 import br.edu.ifba.flowmanager.modules.especialidade.Especialidade;
 import br.edu.ifba.flowmanager.modules.especialidade.EspecialidadeRepository;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalRequestDTO;
@@ -89,8 +90,11 @@ public class ProfissionalService {
     }
 
     public boolean emailExiste(String email, Long excludeId) {
-        if (excludeId != null) {
-            return usuarioRepository.existsByEmailAndIdNot(email, excludeId);
+        if (excludeId != null) { 
+            Profissional profissional = buscarOuLancar(excludeId);
+            Usuario usuario = profissional.getUsuario();
+
+            return usuarioRepository.existsByEmailAndIdNot(email, usuario.getId());
         }
         return usuarioRepository.existsByEmail(email);
     }
@@ -174,6 +178,7 @@ public class ProfissionalService {
     }
 
     private void preencherUsuario(Usuario usuario, ProfissionalRequestDTO dto) {
+        System.out.println("Nome: " + dto.nome());
         usuario.setNome(dto.nome());
         usuario.setSobrenome(dto.sobrenome());
         usuario.setEmail(dto.email());

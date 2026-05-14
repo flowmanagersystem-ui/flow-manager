@@ -89,7 +89,7 @@ export class ProfissionalFormComponent {
       sobrenome: [this.profissional?.sobrenome || '', [Validators.required, Validators.minLength(3)]],
       email: [this.profissional?.email || '', [Validators.required, Validators.email], this.validarEmailDuplicado.bind(this)],
       telefone: [this.profissional?.telefone || '', [Validators.required, FormValidations.telMinLength, FormValidations.telMaxLength]],
-      senha: ['', [Validators.minLength(6), Validators.maxLength(20), FormValidations.validarCaracterESpaco]],
+      senha: ['', [Validators.minLength(6), Validators.maxLength(20), FormValidations.validarCaracterEspaco]],
       status: [this.profissional?.status || '', [Validators.required]],
     })    
   }  
@@ -158,7 +158,7 @@ export class ProfissionalFormComponent {
   }
 
   private camelCase(texto: string): string{
-    return TextFormatted.textToHourMinute(texto)
+    return TextFormatted.capitalizarTexto(texto)
   }
 
 }
