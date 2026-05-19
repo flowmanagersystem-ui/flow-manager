@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.edu.ifba.flowmanager.modules.cliente.Cliente;
 import br.edu.ifba.flowmanager.modules.especialidade.Especialidade;
 import br.edu.ifba.flowmanager.modules.especialidade.EspecialidadeRepository;
 import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalRequestDTO;

@@ -1,4 +1,4 @@
-package br.edu.ifba.flowmanager.modules.horarioAtendimento;
+package br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.edu.ifba.flowmanager.modules.horarioAtendimento.dto.HorarioAtendimentoRequestDTO;
-import br.edu.ifba.flowmanager.modules.horarioAtendimento.dto.HorarioAtendimentoResponseDTO;
 import br.edu.ifba.flowmanager.modules.profissional.Profissional;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalRepository;
+import br.edu.ifba.flowmanager.modules.profissional.dto.HorarioAtendimentoRequestDTO;
+import br.edu.ifba.flowmanager.modules.profissional.dto.HorarioAtendimentoResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @Service

@@ -1,4 +1,4 @@
-package br.edu.ifba.flowmanager.modules.horarioAtendimento;
+package br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento;
 
 import java.time.LocalTime;
 

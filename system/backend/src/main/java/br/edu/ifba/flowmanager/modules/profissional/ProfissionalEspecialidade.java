@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// ProfissionalEspecialidade.java
 @Entity
 @Table(name = "profissional_especialidade")
 @Getter @Setter
