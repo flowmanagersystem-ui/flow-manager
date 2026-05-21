@@ -75,5 +75,17 @@ export class TextFormatted {
       currency: 'BRL'
     })
   }
+
+  static textToDateTime(value: string): string {
+    // Entrada -> "2024-06-30T14:30:00" -- Saída: "30/06/2024 14:30"
+    const date = new Date(value)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`
+  }
 }
 

@@ -1,0 +1,41 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.chip {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.chip-more {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--badge-info-bgcolor);
+  color: var(--badge-info-color);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.badge-agendado   { background: var(--success-light); color: var(--success); }
+.badge-cancelado  { background: var(--danger-light);  color: var(--danger); }
+.badge-concluido  { background: var(--badge-info-bgcolor); color: var(--badge-info-color); }
+.badge-reagendado { background: #faeeda; color: #854f0b; }
+
+/* md */
+@media (min-width: 768px) {
+  .chips {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

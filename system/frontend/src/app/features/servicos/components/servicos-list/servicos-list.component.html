@@ -51,12 +51,12 @@
         </div>
     
         <div class="filter-bar-selects">
-            <select name="" id="" class="filter-bar--select display-none">
+            <select name="" id="" class="filter-bar--select ">
                 <option value="nome">A–Z (Nome)</option>
                 <option value="categoria">A–Z (Categoria)</option>
             </select>
 
-            <select name="" id="" class="filter-bar--select display-none">
+            <select name="" id="" class="filter-bar--select ">
                 <option value="todos">Todas as categorias</option>
                 <option value="barbeiro">Barbeiro</option>
                 <option value="cabeleireiro">Cabeleireiro</option>
@@ -123,46 +123,48 @@
         <table class="tbl" mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Serviço </th>
-                <td mat-cell *matCellDef="let servico"> <strong>{{ servico.nome }}</strong> </td>
+                <td class="tbl-item" mat-cell *matCellDef="let servico"> <strong>{{ servico.nome }}</strong> </td>
             </ng-container>
 
             <ng-container matColumnDef="categoria">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                <td mat-cell *matCellDef="let servico">
+                <td class="tbl-item" mat-cell *matCellDef="let servico">
                     {{ servico.categoria }}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="descricao">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
-                <td mat-cell *matCellDef="let servico">
+                <td class="tbl-item" mat-cell *matCellDef="let servico">
                     {{ servico.descricao }}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="duracao">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Duração </th>
-                <td mat-cell *matCellDef="let servico">
+                <td class="tbl-item" mat-cell *matCellDef="let servico">
                     {{ secondsToTime(servico.duracao) }}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="valor">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
-                <td mat-cell *matCellDef="let servico">
+                <td class="tbl-item" mat-cell *matCellDef="let servico">
                     {{ textToCurrency(servico.valor) }}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
                 <th mat-header-cell style="text-align: center;" *matHeaderCellDef> Ações </th>
-                <td mat-cell class="tbl-actions" style="justify-content: center;" *matCellDef="let  servico">
-                    <button class="btn-icon" (click)="onEdit(servico)">
-                        <mat-icon class="icon-outlined">edit</mat-icon>
-                    </button>
-                    <button class="btn-icon" (click)="onRemove(servico)">
-                        <mat-icon class="icon-outlined">delete</mat-icon>
-                    </button>
+                <td mat-cell *matCellDef="let  servico">
+                    <div class="tbl-actions">
+                        <button class="btn-icon" (click)="onEdit(servico)">
+                            <mat-icon class="icon-outlined">edit</mat-icon>
+                        </button>
+                        <button class="btn-icon" (click)="onRemove(servico)">
+                            <mat-icon class="icon-outlined">delete</mat-icon>
+                        </button>
+                    </div>
                 </td>
             </ng-container>
 

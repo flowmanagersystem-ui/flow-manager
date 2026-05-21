@@ -10,13 +10,18 @@ export const LayoutRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'servicos'
+                redirectTo: 'agendamentos'
             },
             // {
             //     path: 'inicio',
             //     component: DashboardComponent,
             //     data: { breadcrumb: 'Dashboard' } 
             // },
+            {
+                path: 'agendamentos',
+                loadChildren: () => import('../../features/agendamento/agendamentos.routes').then(m => m.AgendamentosRoutes),
+                data: { breadcrumb: 'Agendamentos' }
+            },
             {
                 path: 'clientes',
                 loadChildren: () => import('../../features/clientes/cliente.routes').then(m => m.ClientesRoutes),
