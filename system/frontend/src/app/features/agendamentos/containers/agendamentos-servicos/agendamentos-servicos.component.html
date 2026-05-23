@@ -1,0 +1,130 @@
+<div class="form-dialog-header">
+  <div>
+    <div class="form-dialog-title">Serviço</div>
+    <div class="form-dialog-subtitle">Adição de serviço</div>
+  </div>
+  <button mat-icon-button mat-dialog-close class="btn-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <mat-card class="card" appearance="outlined">
+    <mat-card-content>
+      <form [formGroup]="formulario">
+        <div class="form-row">               
+            
+          <mat-form-field class="form-group" appearance="outline">
+              <mat-label class="form-label">Serviço</mat-label>
+              <mat-select formControlName="servico" placeholder="Selecione o serviço">
+                  <mat-option *ngFor="let servico of servicos$ | async" [value]="servico">
+                    {{ servico.nome }}
+                  </mat-option>
+              </mat-select>
+              <mat-error class="input-message" [control]="$any(formulario.get('servico'))" [label]="'servico'">  </mat-error>                
+          </mat-form-field> 
+
+        </div>
+
+        <div class="form-row">               
+            
+          <mat-form-field class="form-group" appearance="outline">
+              <mat-label class="form-label">Profissional</mat-label>
+              <mat-select formControlName="profissional" placeholder="Selecione o profissional"
+              [disabled]="!formulario.get('servico')?.value">
+
+                  <mat-option *ngIf="carregandoProfissionais" disabled>
+                    <mat-progress-spinner diameter="16" style="display: block; margin-right: 8px;">
+                      Carregando profissionais...
+                    </mat-progress-spinner>
+                  </mat-option>
+
+                  <mat-option *ngFor="let profissional of profissionais" [value]="profissional">
+                    {{ profissional.nome }} {{ profissional.sobrenome }}
+                  </mat-option>
+
+                  <mat-option *ngIf="!carregandoProfissionais && profissionais.length === 0" disabled>
+                    Nenhum profissional habilitado disponível para este serviço
+                  </mat-option>                  
+              </mat-select>
+
+              <mat-hint align="start" class="hint input-message" *ngIf="formulario.get('servico')?.value?.nome">
+                Apenas profissionais habilitados para {{formulario.get('servico')?.value?.nome}}
+              </mat-hint>
+              <mat-error class="input-message" [control]="$any(formulario.get('profissional'))" [label]="'profissional'"></mat-error>                
+          </mat-form-field> 
+        </div>       
+        
+
+      
+        <div class="form-row select-bar" >
+          <label class="form-label">Dia da semana</label>
+
+          <span class="estado-vazio" *ngIf="!formulario.get('profissional')?.value">
+            <mat-icon class="icon-outlined">info</mat-icon>
+            Selecione um profissional primeiro
+          </span>
+
+          <mat-radio-group formControlName="diaSemana" class="lista-servicos"
+            *ngIf="formulario.get('profissional')?.value">
+            <mat-radio-button class="list-item" *ngFor="let dia of DIAS"
+              [value]="dia"
+              [disabled]="!diaDisponivel(dia)"
+              [class.indisponivel]="!diaDisponivel(dia)">
+              {{ capitalizarTexto(dia) }}
+            </mat-radio-button>
+          </mat-radio-group>
+          
+          <mat-hint align="start" class="hint input-message" *ngIf="formulario.get('profissional')?.value">
+            Dias com horário disponível para {{ formulario.get('profissional')?.value?.nome }}
+          </mat-hint>
+        </div>
+
+        <div class="form-row select-bar">
+          <label class="form-label">Horário</label>
+
+          <span class="estado-vazio" *ngIf="!formulario.get('diaSemana')?.value">
+            <mat-icon class="icon-outlined">info</mat-icon>
+            Selecione um dia primeiro
+          </span>
+
+          <div class="loading-inline" *ngIf="carregandoSlots">
+            <mat-spinner diameter="18"></mat-spinner>
+            <span>Verificando disponibilidade...</span>
+          </div>
+
+          <mat-radio-group formControlName="horario" class="lista-servicos"
+            *ngIf="formulario.get('diaSemana')?.value && !carregandoSlots">
+
+            <mat-radio-button class="list-item" *ngFor="let slot of slots" 
+              [value]="slot.horario"
+              [disabled]="!slot.disponivel"
+              [class.indisponivel]="!slot.disponivel"
+              [matTooltip]="!slot.disponivel ? 'Horário ocupado' : ''">
+              {{ timeToHourMinute(slot.horario) }}
+            </mat-radio-button>
+
+            <span class="estado-vazio" *ngIf="slots.length === 0">
+              <mat-icon class="icon-outlined">event_busy</mat-icon>
+              Sem horários disponíveis neste dia
+            </span>
+          </mat-radio-group>
+
+          <mat-hint align="start" class="hint input-message" 
+          *ngIf="formulario.get('servico')?.value && slots.length > 0">
+            Slots de {{ formulario.get('servico')?.value?.duracao }} min ·
+            {{ slots | disponiveisCount }} disponíveis
+          </mat-hint>
+        </div>
+
+      </form>    
+    </mat-card-content>
+
+    <mat-card-actions class="form-actions">
+      <button class="btn btn-cancel" mat-dialog-close>Cancelar</button>
+      <button class="btn btn-primary" [disabled]="!formulario.valid" (click)="onSubmit()">Adicionar</button>
+    </mat-card-actions>
+  </mat-card>
+
+</mat-dialog-content>
+

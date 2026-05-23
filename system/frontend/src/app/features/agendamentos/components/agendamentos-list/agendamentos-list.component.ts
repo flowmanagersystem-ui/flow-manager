@@ -93,8 +93,9 @@ export class AgendamentosListComponent {
     this.viewMode = !this.viewMode
   }
 
-  profissionaisUnicos(agendamento: Agendamento): string[] {
-    const unicos = new Set(agendamento.servicos.map((s: ServicoAgendamento) => s.nomeProfissional));
+  profissionaisUnicos(agendamento: Agendamento): (string | undefined)[] {
+    const unicos = new Set(agendamento.servicos.map((s: ServicoAgendamento) => s.nomeProfissional))
+    
     return [...unicos];
   }
 

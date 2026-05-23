@@ -10,4 +10,6 @@ public interface ProfissionalServicoRepository
     List<ProfissionalServico> findByProfissionalId(Long profissionalId);
     
     void deleteByProfissionalIdAndServicoId(Long profissionalId, Long servicoId);
+    
+    List<ProfissionalServico> findByServicoId(Long servicoId);
 }

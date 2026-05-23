@@ -8,6 +8,7 @@ import { Servico } from './servico.interface';
 import { Page } from '../../shared/interfaces/page.interface';
 import { AsyncValidatorFn } from '@angular/forms';
 import { validarDuplicidade } from '../../shared/validators/duplicidade.validator';
+import { Profissional } from '../profissionais/profissional.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,11 @@ export class ServicosService {
       // Simular atraso de resposta do servidor
       // delay(15000),
     )
+  }
+
+  listarProfissionaisPorServico(servicoId: number) {
+    return this.http.get<Profissional[]>(`${this.API}/${servicoId}/profissionais`)
+      .pipe(first())
   }
 
   save(record: Servico){

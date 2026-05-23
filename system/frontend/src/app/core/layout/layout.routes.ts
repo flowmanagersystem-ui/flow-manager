@@ -19,7 +19,7 @@ export const LayoutRoutes: Routes = [
             // },
             {
                 path: 'agendamentos',
-                loadChildren: () => import('../../features/agendamento/agendamentos.routes').then(m => m.AgendamentosRoutes),
+                loadChildren: () => import('../../features/agendamentos/agendamentos.routes').then(m => m.AgendamentosRoutes),
                 data: { breadcrumb: 'Agendamentos' }
             },
             {

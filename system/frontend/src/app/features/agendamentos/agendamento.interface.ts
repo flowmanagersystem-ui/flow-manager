@@ -1,23 +1,22 @@
-// agendamento.interface.ts
 export interface Agendamento {
-  id: number;
+  id?: number;
   clienteId: number;        
-  nomeCliente: string;
-  dataHora: string;         
+  nomeCliente?: string;
+  dataHora?: string;         
   status: Status;           
-  observacao?: string;      
-  desconto?: number;
-  valorTotal: number;       
+  observacao: string;      
+  desconto: number;
+  valorTotal?: number;       
   servicos: ServicoAgendamento[];  
 }
 
 export interface ServicoAgendamento {
   profissionalId: number;
-  nomeProfissional: string;
+  nomeProfissional?: string;
   servicoId: number;
-  nomeServico: string;      
-  valorServico: number;     
-  duracao: number;          
+  nomeServico?: string;      
+  valorServico?: number;     
+  duracao?: number;          
 }
 
 export enum Status {

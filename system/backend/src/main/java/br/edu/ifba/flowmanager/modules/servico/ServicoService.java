@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoRepository;
+import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalResponseDTO;
 import br.edu.ifba.flowmanager.modules.servico.dto.ServicoRequestDTO;
 import br.edu.ifba.flowmanager.modules.servico.dto.ServicoResponseDTO;
+import br.edu.ifba.flowmanager.modules.usuario.enums.StatusUsuario;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -19,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class ServicoService {
 
     private final ServicoRepository servicoRepository;
+    private final ProfissionalServicoRepository profissionalServicoRepository;
 
     public Page<ServicoResponseDTO> listAll(String nome, String categoria, Pageable pageable) {
         return servicoRepository.findWithFilters(nome, categoria, pageable)
@@ -85,6 +89,22 @@ public class ServicoService {
                 HttpStatus.BAD_REQUEST, "Campo inválido para verificação: " + campo);
         };
     }
+
+    public List<ProfissionalResponseDTO> listarProfissionaisPorServico(Long servicoId) {
+        return profissionalServicoRepository.findByServicoId(servicoId)
+            .stream()
+            .map(ps -> new ProfissionalResponseDTO(
+                ps.getProfissional().getId(),
+                ps.getProfissional().getUsuario().getNome(),
+                ps.getProfissional().getUsuario().getSobrenome(),
+                ps.getProfissional().getUsuario().getEmail(),
+                ps.getProfissional().getUsuario().getTelefone(),
+                null,
+                ps.getProfissional().getUsuario().isAtivo()
+                ? StatusUsuario.Ativo : StatusUsuario.Inativo
+            ))
+            .toList();
+}
 
     private void preencher(Servico servico, ServicoRequestDTO dto) {
         servico.setNome(dto.nome());

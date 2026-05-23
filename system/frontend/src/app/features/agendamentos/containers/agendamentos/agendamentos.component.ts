@@ -85,7 +85,6 @@ export class AgendamentosComponent implements OnInit {
     //   this.onError('Você não tem permissão para editar usuários.')
     // }
   }
-
   
   onEdit(agendamento: Agendamento){
     const dialogRef = FormDialogComponent.open<Agendamento>(this.dialog, {
@@ -121,7 +120,7 @@ export class AgendamentosComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if(result){
         this.loadingService.show()
-        this.agendamentosService.remove(agendamento.id)
+        this.agendamentosService.remove(agendamento.id!)
         .pipe(
           finalize(() => this.loadingService.hide())
         )
@@ -141,21 +140,19 @@ export class AgendamentosComponent implements OnInit {
     }) 
   }
 
-
   refresh(page = 0) {
     this.paginaAtual = page
     this.agendamentos$ = this.agendamentosService.listAll(page)
     .pipe(
       tap(response => this.totalElements = response.totalElements), 
       map(response => response.content),                           
-      tap(console.log), // Verificar resposta do servidor
+      // tap(console.log), // Verificar resposta do servidor
       catchError(error => {
         this.onError('Erro ao carregar agendamentos.');
         return of([]);
       })
     )
   }
-
   
   onPageChange(event: PageEvent) {
     this.refresh(event.pageIndex)

@@ -1,12 +1,16 @@
 package br.edu.ifba.flowmanager.modules.agendamento;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.DiaSemana;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 
@@ -51,5 +55,18 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
         @Param("profissionalId") Long profissionalId,
         @Param("dataHora") LocalDateTime dataHora,
         @Param("excludeId") Long excludeId
+    );
+
+    // AgendamentoRepository.java
+    @Query("""
+        SELECT TIME(a.dataHora) FROM Agendamento a
+        JOIN a.servicos s
+        WHERE s.profissional.id = :profissionalId
+        AND a.status IN ('AGENDADO', 'REAGENDADO')
+        AND DAYOFWEEK(a.dataHora) = :#{#diaSemana.ordinal() + 2}
+    """)
+    List<LocalTime> findHorariosOcupadosByProfissionalAndDia(
+        @Param("profissionalId") Long profissionalId,
+        @Param("diaSemana") DiaSemana diaSemana
     );
 }

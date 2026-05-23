@@ -68,6 +68,12 @@ export class TextFormatted {
     return `${hours}:${minutes.toString().padStart(2, '0')} h`
   }
 
+  static timeToHourMinute(value: string): string {
+    // Entrada -> 10:00:00 -- Saída: 10:00
+    const [hours, minutes] = value.split(':').map(Number)
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+  }
+
   static textToCurrency(value: number): string {
     // Entrada -> 150.5 -- Saída: "R$ 150,50"
     return value.toLocaleString('pt-BR', {

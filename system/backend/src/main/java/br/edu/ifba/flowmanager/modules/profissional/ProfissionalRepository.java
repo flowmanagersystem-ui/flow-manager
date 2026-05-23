@@ -11,5 +11,5 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Long
         value = "SELECT p FROM Profissional p JOIN FETCH p.usuario",
         countQuery = "SELECT COUNT(p) FROM Profissional p" 
     )
-    Page<Profissional> findAllWithUsuario(Pageable pageable);
+    Page<Profissional> findAllWithUsuario(Pageable pageable);    
 }

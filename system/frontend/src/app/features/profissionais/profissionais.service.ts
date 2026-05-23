@@ -87,8 +87,11 @@ export class ProfissionaisService {
 
   // Adições para gerenciamento de horários de atendimento vinculados a um profissional
   listarHorarios(profissionalId: number) {
-    return this.http.get<HorarioAtendimento[]>(`${this.API}/${profissionalId}/horarios`)
-      .pipe(first());
+    return this.http.get<HorarioAtendimento[]>(`${this.API}/${profissionalId}/horarios`)      
+      .pipe(
+        // tap(console.log),
+        first()
+      );
   }
 
   adicionarHorario(profissionalId: number, dto: HorarioAtendimento) {

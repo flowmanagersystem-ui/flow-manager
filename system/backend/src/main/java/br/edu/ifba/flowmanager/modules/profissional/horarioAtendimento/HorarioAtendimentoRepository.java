@@ -31,4 +31,7 @@ public interface HorarioAtendimentoRepository
         @Param("horaFim") LocalTime horaFim,
         @Param("excludeId") Long excludeId
     );
+
+    List<HorarioAtendimento> findByProfissionalIdAndDiaSemana(
+    Long profissionalId, DiaSemana diaSemana);
 }
