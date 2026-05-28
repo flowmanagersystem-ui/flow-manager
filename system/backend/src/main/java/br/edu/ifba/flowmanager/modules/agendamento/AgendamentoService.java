@@ -4,25 +4,25 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoResponseDTO;
-import br.edu.ifba.flowmanager.modules.cliente.Cliente;
 import br.edu.ifba.flowmanager.modules.cliente.ClienteRepository;
+import br.edu.ifba.flowmanager.modules.cliente.Cliente;
 import br.edu.ifba.flowmanager.modules.profissional.Profissional;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalRepository;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoId;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoRepository;
 import br.edu.ifba.flowmanager.modules.servico.Servico;
 import br.edu.ifba.flowmanager.modules.servico.ServicoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,6 +34,8 @@ public class AgendamentoService {
     private final ProfissionalRepository profissionalRepository;
     private final ProfissionalServicoRepository profissionalServicoRepository;
     private final ServicoRepository servicoRepository;
+
+    // ── listagem ──────────────────────────────────────────────
 
     public Page<AgendamentoResponseDTO> listAll(
         Long clienteId, StatusAgendamento status,
@@ -49,32 +51,39 @@ public class AgendamentoService {
         return toDTO(buscarOuLancar(id));
     }
 
+    // ── create ────────────────────────────────────────────────
     @Transactional
     public AgendamentoResponseDTO create(AgendamentoRequestDTO dto) {
         Cliente cliente = clienteRepository.findById(dto.clienteId())
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Cliente não encontrado."));
 
         Agendamento agendamento = new Agendamento();
         agendamento.setCliente(cliente);
-        agendamento.setDataHora(dto.dataHora());
         agendamento.setStatus(dto.status() != null ? dto.status() : StatusAgendamento.AGENDADO);
         agendamento.setObservacao(dto.observacao());
         agendamento.setDesconto(dto.desconto() != null ? dto.desconto() : BigDecimal.ZERO);
+        agendamento.setDataHora(dto.servicos().get(0).dataHoraInicio());
+        agendamento.setValorTotal(BigDecimal.ZERO); // ← valor provisório para o primeiro save
 
-        BigDecimal valorTotal = processarServicos(agendamento, dto.servicos(), null);
-        agendamento.setValorTotal(valorTotal);
+        Agendamento salvo = agendamentoRepository.save(agendamento);
 
-        return toDTO(agendamentoRepository.save(agendamento));
+        BigDecimal valorTotal = processarServicos(salvo, dto.servicos(), null);
+        salvo.setValorTotal(valorTotal); // ← atualiza com o valor real
+
+        return toDTO(agendamentoRepository.save(salvo)); // ← segundo save com valor correto
     }
+
+    // ── update ────────────────────────────────────────────────
 
     @Transactional
     public AgendamentoResponseDTO update(Long id, AgendamentoRequestDTO dto) {
         Agendamento agendamento = buscarOuLancar(id);
 
-        agendamento.setDataHora(dto.dataHora());
         agendamento.setStatus(dto.status());
         agendamento.setObservacao(dto.observacao());
         agendamento.setDesconto(dto.desconto() != null ? dto.desconto() : BigDecimal.ZERO);
+        agendamento.setDataHora(dto.servicos().get(0).dataHoraInicio());
         agendamento.getServicos().clear();
 
         BigDecimal valorTotal = processarServicos(agendamento, dto.servicos(), id);
@@ -83,12 +92,19 @@ public class AgendamentoService {
         return toDTO(agendamentoRepository.save(agendamento));
     }
 
+    // ── delete ────────────────────────────────────────────────
+
     @Transactional
     public void delete(Long id) {
         agendamentoRepository.delete(buscarOuLancar(id));
     }
 
-    // ── privados ─────────────────────────────────────────────
+    // ── processarServicos ─────────────────────────────────────
+    // processa cada serviço do agendamento:
+    // - valida profissional habilitado
+    // - verifica conflito de horário com data real
+    // - calcula data_hora_fim baseado na duração
+    // - encadeia serviços do mesmo profissional
 
     private BigDecimal processarServicos(
         Agendamento agendamento,
@@ -98,34 +114,43 @@ public class AgendamentoService {
         BigDecimal total = BigDecimal.ZERO;
 
         for (AgendamentoServicoDTO s : servicosDTO) {
-            // verifica se profissional existe
+
             Profissional profissional = profissionalRepository.findById(s.profissionalId())
                 .orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Profissional não encontrado: " + s.profissionalId()));
 
-            // verifica se serviço existe
             Servico servico = servicoRepository.findById(s.servicoId())
                 .orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Serviço não encontrado: " + s.servicoId()));
 
-            // verifica se profissional está habilitado para o serviço
+            // valida habilitação profissional → serviço
             ProfissionalServicoId psId = new ProfissionalServicoId(s.profissionalId(), s.servicoId());
             if (!profissionalServicoRepository.existsById(psId)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Profissional não habilitado para o serviço: " + servico.getNome());
             }
 
-            // verifica conflito de horário
-            if (agendamentoRepository.existeConflito(s.profissionalId(), agendamento.getDataHora(), excludeId)) {
+            // calcula data_hora_fim com base na duração do serviço
+            LocalDateTime dataHoraInicio = s.dataHoraInicio();
+            LocalDateTime dataHoraFim = dataHoraInicio.plusMinutes(servico.getDuracao());
+
+            // verifica conflito com horários reais
+            if (agendamentoRepository.existeConflito(
+                s.profissionalId(), dataHoraInicio, dataHoraFim, excludeId)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Profissional já possui agendamento neste horário.");
+                    String.format("Profissional %s já possui agendamento entre %s e %s.",
+                        profissional.getUsuario().getNome(),
+                        dataHoraInicio, dataHoraFim));
             }
 
             AgendamentoServico as = new AgendamentoServico();
-            as.setId(new AgendamentoServicoId(agendamento.getId(), s.profissionalId(), s.servicoId()));
+            as.setId(new AgendamentoServicoId(
+                agendamento.getId(), s.profissionalId(), s.servicoId()));
             as.setAgendamento(agendamento);
             as.setProfissional(profissional);
             as.setServico(servico);
+            as.setDataHoraInicio(dataHoraInicio);
+            as.setDataHoraFim(dataHoraFim);
 
             agendamento.getServicos().add(as);
             total = total.add(servico.getValor());
@@ -137,6 +162,8 @@ public class AgendamentoService {
 
         return total.subtract(desconto).max(BigDecimal.ZERO);
     }
+
+    // ── utilitários ───────────────────────────────────────────
 
     private Agendamento buscarOuLancar(Long id) {
         return agendamentoRepository.findById(id)
@@ -152,7 +179,9 @@ public class AgendamentoService {
                 s.getServico().getId(),
                 s.getServico().getNome(),
                 s.getServico().getValor(),
-                s.getServico().getDuracao()
+                s.getServico().getDuracao(),
+                s.getDataHoraInicio(),
+                s.getDataHoraFim()
             )).toList();
 
         return new AgendamentoResponseDTO(

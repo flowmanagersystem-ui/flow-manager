@@ -21,52 +21,49 @@
                     adicionar serviço
                 </button>
             </div>
-
-            <!-- após o botão de adicionar serviço -->
+            
             <div class="servicos-lista" *ngIf="servicosAdicionados.length > 0">
-            <div class="servico-item-card" *ngFor="let s of servicosAdicionados; let i = index">
-                <div class="servico-item-info">
-                <span class="servico-item-nome">{{ s.nomeServico }}</span>
-                <span class="servico-item-meta">
-                    {{ s.nomeProfissional }} · {{ s.diaSemana }} às {{ s.horario }}
-                </span>
-                </div>
-                <div class="servico-item-right">
-                <span class="servico-item-valor">{{ textToCurrency(s.valorServico) }}</span>
-                <button class="btn-icon" (click)="removerServico(i)">
-                    <mat-icon class="icon-outlined">delete</mat-icon>
-                </button>
-                </div>
-            </div>
-            </div>
-
-            <!-- resumo -->
-            <div class="resumo" *ngIf="servicosAdicionados.length > 0">
-            <div class="resumo-row">
-                <span>Subtotal</span>
-                <div class="resumo-valores">
-                    <span *ngFor="let servico of servicosAdicionados">
-                        {{ textToCurrency(servico.valorServico) }}
+                <div class="servico-item-card" *ngFor="let s of servicosAdicionados; let i = index">
+                    <div class="servico-item-info">
+                    <span class="servico-item-nome">{{ s.nomeServico }}</span>
+                    <span class="servico-item-meta">
+                        {{ s.nomeProfissional }} · {{ s.diaSemana }} às {{ s.horario }}
                     </span>
+                    </div>
+                    <div class="servico-item-right">
+                    <span class="servico-item-valor">{{ textToCurrency(s.valorServico) }}</span>
+                    <button class="btn-icon" (click)="removerServico(i)">
+                        <mat-icon class="icon-outlined">delete</mat-icon> 
+                    </button>
+                    </div>
                 </div>
             </div>
-            <div class="resumo-total">
-                <span>Total</span>
-                <span>{{ textToCurrency(valorTotal) }}</span>
-            </div>
-            </div>
 
-            <!-- desconto e observação -->
+            <div class="resumo" *ngIf="servicosAdicionados.length > 0">
+                <div class="resumo-row">
+                    <span>Subtotal</span>
+                    <div class="resumo-valores">
+                        <span *ngFor="let servico of servicosAdicionados">
+                            {{ textToCurrency(servico.valorServico) }}
+                        </span>
+                    </div>
+                </div>
+                <div class="resumo-total">
+                    <span>Total</span>
+                    <span>{{ textToCurrency(valorTotal) }}</span>
+                </div>
+            </div>
+       
             <div class="form-row desconto-observacao" *ngIf="servicosAdicionados.length > 0">
-            <mat-form-field appearance="outline">
-                <mat-label>Desconto (R$)</mat-label>
-                <input matInput type="number" formControlName="desconto" min="0" />
-            </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Desconto (R$)</mat-label>
+                    <input matInput type="number" formControlName="desconto" min="0" />
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Observação</mat-label>
-                <input matInput formControlName="observacao" />
-            </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Observação</mat-label>
+                    <input matInput formControlName="observacao" />
+                </mat-form-field>
             </div>
         </form>
 

@@ -145,3 +145,33 @@
   color: var(--text-muted);
   padding: 4px 0;
 }
+
+// ── campo de data ─────────────────────────────────────────────
+.campo-data {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.calendario {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+
+  // dias disponíveis ficam com cor primária
+  ::ng-deep .mat-calendar-body-cell-content {
+    border-radius: var(--radius);
+  }
+
+  // dia selecionado
+  ::ng-deep .mat-calendar-body-selected {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  // dia atual
+  ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: var(--primary);
+  }
+}

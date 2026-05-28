@@ -3,9 +3,8 @@ package br.edu.ifba.flowmanager.modules.agenda.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public record DisponibilidadeDTO(
+public record DiasDisponiveisDTO(
     Long profissionalId,
     String nomeProfissional,
-    LocalDate data,
-    List<SlotDTO> slots
+    List<LocalDate> diasDisponiveis  // dias com pelo menos 1 slot livre no mês
 ) {}

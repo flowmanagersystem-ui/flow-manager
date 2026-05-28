@@ -10,7 +10,7 @@ public record AgendamentoResponseDTO(
     Long id,
     Long clienteId,
     String nomeCliente,
-    LocalDateTime dataHora,
+    LocalDateTime dataHora,        // ← data_hora_inicio do primeiro serviço
     StatusAgendamento status,
     String observacao,
     BigDecimal desconto,

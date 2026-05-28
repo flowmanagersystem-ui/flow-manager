@@ -4,6 +4,5 @@ import java.time.LocalTime;
 
 public record SlotDTO(
     LocalTime horario,
-    boolean disponivel,
-    Long agendamentoId  // null se disponível
+    boolean disponivel
 ) {}

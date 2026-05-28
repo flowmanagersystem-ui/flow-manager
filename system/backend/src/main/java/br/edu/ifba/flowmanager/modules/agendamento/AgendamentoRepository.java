@@ -1,18 +1,17 @@
 package br.edu.ifba.flowmanager.modules.agendamento;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.DiaSemana;
-
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
+
+    // ── listagem com filtros ──────────────────────────────────
 
     @Query(
         value = """
@@ -42,31 +41,39 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
         Pageable pageable
     );
 
-    // verifica conflito de horário para o profissional
+    // ── conflito de horário por data real ─────────────────────
+    // verifica sobreposição de horário para um profissional
+    // usando data_hora_inicio e data_hora_fim reais
+
     @Query("""
-        SELECT COUNT(a) > 0 FROM Agendamento a
-        JOIN a.servicos s
+        SELECT COUNT(s) > 0
+        FROM AgendamentoServico s
         WHERE s.profissional.id = :profissionalId
-        AND a.status IN ('AGENDADO', 'REAGENDADO')
-        AND a.dataHora = :dataHora
-        AND (:excludeId IS NULL OR a.id <> :excludeId)
+        AND s.agendamento.status IN ('AGENDADO', 'REAGENDADO')
+        AND (:excludeId IS NULL OR s.agendamento.id <> :excludeId)
+        AND s.dataHoraInicio < :dataHoraFim
+        AND s.dataHoraFim > :dataHoraInicio
     """)
     boolean existeConflito(
         @Param("profissionalId") Long profissionalId,
-        @Param("dataHora") LocalDateTime dataHora,
+        @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
+        @Param("dataHoraFim") LocalDateTime dataHoraFim,
         @Param("excludeId") Long excludeId
     );
 
-    // AgendamentoRepository.java
+    // ── horários ocupados em uma data para um profissional ────
+    // usado pelo AgendaService para calcular slots disponíveis
+
     @Query("""
-        SELECT TIME(a.dataHora) FROM Agendamento a
-        JOIN a.servicos s
+        SELECT s FROM AgendamentoServico s
         WHERE s.profissional.id = :profissionalId
-        AND a.status IN ('AGENDADO', 'REAGENDADO')
-        AND DAYOFWEEK(a.dataHora) = :#{#diaSemana.ordinal() + 2}
+        AND s.agendamento.status IN ('AGENDADO', 'REAGENDADO')
+        AND s.dataHoraInicio >= :inicioDia
+        AND s.dataHoraFim <= :fimDia
     """)
-    List<LocalTime> findHorariosOcupadosByProfissionalAndDia(
+    List<AgendamentoServico> findServicosNoDia(
         @Param("profissionalId") Long profissionalId,
-        @Param("diaSemana") DiaSemana diaSemana
+        @Param("inicioDia") LocalDateTime inicioDia,
+        @Param("fimDia") LocalDateTime fimDia
     );
 }

@@ -4,7 +4,7 @@ import { Component, Inject } from '@angular/core';
 import { CommonModule, Location  } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AsyncValidatorFn, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
 
 // Material
@@ -17,12 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Validations
-import { FormValidations } from '../../../../shared/forms-validations';
 import { TextFormatted } from '../../../../shared/text-formatted';
-
-// Diretivas
-import { CurrencyFormatDirective } from '../../../../shared/directives/currencyFormat.directive';
-import { TimeFormatDirective } from '../../../../shared/directives/timeFormat.directive';
 
 // Components
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
@@ -61,13 +56,13 @@ import { LoadingService } from '../../../../shared/services/loading.service';
   templateUrl: './agendamento-form.component.html',
   styleUrl: './agendamento-form.component.scss'
 })
+
 export class AgendamentoFormComponent {
   clientes$: Observable<Cliente[]> | null = null
   servicosAdicionados: any[] = []
   agendamento: Agendamento  
   formulario!: FormGroup
   paginaAtual = 0
-
 
   constructor(    
     private fb: NonNullableFormBuilder,
@@ -89,6 +84,7 @@ export class AgendamentoFormComponent {
     this.formulario = this.fb.group({
       id:         [this.agendamento?.id],
       cliente:    [null, Validators.required],
+      status:     [Status.AGENDADO],
       desconto:   [0],
       observacao: [''],
     })
@@ -98,41 +94,48 @@ export class AgendamentoFormComponent {
 
   onSubmit() {
     if (this.formulario.invalid || this.servicosAdicionados.length === 0) return
+   
+    this.loadingService.show()
+    
+    const { cliente, status, observacao, desconto } = this.formulario.value;
 
-    const dto = {
-      clienteId: parseInt(this.formulario.get('cliente')?.value?.id),
-      status: Status.AGENDADO,
-      observacao: String(this.formulario.get('observacao')?.value),
-      desconto: parseFloat(this.formulario.get('desconto')?.value) || 0,
-      dataHora: '2026-05-25T08:00:00',
-      servicos: this.servicosAdicionados.map(s => ({
-        profissionalId: parseInt(s.profissionalId),
-        servicoId: parseInt(s.servicoId),
+    const payload = {
+      clienteId:  cliente.id,
+      status:     Status.AGENDADO,
+      observacao: observacao || null,
+      desconto:   desconto || 0,
+      servicos:   this.servicosAdicionados.map(s => ({
+        profissionalId:  s.profissionalId,
+        servicoId:       s.servicoId,
+        dataHoraInicio:  s.dataHoraInicio  
       }))
-    }
+    };
 
-    console.log(dto)
-
-    this.agendamentosService.save(dto)
+    this.agendamentosService.save(payload)
+      .pipe(          
+        finalize(() => this.loadingService.hide())
+      )
       .subscribe({
         next: () => {
-          this.snackBar.open('Agendamento confirmado!', '', { duration: 4000 });
-          this.dialogRef.close(true);
+          this.snackBar.open('Agendamento confirmado!', '', { duration: 4000 })
+          this.dialogRef.close(true)
         },
         error: () => this.onError('Erro ao confirmar agendamento.')
       });
   }
 
-
-  onCancel(){}
+  onCancel(){
+    this.formulario.reset()
+    this.location.back()
+  }
 
   buscarClientes() {
-    this.clientes$ = this.clientesService.listAll(0)
+    this.clientes$ = this.clientesService.listAll(0, 100)
     .pipe(
       map(response => response.content.filter(cliente => String(cliente.status) == 'Ativo')),
       catchError(error => {
-        this.onError('Erro ao carregar clientes.');
-        return of([]);
+        this.onError('Erro ao carregar clientes.')
+        return of([])
       })
     )
   }
@@ -152,7 +155,7 @@ export class AgendamentoFormComponent {
   }
 
   removerServico(index: number) {
-    this.servicosAdicionados.splice(index, 1);
+    this.servicosAdicionados.splice(index, 1)
   }
 
   get valorTotal(): number {
@@ -169,7 +172,7 @@ export class AgendamentoFormComponent {
     const dialogRef = ErrorDialogComponent.open(this.dialog, { message: errorMsg, redirectTo })
 
     dialogRef.afterClosed().subscribe(confirmed => {      
-      this.router.navigate([''], { relativeTo: this.route }) // Mudar para rota home ou outra rota adequada
+      this.router.navigate([''], { relativeTo: this.route }) 
     })
   }
 
