@@ -32,11 +32,19 @@ public class ProfissionalController {
 
     private final ProfissionalService profissionalService;
 
+    // @GetMapping
+    // public Page<ProfissionalResponseDTO> listAll(
+    //     @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
+    // ) {
+    //     return profissionalService.listAll(pageable);
+    // }
+
     @GetMapping
     public Page<ProfissionalResponseDTO> listAll(
+        @RequestParam(required = false) String filtro,
         @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
     ) {
-        return profissionalService.listAll(pageable);
+        return profissionalService.listAll(filtro, pageable);
     }
 
     @GetMapping("/{id}")

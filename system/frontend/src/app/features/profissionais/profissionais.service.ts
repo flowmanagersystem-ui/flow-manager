@@ -19,8 +19,8 @@ export class ProfissionaisService {
 
   constructor(private http: HttpClient) { }
 
-  listAll(page: number = 0, size: number = 10) {
-    return this.http.get<Page<Profissional>>(`${this.API}?page=${page}&size=${size}`)
+  listAll(page: number = 0, size: number = 10, filtro: string = '') {
+    return this.http.get<Page<Profissional>>(`${this.API}?page=${page}&size=${size}&filtro=${filtro}`)
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console

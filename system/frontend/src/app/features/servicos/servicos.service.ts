@@ -19,8 +19,8 @@ export class ServicosService {
 
   constructor(private http: HttpClient) { }
 
-  listAll(page: number = 0, size: number = 10) {
-    return this.http.get<Page<Servico>>(`${this.API}?page=${page}&size=${size}`)
+  listAll(page: number = 0, size: number = 10, nome: string = '', categoria: string = '') {
+    return this.http.get<Page<Servico>>(`${this.API}?page=${page}&size=${size}&nome=${nome}&categoria=${categoria}`)
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console

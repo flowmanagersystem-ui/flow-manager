@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Interfaces
 import { Profissional } from '../../profissional.interface';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profissionais-list',
@@ -20,6 +21,7 @@ import { Profissional } from '../../profissional.interface';
   imports: [
     // Angular
     CommonModule,
+    ReactiveFormsModule,
     // Angular Material
     MatIconModule,
     MatInputModule,
@@ -40,6 +42,7 @@ export class ProfissionaisListComponent {
   info = 'profissional'
   listaVazia = 'Não há profissionais cadastrados neste momento.'
   noResults = `Nenhum resultado encontrado com o filtro `
+  filtro = ''
   viewMode: boolean = false
 
   selectedAZ = 'nome'
@@ -56,6 +59,7 @@ export class ProfissionaisListComponent {
   @Input() paginaAtual = 0
   @Input() totalAtivos = 0
   @Input() totalEspecialidades = 0
+  @Input() filtroControl!: FormControl
   @Input() set profissionais(data: Profissional[]) { this.dataSource.data = data}
   @Output() pageChange = new EventEmitter<PageEvent>()
   @Output() add: EventEmitter<boolean> = new EventEmitter(false)
@@ -73,14 +77,6 @@ export class ProfissionaisListComponent {
   constructor(private renderer: Renderer2) {
     this.dataSource = new MatTableDataSource(this.profissionais)
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value    
-    this.dataSource.filter = filterValue.trim().toLowerCase()
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
-  }  
 
   onAdd(){
     this.add.emit(true)

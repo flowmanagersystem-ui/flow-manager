@@ -1,7 +1,7 @@
   // Angular
   import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
   import { CommonModule } from '@angular/common';
-  import { FormsModule } from '@angular/forms';
+  import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   // Angular Material
   import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +20,7 @@
       // Angular
       CommonModule,
       FormsModule,
+      ReactiveFormsModule,
       // Angular Material
       MatIconModule,
       MatButtonModule,
@@ -36,12 +37,14 @@
     info = 'cliente'
     listaVazia = 'Não há clientes cadastrados neste momento.'
     noResults = `Nenhum resultado encontrado com o filtro `
-    
+    filtro = ''
+
     dataSource: MatTableDataSource<Cliente>
     @ViewChild(MatPaginator) paginator!: MatPaginator
     @ViewChild(MatSort) sort!: MatSort
     @Input() totalElements = 0
     @Input() paginaAtual = 0
+    @Input() filtroControl!: FormControl
     @Input() set clientes(data: Cliente[]) { this.dataSource.data = data}
     @Output() pageChange = new EventEmitter<PageEvent>()
     @Output() add: EventEmitter<boolean> = new EventEmitter(false)
@@ -59,11 +62,13 @@
     }
 
     applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value    
-      this.dataSource.filter = filterValue.trim().toLowerCase()
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage()
-      }
+      // const filtro = (event.target as HTMLInputElement).value;
+      // this.filterChange.emit(filtro);
+      // const filterValue = (event.target as HTMLInputElement).value    
+      // this.dataSource.filter = filterValue.trim().toLowerCase()
+      // if (this.dataSource.paginator) {
+      //   this.dataSource.paginator.firstPage()
+      // }
     }  
 
     onAdd(){

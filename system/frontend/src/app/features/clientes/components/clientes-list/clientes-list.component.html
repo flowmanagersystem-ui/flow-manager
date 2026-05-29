@@ -13,9 +13,15 @@
         <div class="table-toolbar">
             <div class="table-toolbar-search">
                 <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
-                <input type="text" matInput  (keyup)="applyFilter($event)" #input placeholder="Buscar por nome, e-mail, telefone..." />
+                <input type="text" placeholder="Buscar por nome, e-mail, telefone..." autofocus                
+                    #input 
+                    matInput  
+                    [formControl]="filtroControl"
+                    (keyup)="applyFilter($event)"/>
             </div>
-            <span class="badge badge-info">{{ dataSource.filteredData.length }} {{ dataSource.filteredData.length == 1 ? info : info + 's' }}</span>
+
+            <span class="badge badge-info">{{ totalElements }} {{ totalElements == 1 ? info : info + 's' }}</span>
+
             <table class="tbl" mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="nome">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>

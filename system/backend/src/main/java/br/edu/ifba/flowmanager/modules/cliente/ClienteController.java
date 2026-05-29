@@ -30,11 +30,18 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+    // @GetMapping
+    // public Page<ClienteResponseDTO> listAll(
+    //     @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
+    // ) {
+    //     return clienteService.listAll(pageable);
+    // }
     @GetMapping
     public Page<ClienteResponseDTO> listAll(
+        @RequestParam(required = false) String filtro,
         @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
     ) {
-        return clienteService.listAll(pageable);
+        return clienteService.listAll(filtro, pageable);
     }
 
     @GetMapping("/{id}")

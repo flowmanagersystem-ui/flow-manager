@@ -24,9 +24,17 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final UsuarioRepository usuarioRepository;
 
-    public Page<ClienteResponseDTO> listAll(Pageable pageable) {
-        return clienteRepository.findAllWithUsuario(pageable)
-                .map(this::toDTO);
+    // public Page<ClienteResponseDTO> listAll(Pageable pageable) {
+    //     return clienteRepository.findAllWithUsuario(pageable)
+    //             .map(this::toDTO);
+    // }
+    public Page<ClienteResponseDTO> listAll(
+        String filtro,
+        Pageable pageable
+    ) {
+        return clienteRepository
+            .findAllWithFiltro(filtro, pageable)
+            .map(this::toDTO);
     }
 
     public ClienteResponseDTO findById(Long id) {

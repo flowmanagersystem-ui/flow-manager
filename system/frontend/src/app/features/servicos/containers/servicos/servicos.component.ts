@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
-import { Observable, catchError, map, tap, of, finalize } from 'rxjs';
+import { Observable, catchError, map, tap, of, finalize, distinctUntilChanged, debounceTime } from 'rxjs';
 
 // Material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -25,6 +25,7 @@ import { Servico } from '../../servico.interface';
 
 // Services
 import { ServicosService } from '../../servicos.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-servicos',
@@ -48,6 +49,9 @@ export class ServicosComponent {
   paginaAtual = 0
   totalCategorias = 0
   ticketMedio = 0
+  searchControl = new FormControl('')
+  nomeFiltro = ''
+  categoriaFiltro = ''
 
   constructor(
     private servicosService: ServicosService,
@@ -59,6 +63,16 @@ export class ServicosComponent {
   ) {}
 
   ngOnInit(){
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(valor => {
+
+      this.nomeFiltro = valor ?? '';
+
+      this.refresh(0);
+
+    });
     this.refresh()
   }
 
@@ -140,7 +154,7 @@ export class ServicosComponent {
 
   refresh(page = 0) {    
     this.paginaAtual = page
-    this.servicos$ = this.servicosService.listAll(page)
+    this.servicos$ = this.servicosService.listAll(page, 10, this.nomeFiltro, this.categoriaFiltro)
     .pipe(
       tap(response => this.totalElements = response.totalElements), 
       tap(response => {

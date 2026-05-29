@@ -16,6 +16,7 @@ import { TextFormatted } from '../../../../shared/text-formatted';
 
 // Interfaces
 import { Servico } from '../../servico.interface';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-servicos-list',
@@ -23,7 +24,7 @@ import { Servico } from '../../servico.interface';
   imports: [
     // Angular
     CommonModule,
-
+    ReactiveFormsModule,
     // Angular Material
     MatIconModule,
     MatInputModule,
@@ -57,6 +58,7 @@ export class ServicosListComponent {
   @Input() paginaAtual = 0
   @Input() totalCategorias = 0
   @Input() ticketMedio = 0
+  @Input() searchControl!: FormControl; 
   @Input() set servicos(data: Servico[]) { this.dataSource.data = data}
   @Output() pageChange = new EventEmitter<PageEvent>()
   @Output() add: EventEmitter<boolean> = new EventEmitter(false)
@@ -65,14 +67,6 @@ export class ServicosListComponent {
 
   constructor(private renderer: Renderer2) {
     this.dataSource = new MatTableDataSource(this.servicos)
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value    
-    this.dataSource.filter = filterValue.trim().toLowerCase()
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
   }  
 
   onAdd(){

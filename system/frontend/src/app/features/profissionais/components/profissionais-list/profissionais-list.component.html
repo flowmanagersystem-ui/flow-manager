@@ -57,9 +57,13 @@
 
         <div class="filter-bar-search">            
             <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
-            <input type="text" matInput placeholder="Buscar por nome, especialidade ou e-mail..." (keyup)="applyFilter($event)" #input />
+            <input type="text" placeholder="Buscar por nome, especialidade ou e-mail..." 
+                matInput
+                #input  
+                [formControl]="filtroControl"/>
         </div>
-    
+
+        <!--     Para futuras implementações de filtros e ordenação, mantendo a estrutura para não perder o layout
         <div class="filter-bar-selects">
             <select name="" id="" class="filter-bar--select ">
                 <option value="nome">A–Z (Nome)</option>
@@ -85,7 +89,7 @@
                     <mat-icon class="icon-outlined">lists</mat-icon>
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="cards-mediuns" *ngIf="viewMode; else modoTabela">

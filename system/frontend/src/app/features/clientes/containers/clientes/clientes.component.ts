@@ -1,11 +1,12 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, PRIMARY_OUTLET, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormControl } from '@angular/forms';
 
 // RxJS
-import { Observable, of, catchError, delay, finalize, map, tap } from 'rxjs';
+import { Observable, of, catchError, delay, finalize, map, tap, debounceTime, distinctUntilChanged } from 'rxjs';
 
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -45,9 +46,13 @@ import { Cliente } from '../../cliente.interface';
   styleUrl: './clientes.component.scss'
 })
 export class ClientesComponent {
+  @Input() filtroChange = new EventEmitter<string>()
+  
   clientes$: Observable<Cliente[]> | null = null
   totalElements = 0
   paginaAtual = 0
+  filtroControl = new FormControl('')
+  filtroAtual = ''
 
   constructor(
     private router: Router,
@@ -59,6 +64,17 @@ export class ClientesComponent {
   ) {}
 
   ngOnInit(){
+    this.filtroControl.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+
+      this.filtroAtual = filtro ?? ''
+
+      this.refresh(0, this.filtroAtual)
+
+    })
+
     this.refresh()
   }
 
@@ -75,7 +91,7 @@ export class ClientesComponent {
   
       dialogRef.afterClosed().subscribe(result => {
         if(result){
-          console.log('Cliente criado/atualizado com sucesso!') 
+          // console.log('Cliente criado/atualizado com sucesso!') 
           this.refresh()
         }
       })
@@ -139,9 +155,10 @@ export class ClientesComponent {
     }) 
   }
 
-  refresh(page = 0) {
+  refresh(page = 0, filtro = this.filtroAtual) {
     this.paginaAtual = page
-    this.clientes$ = this.clientesService.listAll(page)
+
+    this.clientes$ = this.clientesService.listAll(page, 10, filtro)
     .pipe(
       tap(response => this.totalElements = response.totalElements), 
       map(response => response.content),                           
@@ -154,6 +171,11 @@ export class ClientesComponent {
 
   onPageChange(event: PageEvent) {
     this.refresh(event.pageIndex)
+  }
+
+  onFilterChange(filtro: string) {
+    this.filtroAtual = filtro
+    this.refresh(0, filtro)
   }
 
   onError(errorMsg: string, redirectTo?: string) {

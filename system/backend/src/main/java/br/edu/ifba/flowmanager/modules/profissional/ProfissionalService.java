@@ -35,9 +35,15 @@ public class ProfissionalService {
     private final ProfissionalServicoRepository profissionalServicoRepository;
     private final ServicoRepository servicoRepository;
 
-    public Page<ProfissionalResponseDTO> listAll(Pageable pageable) {
-        return profissionalRepository.findAllWithUsuario(pageable)
-                .map(this::toDTO);
+    // public Page<ProfissionalResponseDTO> listAll(Pageable pageable) {
+    //     return profissionalRepository.findAllWithUsuario(pageable)
+    //             .map(this::toDTO);
+    // }
+    public Page<ProfissionalResponseDTO> listAll(String filtro, Pageable pageable
+    ) {
+        return profissionalRepository
+            .findAllWithFiltro(filtro, pageable)
+            .map(this::toDTO);
     }
 
     public ProfissionalResponseDTO findById(Long id) {

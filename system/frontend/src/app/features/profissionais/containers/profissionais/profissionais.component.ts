@@ -1,9 +1,9 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, map, tap, of, finalize } from 'rxjs';
+import { Observable, catchError, map, tap, of, finalize, debounceTime, distinctUntilChanged } from 'rxjs';
 
 // Material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,6 +27,7 @@ import { Profissional, Status } from '../../profissional.interface';
 // Services
 import { LoadingService } from '../../../../shared/services/loading.service';
 import { ProfissionaisService } from '../../profissionais.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-profissionais',
@@ -45,11 +46,15 @@ import { ProfissionaisService } from '../../profissionais.service';
   styleUrl: './profissionais.component.scss'
 })
 export class ProfissionaisComponent {
+  @Input() filtroChange = new EventEmitter<string>()
+  
   profissionais$: Observable<Profissional[]> | null = null
   totalElements = 0
   paginaAtual = 0
   totalAtivos = 0
   totalEspecialidades = 0
+  filtroAtual = ''
+  filtroControl = new FormControl('')
 
   constructor(
     private profissionaisService: ProfissionaisService,
@@ -62,6 +67,17 @@ export class ProfissionaisComponent {
   ) {}
 
   ngOnInit(){
+    this.filtroControl.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+
+      this.filtroAtual = filtro ?? ''
+
+      this.refresh(0, this.filtroAtual)
+
+    })
+  
     this.refresh()
   }
 
@@ -142,9 +158,11 @@ export class ProfissionaisComponent {
     }) 
   }
 
-  refresh(page = 0) {    
+  refresh(page = 0, filtro = this.filtroAtual) {    
+    
     this.paginaAtual = page
-    this.profissionais$ = this.profissionaisService.listAll(page)
+
+    this.profissionais$ = this.profissionaisService.listAll(page, 10, filtro)
     .pipe(
       tap(response => this.totalElements = response.totalElements), 
       tap(response => this.totalAtivos = response.content.filter((p: Profissional) => p.status == Status.ATIVO).length),
