@@ -1,0 +1,92 @@
+<mat-card class="card" appearance="outlined">
+  <mat-card-content>
+    <form [formGroup]="formulario">
+      <div class="cliente-resumo">
+        <span class="cliente-label">Cliente</span>
+        <strong>{{ agendamento.nomeCliente }}</strong>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label class="form-label">Status</mat-label>
+          <mat-select formControlName="status" placeholder="Selecione o status">
+            <mat-option *ngFor="let status of statusOptions" [value]="status">
+              {{ capitalizarTexto(status) }}
+            </mat-option>
+          </mat-select>
+          <mat-error class="input-message" [control]="$any(formulario.get('status'))" [label]="'status'"></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row desconto-observacao">
+        <mat-form-field appearance="outline">
+          <mat-label>Desconto (R$)</mat-label>
+          <input matInput type="number" formControlName="desconto" min="0" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Observação</mat-label>
+          <input matInput formControlName="observacao" />
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="servicos-header">
+      <div>
+        <span class="section-title">Serviços</span>
+        <span class="section-subtitle">Adicione, remova ou substitua um serviço do agendamento</span>
+      </div>
+      <button class="btn btn-primary" (click)="onAddServico()">
+        <mat-icon>add</mat-icon>
+        <span>Adicionar</span>
+      </button>
+    </div>
+
+    <div class="servicos-lista" *ngIf="servicosAgendamento.length > 0; else semServicos">
+      <div class="servico-item-card" *ngFor="let servico of servicosAgendamento; let i = index">
+        <div class="servico-item-info">
+          <span class="servico-item-nome">{{ servico.nomeServico }}</span>
+          <span class="servico-item-meta">
+            {{ servico.nomeProfissional }} · {{ textToDateTime(servico.dataHoraInicio) }}
+          </span>
+        </div>
+        <div class="servico-item-right">
+          <span class="servico-item-valor">{{ textToCurrency(servico.valorServico) }}</span>
+          <button class="btn-icon" matTooltip="Editar serviço" (click)="onEditServico(i)">
+            <mat-icon class="icon-outlined">edit</mat-icon>
+          </button>
+          <button class="btn-icon" matTooltip="Remover serviço" (click)="onRemoveServico(i)">
+            <mat-icon class="icon-outlined">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #semServicos>
+      <div class="estado-vazio">
+        <mat-icon class="icon-outlined">event_busy</mat-icon>
+        Nenhum serviço no agendamento
+      </div>
+    </ng-template>
+
+    <div class="resumo" *ngIf="servicosAgendamento.length > 0">
+      <div class="resumo-row">
+        <span>Subtotal</span>
+        <span>{{ textToCurrency(subtotal) }}</span>
+      </div>
+      <div class="resumo-row">
+        <span>Desconto</span>
+        <span>{{ textToCurrency(formulario.get('desconto')?.value || 0) }}</span>
+      </div>
+      <div class="resumo-total">
+        <span>Total</span>
+        <span>{{ textToCurrency(valorTotal) }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="form-actions">
+    <button class="btn btn-cancel" matButton="filled" (click)="onCancel()">Cancelar</button>
+    <button class="btn btn-confirm" matButton="filled" (click)="onSubmit()">Salvar Alterações</button>
+  </mat-card-actions>
+</mat-card>

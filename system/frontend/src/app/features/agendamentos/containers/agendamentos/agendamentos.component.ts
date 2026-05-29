@@ -19,6 +19,7 @@ import { AgendamentosListComponent } from '../../components/agendamentos-list/ag
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
 import { AgendamentoFormComponent } from '../agendamento-form/agendamento-form.component';
+import { AgendamentoEdicaoComponent } from '../agendamento-edicao/agendamento-edicao.component';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 // Interfaces
@@ -89,10 +90,10 @@ export class AgendamentosComponent implements OnInit {
   onEdit(agendamento: Agendamento){
     const dialogRef = FormDialogComponent.open<Agendamento>(this.dialog, {
       title: 'Editar Agendamento',
-      subtitle: 'Preencha os campos abaixo para editar o agendamento.',
+      subtitle: 'Edite status, observação, desconto e os serviços do agendamento.',
       modo: ModoFormT.EDITAR,
       record: agendamento,
-      component: AgendamentoFormComponent,
+      component: AgendamentoEdicaoComponent,
     })
 
     dialogRef.afterClosed().subscribe(result => {

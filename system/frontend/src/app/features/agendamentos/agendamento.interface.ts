@@ -17,6 +17,9 @@ export interface ServicoAgendamento {
   nomeServico?: string;      
   valorServico?: number;     
   duracao?: number;          
+  dataHoraInicio?: string;
+  dataHoraFim?: string;
+  horario?: string;
 }
 
 export enum Status {
