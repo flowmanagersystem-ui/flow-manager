@@ -17,22 +17,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Validations
-import { TextFormatted } from '../../../../shared/text-formatted';
+import { TextFormatted } from '../../../../../shared/text-formatted';
 
 // Components
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
-import { InputErroMsgComponent } from '../../../../shared/components/input-erro-msg/input-erro-msg.component';
-import { FormDialogComponent } from '../../../../shared/components/form-dialog/form-dialog.component';
+import { ErrorDialogComponent } from '../../../../../shared/components/error-dialog/error-dialog.component';
+import { InputErroMsgComponent } from '../../../../../shared/components/input-erro-msg/input-erro-msg.component';
+import { FormDialogComponent } from '../../../../../shared/components/form-dialog/form-dialog.component';
 import { AgendamentosServicosComponent } from '../agendamentos-servicos/agendamentos-servicos.component';
 
 // Interfaces
-import { Agendamento, Status } from '../../agendamento.interface';
-import { Cliente } from '../../../clientes/cliente.interface';
+import { Agendamento, Status } from '../../../agendamento.interface';
+import { Cliente } from '../../../../clientes/cliente.interface';
 
 // Services
-import { AgendamentosService } from '../../agendamentos.service';
-import { ClientesService } from '../../../clientes/clientes.service';
-import { LoadingService } from '../../../../shared/services/loading.service';
+import { AgendamentosService } from '../../../agendamentos.service';
+import { ClientesService } from '../../../../clientes/clientes.service';
+import { LoadingService } from '../../../../../shared/services/loading.service';
 
 
 @Component({
@@ -130,9 +130,9 @@ export class AgendamentoFormComponent {
   }
 
   buscarClientes() {
-    this.clientes$ = this.clientesService.listAll(0, 100)
+    this.clientes$ = this.clientesService.listAll(0, 100, '', true)
     .pipe(
-      map(response => response.content.filter(cliente => String(cliente.status) == 'Ativo')),
+      map(response => response.content),
       catchError(error => {
         this.onError('Erro ao carregar clientes.')
         return of([])

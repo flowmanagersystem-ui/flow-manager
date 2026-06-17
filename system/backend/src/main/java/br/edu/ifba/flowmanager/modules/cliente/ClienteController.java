@@ -39,9 +39,10 @@ public class ClienteController {
     @GetMapping
     public Page<ClienteResponseDTO> listAll(
         @RequestParam(required = false) String filtro,
+        @RequestParam(required = false, defaultValue = "false") Boolean apenasAtivos,
         @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
     ) {
-        return clienteService.listAll(filtro, pageable);
+        return clienteService.listAll(filtro, apenasAtivos, pageable);
     }
 
     @GetMapping("/{id}")

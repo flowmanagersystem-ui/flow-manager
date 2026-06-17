@@ -1,5 +1,7 @@
 package br.edu.ifba.flowmanager.modules.profissional;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,5 +38,7 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Long
     Page<Profissional> findAllWithFiltro(
         @Param("filtro") String filtro,
         Pageable pageable
-    );   
+    );
+
+    Optional<Profissional> findByUsuarioEmail(String email);
 }

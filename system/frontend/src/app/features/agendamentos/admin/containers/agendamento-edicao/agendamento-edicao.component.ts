@@ -19,20 +19,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Shared
-import { TextFormatted } from '../../../../shared/text-formatted';
+import { TextFormatted } from '../../../../../shared/text-formatted';
 
 // Components
 import { AgendamentosServicosComponent } from '../agendamentos-servicos/agendamentos-servicos.component';
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
-import { FormDialogComponent } from '../../../../shared/components/form-dialog/form-dialog.component';
-import { InputErroMsgComponent } from '../../../../shared/components/input-erro-msg/input-erro-msg.component';
+import { ErrorDialogComponent } from '../../../../../shared/components/error-dialog/error-dialog.component';
+import { FormDialogComponent } from '../../../../../shared/components/form-dialog/form-dialog.component';
+import { InputErroMsgComponent } from '../../../../../shared/components/input-erro-msg/input-erro-msg.component';
 
 // Interfaces
-import { Agendamento, ServicoAgendamento, Status } from '../../agendamento.interface';
+import { Agendamento, ServicoAgendamento, Status } from '../../../agendamento.interface';
 
 // Services
-import { AgendamentosService } from '../../agendamentos.service';
-import { LoadingService } from '../../../../shared/services/loading.service';
+import { AgendamentosService } from '../../../agendamentos.service';
+import { LoadingService } from '../../../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-agendamento-edicao',

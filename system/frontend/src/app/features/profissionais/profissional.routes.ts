@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { ProfissionaisComponent } from './containers/profissionais/profissionais.component';
 import { ProfissionaisListComponent } from './components/profissionais-list/profissionais-list.component';
 
-export const ProfissinalRoutes: Routes = [{
+export const ProfissionaisRoutes: Routes = [{
     path: '',
     children: [
         {
@@ -15,11 +15,5 @@ export const ProfissinalRoutes: Routes = [{
             component: ProfissionaisComponent,
             data: { breadcrumb: 'Lista de Profissionais' }
         },
-        // {
-        //     path: 'novo',
-        //     component: ClienteFormComponent,
-        //     data: { breadcrumb: 'Novo Cliente' }
-        // }
-
     ]
 }]

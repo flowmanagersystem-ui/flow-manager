@@ -22,23 +22,23 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 
 // Shared
-import { TextFormatted } from '../../../../shared/text-formatted';
+import { TextFormatted } from '../../../../../shared/text-formatted';
 
 // Pipes
-import { DisponiveisCountPipe } from '../../../../shared/pipes/disponiveis-count.pipe';
+import { DisponiveisCountPipe } from '../../../../../shared/pipes/disponiveis-count.pipe';
 
 // Components
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
-import { InputErroMsgComponent } from '../../../../shared/components/input-erro-msg/input-erro-msg.component';
+import { ErrorDialogComponent } from '../../../../../shared/components/error-dialog/error-dialog.component';
+import { InputErroMsgComponent } from '../../../../../shared/components/input-erro-msg/input-erro-msg.component';
 
 // Interfaces
-import { Servico } from '../../../servicos/servico.interface';
-import { Profissional } from '../../../profissionais/profissional.interface';
+import { Servico } from '../../../../servicos/servico.interface';
+import { Profissional } from '../../../../profissionais/profissional.interface';
 
 // Services
-import { ServicosService } from '../../../servicos/servicos.service';
-import { ProfissionaisService } from '../../../profissionais/profissionais.service';
-import { AgendaService, SlotDTO } from '../../../agenda/agenda.service';
+import { ServicosService } from '../../../../servicos/servicos.service';
+import { ProfissionaisService } from '../../../../profissionais/profissionais.service';
+import { AgendaService, SlotDTO } from '../../../../agenda/agenda.service';
 
 @Component({
   selector: 'app-agendamentos-servicos',

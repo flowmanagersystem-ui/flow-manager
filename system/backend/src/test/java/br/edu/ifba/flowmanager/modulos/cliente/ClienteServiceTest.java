@@ -27,6 +27,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -40,6 +41,7 @@ class ClienteServiceTest {
 
     @Mock ClienteRepository clienteRepository;
     @Mock UsuarioRepository usuarioRepository;
+    @Mock PasswordEncoder passwordEncoder;
     @InjectMocks ClienteService clienteService;
 
     private Cliente cliente;
@@ -88,6 +90,7 @@ class ClienteServiceTest {
     @DisplayName("Deve criar cliente com sucesso")
     void deveCriarClienteComSucesso() {
         when(usuarioRepository.existsByEmail(anyString())).thenReturn(false);
+        when(passwordEncoder.encode(anyString())).thenReturn("senha-hasheada");
         when(clienteRepository.save(any())).thenReturn(cliente);
 
         ClienteResponseDTO response = clienteService.create(requestDTO);
@@ -202,6 +205,7 @@ class ClienteServiceTest {
     @Test
     @DisplayName("Deve verificar email excluindo o próprio ID")
     void deveVerificarEmailExcluindoProprioId() {
+        when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
         when(usuarioRepository.existsByEmailAndIdNot("joao@email.com", 1L)).thenReturn(false);
 
         assertThat(clienteService.emailExiste("joao@email.com", 1L)).isFalse();

@@ -20,6 +20,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
             JOIN FETCH c.usuario
             LEFT JOIN FETCH a.servicos s
             WHERE (:clienteId IS NULL OR c.id = :clienteId)
+            AND (:profissionalId IS NULL OR s.profissional.id = :profissionalId)
             AND (:status IS NULL OR a.status = :status)
             AND (:dataInicio IS NULL OR a.dataHora >= :dataInicio)
             AND (:dataFim IS NULL OR a.dataHora <= :dataFim)
@@ -27,7 +28,9 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
         countQuery = """
             SELECT COUNT(a) FROM Agendamento a
             JOIN a.cliente c
+            LEFT JOIN a.servicos s
             WHERE (:clienteId IS NULL OR c.id = :clienteId)
+            AND (:profissionalId IS NULL OR s.profissional.id = :profissionalId)
             AND (:status IS NULL OR a.status = :status)
             AND (:dataInicio IS NULL OR a.dataHora >= :dataInicio)
             AND (:dataFim IS NULL OR a.dataHora <= :dataFim)
@@ -35,6 +38,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     )
     Page<Agendamento> findWithFilters(
         @Param("clienteId") Long clienteId,
+        @Param("profissionalId") Long profissionalId,
         @Param("status") StatusAgendamento status,
         @Param("dataInicio") LocalDateTime dataInicio,
         @Param("dataFim") LocalDateTime dataFim,

@@ -22,6 +22,8 @@ import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoId;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoRepository;
 import br.edu.ifba.flowmanager.modules.servico.Servico;
 import br.edu.ifba.flowmanager.modules.servico.ServicoRepository;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
+import br.edu.ifba.flowmanager.modules.usuario.enums.PerfilUsuario;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -40,10 +42,27 @@ public class AgendamentoService {
     public Page<AgendamentoResponseDTO> listAll(
         Long clienteId, StatusAgendamento status,
         LocalDateTime dataInicio, LocalDateTime dataFim,
+        Usuario usuarioLogado,
         Pageable pageable
     ) {
+        Long profissionalId = null;
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.CLIENTE) {
+            clienteId = clienteRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."))
+                .getId();
+        }
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.PROFISSIONAL) {
+            profissionalId = profissionalRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Profissional não vinculado ao usuário logado."))
+                .getId();
+        }
+
         return agendamentoRepository
-            .findWithFilters(clienteId, status, dataInicio, dataFim, pageable)
+            .findWithFilters(clienteId, profissionalId, status, dataInicio, dataFim, pageable)
             .map(this::toDTO);
     }
 

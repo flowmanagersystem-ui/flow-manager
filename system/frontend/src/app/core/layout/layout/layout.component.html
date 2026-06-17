@@ -12,13 +12,13 @@
 
         <div class="nav-section">
             <div class="nav-label" [class.hidden]="!toggleSidebar">Principal</div>
-            <div class="nav-item" #dashboard>           
+            <div class="nav-item" #dashboard *ngIf="podeVer(['ADMIN'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="dashboard">
                 <mat-icon class="icon icon-outlined">dashboard_2</mat-icon>
                     <span>Dashboard</span>
                 </a>
             </div>
-            <div class="nav-item" #agenda>                          
+            <div class="nav-item" #agenda *ngIf="podeVer(['PROFISSIONAL'])">                          
                 <a class="nav-link" routerLinkActive="active" routerLink="agenda">
                     <mat-icon class="icon icon-outlined">calendar_today</mat-icon>
                     <span>Agenda</span>
@@ -28,13 +28,13 @@
 
         <div class="nav-section">
             <div class="nav-label" [class.hidden]="!toggleSidebar">Gestão</div>
-            <div class="nav-item" #agendamentos>           
+            <div class="nav-item" #agendamentos *ngIf="podeVer(['ADMIN', 'CLIENTE'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="agendamentos">
                 <mat-icon class="icon icon-outlined">schedule</mat-icon>
                     <span>Agendamentos</span>
                 </a>
             </div>                
-            <div class="nav-item" #clientes>           
+            <div class="nav-item" #clientes *ngIf="podeVer(['ADMIN'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="clientes">
                 <mat-icon class="icon icon-outlined">group</mat-icon>
                     <span>Clientes</span>
@@ -85,7 +85,7 @@
                 <button class="icon-btn"  style="display: none;">
                     <mat-icon class="icon-outlined">notifications</mat-icon>
                 </button>
-                <button class="icon-btn btn-danger btn-sm">Sair</button>
+                <button class="icon-btn btn-danger btn-sm" (click)="logout()">Sair</button>
             </div> 
         </header>
 
@@ -98,4 +98,3 @@
         </footer>
     </main>
 </div> 
-

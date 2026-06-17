@@ -3,6 +3,7 @@ package br.edu.ifba.flowmanager.modules.profissional;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,6 +35,7 @@ public class ProfissionalService {
     private final ProfissionalEspecialidadeRepository profissionalEspecialidadeRepository;
     private final ProfissionalServicoRepository profissionalServicoRepository;
     private final ServicoRepository servicoRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // public Page<ProfissionalResponseDTO> listAll(Pageable pageable) {
     //     return profissionalRepository.findAllWithUsuario(pageable)
@@ -183,13 +185,12 @@ public class ProfissionalService {
     }
 
     private void preencherUsuario(Usuario usuario, ProfissionalRequestDTO dto) {
-        System.out.println("Nome: " + dto.nome());
         usuario.setNome(dto.nome());
         usuario.setSobrenome(dto.sobrenome());
         usuario.setEmail(dto.email());
         usuario.setTelefone(dto.telefone());
         usuario.setAtivo(dto.status() == StatusUsuario.Ativo);
-        usuario.setSenha(dto.senha());
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
     }
 
     private void preencherUsuario(Usuario usuario, ProfissionalUpdateDTO dto) {
@@ -201,7 +202,7 @@ public class ProfissionalService {
         // usuario.setSenha(dto.senha());
 
         if (senhaValida(dto.senha())) {
-            usuario.setSenha(dto.senha());
+            usuario.setSenha(passwordEncoder.encode(dto.senha()));
         }
     }
 

@@ -4,6 +4,7 @@ package br.edu.ifba.flowmanager.modules.cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,6 +24,7 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // public Page<ClienteResponseDTO> listAll(Pageable pageable) {
     //     return clienteRepository.findAllWithUsuario(pageable)
@@ -33,7 +35,17 @@ public class ClienteService {
         Pageable pageable
     ) {
         return clienteRepository
-            .findAllWithFiltro(filtro, pageable)
+            .findAllWithFiltro(filtro, false, pageable)
+            .map(this::toDTO);
+    }
+
+    public Page<ClienteResponseDTO> listAll(
+        String filtro,
+        Boolean apenasAtivos,
+        Pageable pageable
+    ) {
+        return clienteRepository
+            .findAllWithFiltro(filtro, Boolean.TRUE.equals(apenasAtivos), pageable)
             .map(this::toDTO);
     }
 
@@ -97,7 +109,7 @@ public class ClienteService {
         usuario.setEmail(dto.email());
         usuario.setTelefone(dto.telefone());
         usuario.setAtivo(dto.status() == StatusUsuario.Ativo);
-        usuario.setSenha(dto.senha()); 
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
     }
 
     private void preencherUsuario(Usuario usuario, ClienteRequestUpdateDTO dto) {
@@ -108,7 +120,7 @@ public class ClienteService {
         usuario.setAtivo(dto.status() == StatusUsuario.Ativo);
 
         if (senhaValida(dto.senha())) {
-            usuario.setSenha(dto.senha());
+            usuario.setSenha(passwordEncoder.encode(dto.senha()));
         }
     }
 

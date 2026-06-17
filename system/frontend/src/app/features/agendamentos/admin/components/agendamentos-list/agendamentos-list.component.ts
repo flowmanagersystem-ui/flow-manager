@@ -13,10 +13,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Shared
-import { TextFormatted } from '../../../../shared/text-formatted';
+import { TextFormatted } from '../../../../../shared/text-formatted';
 
 // Interfaces
-import { Agendamento, ServicoAgendamento   } from '../../agendamento.interface';  
+import { Agendamento, ServicoAgendamento   } from '../../../agendamento.interface';  
 
 @Component({
   selector: 'app-agendamentos-list',

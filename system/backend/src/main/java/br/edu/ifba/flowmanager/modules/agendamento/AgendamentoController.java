@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,17 @@ public class AgendamentoController {
         @RequestParam(required = false) StatusAgendamento status,
         @RequestParam(required = false) LocalDateTime dataInicio,
         @RequestParam(required = false) LocalDateTime dataFim,
-        @PageableDefault(size = 10, sort = "dataHora") Pageable pageable
+        @PageableDefault(size = 10, sort = "dataHora") Pageable pageable,
+        org.springframework.security.core.Authentication authentication
     ) {
-        return agendamentoService.listAll(clienteId, status, dataInicio, dataFim, pageable);
+        return agendamentoService.listAll(
+            clienteId,
+            status,
+            dataInicio,
+            dataFim,
+            (Usuario) authentication.getPrincipal(),
+            pageable
+        );
     }
 
     @GetMapping("/{id}")

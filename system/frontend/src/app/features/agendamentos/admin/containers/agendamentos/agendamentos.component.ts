@@ -16,18 +16,18 @@ import { PageEvent } from '@angular/material/paginator';
 
 // Components
 import { AgendamentosListComponent } from '../../components/agendamentos-list/agendamentos-list.component';
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
-import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
+import { ErrorDialogComponent } from '../../../../../shared/components/error-dialog/error-dialog.component';
+import { FormDialogComponent, ModoFormT } from '../../../../../shared/components/form-dialog/form-dialog.component';
 import { AgendamentoFormComponent } from '../agendamento-form/agendamento-form.component';
 import { AgendamentoEdicaoComponent } from '../agendamento-edicao/agendamento-edicao.component';
-import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 // Interfaces
-import { Agendamento } from '../../agendamento.interface';
+import { Agendamento } from '../../../agendamento.interface';
 
 // Services
-import { LoadingService } from '../../../../shared/services/loading.service';
-import { AgendamentosService } from '../../agendamentos.service';
+import { LoadingService } from '../../../../../shared/services/loading.service';
+import { AgendamentosService } from '../../../agendamentos.service';
 
 @Component({
   selector: 'app-agendamentos',
