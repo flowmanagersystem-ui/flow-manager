@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AgendaListComponent } from './components/agenda-list/agenda-list.component';
 
 export const AgendaRoutes: Routes = [{
     path: '',
@@ -7,6 +8,11 @@ export const AgendaRoutes: Routes = [{
             path: '',
             pathMatch: 'full',
             redirectTo: ''
-        }
+        },
+        {
+            path: '',
+            component: AgendaListComponent,
+            data: { breadcrumb: 'Lista de Clientes' }
+        },
     ]
 }]

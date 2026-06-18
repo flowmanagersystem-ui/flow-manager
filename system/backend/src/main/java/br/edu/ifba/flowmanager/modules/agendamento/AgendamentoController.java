@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
+import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoStatusRequestDTO;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 
 import jakarta.validation.Valid;
@@ -51,8 +52,11 @@ public class AgendamentoController {
     }
 
     @GetMapping("/{id}")
-    public AgendamentoResponseDTO findById(@PathVariable Long id) {
-        return agendamentoService.findById(id);
+    public AgendamentoResponseDTO findById(
+        @PathVariable Long id,
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return agendamentoService.findById(id, (Usuario) authentication.getPrincipal());
     }
 
     @PostMapping
@@ -67,6 +71,15 @@ public class AgendamentoController {
         @RequestBody @Valid AgendamentoRequestDTO dto
     ) {
         return agendamentoService.update(id, dto);
+    }
+
+    @PatchMapping("/{id}/status")
+    public AgendamentoResponseDTO updateStatus(
+        @PathVariable Long id,
+        @RequestBody @Valid AgendamentoStatusRequestDTO dto,
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return agendamentoService.updateStatus(id, dto, (Usuario) authentication.getPrincipal());
     }
 
     @DeleteMapping("/{id}")

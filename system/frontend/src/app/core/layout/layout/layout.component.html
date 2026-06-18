@@ -11,14 +11,14 @@
         </div>
 
         <div class="nav-section">
-            <div class="nav-label" [class.hidden]="!toggleSidebar">Principal</div>
+            <!-- <div class="nav-label" [class.hidden]="!toggleSidebar">Principal</div>
             <div class="nav-item" #dashboard *ngIf="podeVer(['ADMIN'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="dashboard">
                 <mat-icon class="icon icon-outlined">dashboard_2</mat-icon>
                     <span>Dashboard</span>
                 </a>
-            </div>
-            <div class="nav-item" #agenda *ngIf="podeVer(['PROFISSIONAL'])">                          
+            </div> -->
+            <div class="nav-item" #agenda *ngIf="podeVer(['ADMIN', 'PROFISSIONAL', 'CLIENTE'])">                          
                 <a class="nav-link" routerLinkActive="active" routerLink="agenda">
                     <mat-icon class="icon icon-outlined">calendar_today</mat-icon>
                     <span>Agenda</span>
@@ -27,8 +27,7 @@
         </div>
 
         <div class="nav-section">
-            <div class="nav-label" [class.hidden]="!toggleSidebar">Gestão</div>
-            <div class="nav-item" #agendamentos *ngIf="podeVer(['ADMIN', 'CLIENTE'])">           
+            <div class="nav-item" #agendamentos *ngIf="podeVer(['ADMIN', 'PROFISSIONAL'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="agendamentos">
                 <mat-icon class="icon icon-outlined">schedule</mat-icon>
                     <span>Agendamentos</span>
@@ -40,13 +39,13 @@
                     <span>Clientes</span>
                 </a>
             </div>                
-            <div class="nav-item" #profissionais>           
+            <div class="nav-item" #profissionais *ngIf="podeVer(['ADMIN'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="profissionais">
                 <mat-icon class="icon icon-outlined">assignment_ind</mat-icon>
                     <span>Profissionais</span>
                 </a>
             </div>                
-            <div class="nav-item" #servicos>           
+            <div class="nav-item" #servicos *ngIf="podeVer(['ADMIN'])">           
                 <a class="nav-link" routerLinkActive="active" routerLink="servicos">
                 <mat-icon class="icon icon-outlined">layers</mat-icon>
                     <span>Serviços</span>

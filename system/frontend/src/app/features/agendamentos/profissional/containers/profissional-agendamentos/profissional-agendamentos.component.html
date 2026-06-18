@@ -1,0 +1,114 @@
+<div class="screen">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Meus agendamentos</div>
+      <div class="page-subtitle">Atendimentos vinculados ao seu perfil profissional</div>
+    </div>
+  </div>
+
+  <div class="stats-group">
+
+    <div class="card stat-card stat-card--green">
+      <div class="stat-icon">
+        <mat-icon class="icon-outlined">event_available</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-label">Agendamentos</span>
+        <span class="stat-value">{{ totalElements }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="loading; else modoTabela">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-template #modoTabela>
+    <div class="tbl-container">
+      <table class="tbl" mat-table >
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Serviço</th>
+            <th>Profissional</th>
+            <th>Data e Hora</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th class="actions-header">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agendamento of agendamentos">
+            <td class="tbl-item" data-label="Cliente">
+              <strong>{{ agendamento.nomeCliente }}</strong>
+            </td>
+            <td class="tbl-item" data-label="Serviço">
+              <div class="chips">
+                <span class="chip" *ngFor="let servico of primeirosServicos(agendamento)">
+                  {{ servico.nomeServico }}
+                </span>
+                <span
+                  class="chip-more"
+                  *ngIf="agendamento.servicos.length > 2"
+                  [matTooltip]="servicosRestantes(agendamento)">
+                  +{{ agendamento.servicos.length - 2 }}
+                </span>
+              </div>
+            </td>
+            <td class="tbl-item" data-label="Profissional">
+              <ng-container *ngIf="profissionaisUnicos(agendamento) as profs">
+                <span class="muted">{{ profs[0] }}</span>
+                <span
+                  class="chip-more"
+                  *ngIf="profs.length > 1"
+                  [matTooltip]="profs.slice(1).join(', ')">
+                  +{{ profs.length - 1 }}
+                </span>
+              </ng-container>
+            </td>
+            <td class="tbl-item" data-label="Data e Hora">{{ textToDateTime(agendamento.dataHora) }}</td>
+            <td class="tbl-item" data-label="Valor">{{ textToCurrency(agendamento.valorTotal) }}</td>
+            <td class="tbl-item" data-label="Status">
+              <span class="status-badge" [ngClass]="'status-badge--' + agendamento.status.toLowerCase()">
+                {{ capitalizarTexto(agendamento.status) }}
+              </span>
+            </td>
+            <td class="tbl-item" data-label="Ações">
+              <div class="tbl-actions conteudo-center" *ngIf="canUpdateStatus(agendamento); else statusFechado">
+                <button
+                  class="btn-icon btn-icon--success"
+                  matTooltip="Marcar como concluído"
+                  [disabled]="updatingId === agendamento.id"
+                  (click)="updateStatus(agendamento, Status.CONCLUIDO)">
+                  <mat-icon class="icon-outlined">check_circle</mat-icon>
+                </button>
+                <button
+                  class="btn-icon btn-icon--danger"
+                  matTooltip="Cancelar agendamento"
+                  [disabled]="updatingId === agendamento.id"
+                  (click)="updateStatus(agendamento, Status.CANCELADO)">
+                  <mat-icon class="icon-outlined">cancel</mat-icon>
+                </button>
+              </div>
+              <ng-template #statusFechado>
+                <span class="muted">Sem ações</span>
+              </ng-template>
+            </td>
+          </tr>
+          <tr *ngIf="agendamentos.length === 0">
+            <td class="lista-vazia" colspan="7">Não há agendamentos vinculados ao seu perfil.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <mat-paginator
+      class="pagination"
+      aria-label="Navegação da tabela"
+      [length]="totalElements"
+      [pageSize]="10"
+      [pageIndex]="paginaAtual"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </ng-template>
+</div>

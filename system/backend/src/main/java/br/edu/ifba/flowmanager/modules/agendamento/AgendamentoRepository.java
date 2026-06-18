@@ -15,7 +15,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
 
     @Query(
         value = """
-            SELECT a FROM Agendamento a
+            SELECT DISTINCT a FROM Agendamento a
             JOIN FETCH a.cliente c
             JOIN FETCH c.usuario
             LEFT JOIN FETCH a.servicos s
@@ -26,7 +26,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
             AND (:dataFim IS NULL OR a.dataHora <= :dataFim)
         """,
         countQuery = """
-            SELECT COUNT(a) FROM Agendamento a
+            SELECT COUNT(DISTINCT a) FROM Agendamento a
             JOIN a.cliente c
             LEFT JOIN a.servicos s
             WHERE (:clienteId IS NULL OR c.id = :clienteId)
@@ -79,5 +79,27 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
         @Param("profissionalId") Long profissionalId,
         @Param("inicioDia") LocalDateTime inicioDia,
         @Param("fimDia") LocalDateTime fimDia
+    );
+
+    @Query("""
+        SELECT COUNT(a) > 0
+        FROM Agendamento a
+        WHERE a.id = :agendamentoId
+        AND a.cliente.id = :clienteId
+    """)
+    boolean existsByIdAndClienteId(
+        @Param("agendamentoId") Long agendamentoId,
+        @Param("clienteId") Long clienteId
+    );
+
+    @Query("""
+        SELECT COUNT(s) > 0
+        FROM AgendamentoServico s
+        WHERE s.agendamento.id = :agendamentoId
+        AND s.profissional.id = :profissionalId
+    """)
+    boolean existsByIdAndProfissionalId(
+        @Param("agendamentoId") Long agendamentoId,
+        @Param("profissionalId") Long profissionalId
     );
 }

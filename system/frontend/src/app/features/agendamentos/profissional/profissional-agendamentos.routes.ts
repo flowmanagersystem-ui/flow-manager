@@ -2,11 +2,6 @@ import { Routes } from '@angular/router';
 
 export const ProfissionalAgendamentosRoutes: Routes = [{
     path: '',
-    children: [
-        {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: ''
-        }
-    ]
+    loadComponent: () => import('./containers/profissional-agendamentos/profissional-agendamentos.component')
+        .then(m => m.ProfissionalAgendamentosComponent)
 }]

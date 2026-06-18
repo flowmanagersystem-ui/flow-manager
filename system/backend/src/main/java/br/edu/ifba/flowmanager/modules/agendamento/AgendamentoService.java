@@ -14,6 +14,7 @@ import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoResponseDTO;
+import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoStatusRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.ClienteRepository;
 import br.edu.ifba.flowmanager.modules.cliente.Cliente;
 import br.edu.ifba.flowmanager.modules.profissional.Profissional;
@@ -66,7 +67,9 @@ public class AgendamentoService {
             .map(this::toDTO);
     }
 
-    public AgendamentoResponseDTO findById(Long id) {
+    public AgendamentoResponseDTO findById(Long id, Usuario usuarioLogado) {
+        validarAcessoAoAgendamento(id, usuarioLogado);
+
         return toDTO(buscarOuLancar(id));
     }
 
@@ -107,6 +110,29 @@ public class AgendamentoService {
 
         BigDecimal valorTotal = processarServicos(agendamento, dto.servicos(), id);
         agendamento.setValorTotal(valorTotal);
+
+        return toDTO(agendamentoRepository.save(agendamento));
+    }
+
+    @Transactional
+    public AgendamentoResponseDTO updateStatus(
+        Long id,
+        AgendamentoStatusRequestDTO dto,
+        Usuario usuarioLogado
+    ) {
+        validarAcessoAoAgendamento(id, usuarioLogado);
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.PROFISSIONAL
+            && dto.status() != StatusAgendamento.CONCLUIDO
+            && dto.status() != StatusAgendamento.CANCELADO) {
+            throw new ResponseStatusException(
+                HttpStatus.FORBIDDEN,
+                "Profissional só pode alterar o status para CONCLUIDO ou CANCELADO."
+            );
+        }
+
+        Agendamento agendamento = buscarOuLancar(id);
+        agendamento.setStatus(dto.status());
 
         return toDTO(agendamentoRepository.save(agendamento));
     }
@@ -188,6 +214,39 @@ public class AgendamentoService {
         return agendamentoRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Agendamento não encontrado."));
+    }
+
+    private void validarAcessoAoAgendamento(Long agendamentoId, Usuario usuarioLogado) {
+        if (usuarioLogado.getPerfil() == PerfilUsuario.ADMIN) {
+            return;
+        }
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.CLIENTE) {
+            Long clienteId = clienteRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."))
+                .getId();
+
+            if (agendamentoRepository.existsByIdAndClienteId(agendamentoId, clienteId)) {
+                return;
+            }
+        }
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.PROFISSIONAL) {
+            Long profissionalId = profissionalRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Profissional não vinculado ao usuário logado."))
+                .getId();
+
+            if (agendamentoRepository.existsByIdAndProfissionalId(agendamentoId, profissionalId)) {
+                return;
+            }
+        }
+
+        throw new ResponseStatusException(
+            HttpStatus.FORBIDDEN,
+            "Você não tem permissão para acessar este agendamento."
+        );
     }
 
     private AgendamentoResponseDTO toDTO(Agendamento a) {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // RxJS
-import { first, delay, tap } from 'rxjs';
+import { first } from 'rxjs';
 
 // Environment
 import { environment } from '../../../environments/environment.development';
@@ -11,9 +11,6 @@ import { environment } from '../../../environments/environment.development';
 // Interfaces
 import { Agendamento } from './agendamento.interface';
 import { Page } from '../../shared/interfaces/page.interface';
-
-// Services
-import { AuthService } from '../../core/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +21,11 @@ export class AgendamentosService {
   private readonly API = `${environment.apiUrl}api/agendamentos`
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService
+    private http: HttpClient
   ) { }
 
   listAll(page: number = 0, size: number = 10) {
-    const usuario = this.authService.getUsuarioLogado()
-    const clienteId = usuario?.perfil === 'CLIENTE' ? `&clienteId=${usuario.id}` : ''
-
-    return this.http.get<Page<Agendamento>>(`${this.API}?page=${page}&size=${size}${clienteId}`)
+    return this.http.get<Page<Agendamento>>(`${this.API}?page=${page}&size=${size}`)
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console
@@ -55,6 +48,10 @@ export class AgendamentosService {
 
   private update(record: Partial<Agendamento>){
     return this.http.patch<Agendamento>(`${this.API}/${record.id}`, record)
+  }
+
+  updateStatus(id: number, status: Agendamento['status']){
+    return this.http.patch<Agendamento>(`${this.API}/${id}/status`, { status })
   }
 
   remove(id: number){

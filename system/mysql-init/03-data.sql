@@ -227,7 +227,7 @@ INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone)
 
 -- Senha: senha456
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Dayana', 'Alves', 'dayana@salao.com', 'PROFISSIONAL', '$2b$10$Unf3wBOrNA1/xF/xw3zln.YCbh0wuNOnx4CmQRUJDGNwlWRaIyfE2', 1, '(47) 9 9001-0001');
+        VALUES ('Dayana', 'Alves', 'dayana@salao.com', 'PROFISSIONAL', '$2a$10$ov1JwvtjsPqbYqLcUGC6/eh8XuQxHHo09LNvDgJ/yZfdH/xSoryc.', 1, '(47) 9 9001-0001');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);

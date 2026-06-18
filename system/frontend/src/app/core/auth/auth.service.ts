@@ -66,11 +66,11 @@ export class AuthService {
   rotaInicialPorPerfil(perfil: PerfilUsuario | null = this.getPerfil()): string {
     switch (perfil) {
       case 'ADMIN':
-        return '/admin/dashboard'
+        return '/admin/agenda'
       case 'PROFISSIONAL':
         return '/profissional/agenda'
       case 'CLIENTE':
-        return '/cliente/agendamentos'
+        return '/cliente/agenda'
       default:
         return '/login'
     }

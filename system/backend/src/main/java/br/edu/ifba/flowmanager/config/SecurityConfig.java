@@ -60,6 +60,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/servicos/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/agendamentos/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .requestMatchers(HttpMethod.POST, "/api/agendamentos/**").hasAnyRole("ADMIN", "CLIENTE")
+                .requestMatchers(HttpMethod.PATCH, "/api/agendamentos/*/status").hasAnyRole("ADMIN", "PROFISSIONAL")
                 .requestMatchers("/api/agendamentos/**").hasRole("ADMIN")
                 .requestMatchers("/api/agenda/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .anyRequest().authenticated()
