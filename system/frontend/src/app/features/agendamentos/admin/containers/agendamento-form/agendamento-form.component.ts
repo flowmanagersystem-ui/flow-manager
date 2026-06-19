@@ -83,10 +83,12 @@ export class AgendamentoFormComponent {
   }
 
   ngOnInit(): void {
+    this.isCliente = this.authService.getPerfil() === 'CLIENTE'
+
     console.log('Agendamento recebido no form:', this.agendamento)
     this.formulario = this.fb.group({
       id:         [this.agendamento?.id],
-      cliente:    [null, Validators.required],
+      cliente:    [null, this.isCliente ? [] : Validators.required],
       status:     [Status.AGENDADO],
       desconto:   [0],
       observacao: [''],
@@ -118,7 +120,7 @@ export class AgendamentoFormComponent {
     const { cliente, status, observacao, desconto } = this.formulario.value;
 
     const payload = {
-      clienteId:  cliente.id,
+      clienteId:  cliente?.id ?? null,
       status:     Status.AGENDADO,
       observacao: observacao || null,
       desconto:   desconto || 0,
@@ -148,8 +150,6 @@ export class AgendamentoFormComponent {
   }
 
   buscarClientes() {
-    this.isCliente = this.authService.getPerfil() === 'CLIENTE'
-
     if (this.isCliente) {
       this.clientes$ = this.clientesService.loadMe()
         .pipe(

@@ -106,6 +106,13 @@ public class AgendamentoService {
                     HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."));
         }
 
+        if (dto.clienteId() == null) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Cliente é obrigatório para criar agendamento."
+            );
+        }
+
         return clienteRepository.findById(dto.clienteId())
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Cliente não encontrado."));
