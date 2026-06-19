@@ -15,6 +15,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./core/auth/login/login-form.component').then(m => m.LoginFormComponent)
   },
+  {
+    path: 'cadastro',
+    loadComponent: () => import('./core/auth/cadastro-form/cadastro-form.component').then(m => m.CadastroFormComponent)
+  },
 
   // ── ADMIN ────────────────────────────────────────────────────
   {

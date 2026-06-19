@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,7 @@ import { AuthService } from '../auth.service';
   imports: [
     // Angular
     CommonModule,
+    RouterLink,
     ReactiveFormsModule,
     // Angular Material
     MatButtonModule,

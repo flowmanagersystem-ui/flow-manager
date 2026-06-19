@@ -1,13 +1,16 @@
 package br.edu.ifba.flowmanager.auth;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifba.flowmanager.auth.dto.CadastroRequestDTO;
 import br.edu.ifba.flowmanager.auth.dto.LoginRequestDTO;
 import br.edu.ifba.flowmanager.auth.dto.LoginResponseDTO;
 import br.edu.ifba.flowmanager.auth.dto.RefreshTokenRequestDTO;
@@ -40,6 +43,12 @@ public class AuthController {
     @GetMapping("/me")
     public UsuarioLogadoDTO me(org.springframework.security.core.Authentication authentication) {
         return authService.me(authentication.getName());
+    }
+
+    @PostMapping("/cadastro")
+    @ResponseStatus(HttpStatus.CREATED)
+    public LoginResponseDTO cadastro(@RequestBody @Valid CadastroRequestDTO dto) {
+        return authService.cadastrarCliente(dto);
     }
 
     private String extrairToken(String authHeader) {

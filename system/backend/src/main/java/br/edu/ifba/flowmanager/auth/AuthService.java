@@ -6,11 +6,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifba.flowmanager.auth.dto.CadastroRequestDTO;
 import br.edu.ifba.flowmanager.auth.dto.LoginRequestDTO;
 import br.edu.ifba.flowmanager.auth.dto.LoginResponseDTO;
 import br.edu.ifba.flowmanager.auth.dto.UsuarioLogadoDTO;
+import br.edu.ifba.flowmanager.modules.cliente.ClienteService;
+import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import br.edu.ifba.flowmanager.modules.usuario.UsuarioRepository;
+import br.edu.ifba.flowmanager.modules.usuario.enums.StatusUsuario;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,6 +26,7 @@ public class AuthService {
     private final UsuarioRepository usuarioRepository;
     private final JwtService jwtService;
     private final TokenBlocklistService tokenBlocklistService;
+    private final ClienteService clienteService;
 
     public LoginResponseDTO login(LoginRequestDTO dto) {
         authenticationManager.authenticate(
@@ -78,6 +84,25 @@ public class AuthService {
             usuario.getNome(),
             usuario.getId()
         );
+    }
+
+    @Transactional
+    public LoginResponseDTO cadastrarCliente(CadastroRequestDTO dto) {
+
+        // reutiliza a lógica existente do ClienteService
+        clienteService.create(new ClienteRequestDTO(
+            null,
+            dto.nome(),
+            dto.sobrenome(),
+            dto.email(),
+            dto.telefone(),
+            dto.senha(),
+            StatusUsuario.Ativo
+        ));
+
+        // busca o usuário recém criado e gera o token
+        Usuario usuario = buscarUsuarioPorEmail(dto.email());
+        return montarLoginResponse(usuario);
     }
 
     private Usuario buscarUsuarioPorEmail(String email) {

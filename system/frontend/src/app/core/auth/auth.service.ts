@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // RxJS
-import { tap } from 'rxjs';
+import { first, tap } from 'rxjs';
 
 // Environment
 import { environment } from '../../../environments/environment.development';
@@ -74,6 +74,14 @@ export class AuthService {
       default:
         return '/login'
     }
+  }
+
+  cadastrar(dto: any) {
+    return this.http.post<LoginResponse>(`${this.API}/cadastro`, dto)
+      .pipe(
+        first(),
+        tap(response => this.salvarSessao(response)) 
+      );
   }
 
   private salvarSessao(response: LoginResponse) {
