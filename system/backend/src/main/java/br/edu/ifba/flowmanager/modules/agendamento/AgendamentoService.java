@@ -76,9 +76,12 @@ public class AgendamentoService {
     // ── create ────────────────────────────────────────────────
     @Transactional
     public AgendamentoResponseDTO create(AgendamentoRequestDTO dto) {
-        Cliente cliente = clienteRepository.findById(dto.clienteId())
-            .orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+        return create(dto, null);
+    }
+
+    @Transactional
+    public AgendamentoResponseDTO create(AgendamentoRequestDTO dto, Usuario usuarioLogado) {
+        Cliente cliente = buscarClienteParaCriacao(dto, usuarioLogado);
 
         Agendamento agendamento = new Agendamento();
         agendamento.setCliente(cliente);
@@ -94,6 +97,18 @@ public class AgendamentoService {
         salvo.setValorTotal(valorTotal); // ← atualiza com o valor real
 
         return toDTO(agendamentoRepository.save(salvo)); // ← segundo save com valor correto
+    }
+
+    private Cliente buscarClienteParaCriacao(AgendamentoRequestDTO dto, Usuario usuarioLogado) {
+        if (usuarioLogado != null && usuarioLogado.getPerfil() == PerfilUsuario.CLIENTE) {
+            return clienteRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."));
+        }
+
+        return clienteRepository.findById(dto.clienteId())
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
 
     // ── update ────────────────────────────────────────────────
@@ -128,6 +143,14 @@ public class AgendamentoService {
             throw new ResponseStatusException(
                 HttpStatus.FORBIDDEN,
                 "Profissional só pode alterar o status para CONCLUIDO ou CANCELADO."
+            );
+        }
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.CLIENTE
+            && dto.status() != StatusAgendamento.CANCELADO) {
+            throw new ResponseStatusException(
+                HttpStatus.FORBIDDEN,
+                "Cliente só pode cancelar o próprio agendamento."
             );
         }
 

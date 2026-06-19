@@ -53,6 +53,13 @@ public class ClienteService {
         return toDTO(buscarOuLancar(id));
     }
 
+    public ClienteResponseDTO findByUsuarioLogado(Usuario usuarioLogado) {
+        return clienteRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+            .map(this::toDTO)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."));
+    }
+
     @Transactional
     public ClienteResponseDTO create(ClienteRequestDTO dto) {
         if (usuarioRepository.existsByEmail(dto.email())) {

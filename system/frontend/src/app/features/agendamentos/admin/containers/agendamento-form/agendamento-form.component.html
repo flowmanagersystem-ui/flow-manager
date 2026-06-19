@@ -1,7 +1,7 @@
 <mat-card class="card" appearance="outlined">
     <mat-card-content>
         <form [formGroup]="formulario">
-            <div class="form-row">               
+            <div class="form-row" *ngIf="!isCliente">
                 
                 <mat-form-field class="form-group" appearance="outline">
                     <mat-label class="form-label">Cliente</mat-label>

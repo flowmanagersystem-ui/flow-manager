@@ -5,17 +5,24 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifba.flowmanager.modules.agenda.dto.AgendaEventoDTO;
+import br.edu.ifba.flowmanager.modules.agenda.dto.AgendaEventoExtendedPropsDTO;
 import br.edu.ifba.flowmanager.modules.agenda.dto.DiasDisponiveisDTO;
 import br.edu.ifba.flowmanager.modules.agenda.dto.DisponibilidadeDTO;
 import br.edu.ifba.flowmanager.modules.agenda.dto.SlotDTO;
+import br.edu.ifba.flowmanager.modules.agendamento.Agendamento;
 import br.edu.ifba.flowmanager.modules.agendamento.AgendamentoRepository;
 import br.edu.ifba.flowmanager.modules.agendamento.AgendamentoServico;
+import br.edu.ifba.flowmanager.modules.agendamento.StatusAgendamento;
+import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoResponseDTO;
+import br.edu.ifba.flowmanager.modules.cliente.ClienteRepository;
 import br.edu.ifba.flowmanager.modules.profissional.Profissional;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalRepository;
 import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.DiaSemana;
@@ -23,6 +30,8 @@ import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.HorarioAt
 import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.HorarioAtendimentoRepository;
 import br.edu.ifba.flowmanager.modules.servico.Servico;
 import br.edu.ifba.flowmanager.modules.servico.ServicoRepository;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
+import br.edu.ifba.flowmanager.modules.usuario.enums.PerfilUsuario;
 import lombok.RequiredArgsConstructor;
 
 
@@ -34,6 +43,7 @@ class AgendaService {
     private final AgendamentoRepository agendamentoRepository;
     private final ProfissionalRepository profissionalRepository;
     private final ServicoRepository servicoRepository;
+    private final ClienteRepository clienteRepository;
  
     // dias disponíveis no mês para o calendário
     DiasDisponiveisDTO getDiasDisponiveis(Long profissionalId, Long servicoId, int ano, int mes) {
@@ -99,6 +109,36 @@ class AgendaService {
             slots
         );
     }
+
+    List<AgendaEventoDTO> getEventos(
+        LocalDateTime dataInicio,
+        LocalDateTime dataFim,
+        Long profissionalId,
+        StatusAgendamento status,
+        Usuario usuarioLogado
+    ) {
+        Long clienteId = null;
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.CLIENTE) {
+            clienteId = clienteRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Cliente não vinculado ao usuário logado."))
+                .getId();
+        }
+
+        if (usuarioLogado.getPerfil() == PerfilUsuario.PROFISSIONAL) {
+            profissionalId = profissionalRepository.findByUsuarioEmail(usuarioLogado.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Profissional não vinculado ao usuário logado."))
+                .getId();
+        }
+
+        return agendamentoRepository
+            .findEventosAgenda(clienteId, profissionalId, status, dataInicio, dataFim)
+            .stream()
+            .map(this::toEventoDTO)
+            .toList();
+    }
  
     // ── utilitários ───────────────────────────────────────────
  
@@ -162,5 +202,68 @@ class AgendaService {
         return servicoRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Serviço não encontrado."));
+    }
+
+    private AgendaEventoDTO toEventoDTO(Agendamento agendamento) {
+        List<AgendamentoServico> servicosOrdenados = agendamento.getServicos().stream()
+            .sorted(Comparator.comparing(AgendamentoServico::getDataHoraInicio))
+            .toList();
+
+        LocalDateTime inicio = servicosOrdenados.stream()
+            .map(AgendamentoServico::getDataHoraInicio)
+            .min(LocalDateTime::compareTo)
+            .orElse(agendamento.getDataHora());
+
+        LocalDateTime fim = servicosOrdenados.stream()
+            .map(AgendamentoServico::getDataHoraFim)
+            .max(LocalDateTime::compareTo)
+            .orElse(inicio.plusMinutes(30));
+
+        List<AgendamentoServicoResponseDTO> servicos = servicosOrdenados.stream()
+            .map(s -> new AgendamentoServicoResponseDTO(
+                s.getProfissional().getId(),
+                s.getProfissional().getUsuario().getNome(),
+                s.getServico().getId(),
+                s.getServico().getNome(),
+                s.getServico().getValor(),
+                s.getServico().getDuracao(),
+                s.getDataHoraInicio(),
+                s.getDataHoraFim()
+            ))
+            .toList();
+
+        String title = "%s - %s".formatted(
+            agendamento.getCliente().getUsuario().getNome(),
+            servicos.isEmpty() ? "Agendamento" : servicos.get(0).nomeServico()
+        );
+
+        return new AgendaEventoDTO(
+            agendamento.getId().toString(),
+            title,
+            inicio,
+            fim,
+            corPorStatus(agendamento.getStatus()),
+            new AgendaEventoExtendedPropsDTO(
+                agendamento.getId(),
+                agendamento.getCliente().getId(),
+                agendamento.getCliente().getUsuario().getNome(),
+                inicio,
+                fim,
+                agendamento.getStatus(),
+                agendamento.getObservacao(),
+                agendamento.getDesconto(),
+                agendamento.getValorTotal(),
+                servicos
+            )
+        );
+    }
+
+    private String corPorStatus(StatusAgendamento status) {
+        return switch (status) {
+            case AGENDADO -> "#4FBF9B";
+            case REAGENDADO -> "#FF9800";
+            case CONCLUIDO -> "#9E9E9E";
+            case CANCELADO -> "#e53935";
+        };
     }
 }

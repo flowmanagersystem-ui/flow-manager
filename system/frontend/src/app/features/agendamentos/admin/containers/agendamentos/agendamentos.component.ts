@@ -77,7 +77,6 @@ export class AgendamentosComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if(result){
-          console.log('Agendamento criado/atualizado com sucesso!') 
           this.refresh()
         }
       })

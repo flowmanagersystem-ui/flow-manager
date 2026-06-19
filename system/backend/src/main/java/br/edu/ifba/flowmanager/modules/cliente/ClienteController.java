@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteResponseDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestUpdateDTO;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -48,6 +49,13 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ClienteResponseDTO findById(@PathVariable Long id) {
         return clienteService.findById(id);
+    }
+
+    @GetMapping("/me")
+    public ClienteResponseDTO findMe(
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return clienteService.findByUsuarioLogado((Usuario) authentication.getPrincipal());
     }
 
     @PostMapping

@@ -61,8 +61,11 @@ public class AgendamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AgendamentoResponseDTO create(@RequestBody @Valid AgendamentoRequestDTO dto) {
-        return agendamentoService.create(dto);
+    public AgendamentoResponseDTO create(
+        @RequestBody @Valid AgendamentoRequestDTO dto,
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return agendamentoService.create(dto, (Usuario) authentication.getPrincipal());
     }
 
     @PatchMapping("/{id}")

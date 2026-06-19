@@ -61,6 +61,9 @@ export class AgendamentoEdicaoComponent {
   formulario!: FormGroup
   servicosAgendamento: ServicoAgendamento[] = []
   statusOptions = Object.values(Status)
+  // data hoje 
+  dataHoje = new Date()
+  agandamentoPassado = false
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -89,6 +92,18 @@ export class AgendamentoEdicaoComponent {
         ...servico,
         horario: this.horarioServico(servico)
       }))
+
+    // Se data do serviço já passou, não permitir adicionar ou editar serviços, apenas remover e mudar status para cancelado ou reagendado.
+    const dataServicoMaisRecente = this.servicosAgendamento
+      .map(s => s.dataHoraInicio)
+      .filter((data): data is string => !!data)
+      .sort()
+      .reverse()[0]
+
+    if (dataServicoMaisRecente && new Date(dataServicoMaisRecente) < this.dataHoje) {
+      this.statusOptions = [Status.CANCELADO, Status.REAGENDADO]
+      this.agandamentoPassado = true
+    }
   }
 
   onSubmit() {

@@ -1,0 +1,121 @@
+.agenda-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 4px 0 24px;
+}
+
+.agenda-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+
+  h1 {
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  p {
+    color: var(--text-muted);
+    margin: 2px 0 0;
+  }
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(180px, 220px) auto;
+  gap: 12px;
+  align-items: center;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    height: 40px;
+    justify-self: start;
+  }
+}
+
+.calendar-card {
+  position: relative;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+:host ::ng-deep {
+  .fc {
+    color: var(--text);
+  }
+
+  .fc .fc-toolbar {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fc .fc-toolbar-title {
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .fc .fc-button-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .fc .fc-button-primary:disabled {
+    background: var(--color-primary-mid);
+    border-color: var(--color-primary-mid);
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active,
+  .fc .fc-button-primary:not(:disabled):active {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+
+  .fc-theme-standard td,
+  .fc-theme-standard th,
+  .fc-theme-standard .fc-scrollgrid {
+    border-color: var(--border);
+  }
+
+  .fc-daygrid-event,
+  .fc-timegrid-event {
+    border: 0;
+    border-radius: 6px;
+    padding: 2px 4px;
+  }
+}
+
+@media (max-width: 760px) {
+  .filters {
+    grid-template-columns: 1fr;
+
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .calendar-card {
+    padding: 10px;
+  }
+}

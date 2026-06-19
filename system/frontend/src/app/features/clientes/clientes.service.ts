@@ -53,6 +53,11 @@ export class ClientesService {
     return this.http.get<Cliente>(`${this.API}/${id}`)
   }
 
+  loadMe(){
+    return this.http.get<Cliente>(`${this.API}/me`)
+      .pipe(first())
+  }
+
   validarEmailExistente(email: string, clienteId: string) {
     const params = clienteId
       ? `?email=${email}&excludeId=${clienteId}`

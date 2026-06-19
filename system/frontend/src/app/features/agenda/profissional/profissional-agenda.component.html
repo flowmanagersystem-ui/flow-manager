@@ -1,0 +1,16 @@
+<section class="agenda-page">
+  <div class="agenda-header">
+    <div>
+      <h1>Minha Agenda</h1>
+      <p>Agendamentos vinculados aos seus atendimentos.</p>
+    </div>
+  </div>
+
+  <mat-card class="calendar-card">
+    <div class="loading-overlay" *ngIf="loading">
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
+
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </mat-card>
+</section>

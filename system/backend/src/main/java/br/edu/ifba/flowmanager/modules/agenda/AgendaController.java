@@ -1,6 +1,8 @@
 package br.edu.ifba.flowmanager.modules.agenda;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
+import br.edu.ifba.flowmanager.modules.agenda.dto.AgendaEventoDTO;
 import br.edu.ifba.flowmanager.modules.agenda.dto.DiasDisponiveisDTO;
 import br.edu.ifba.flowmanager.modules.agenda.dto.DisponibilidadeDTO;
+import br.edu.ifba.flowmanager.modules.agendamento.StatusAgendamento;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 
 @RestController
 @RequestMapping("/api/agenda")
@@ -41,6 +46,23 @@ public class AgendaController {
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data
     ) {
         return agendaService.getDisponibilidade(profissionalId, servicoId, data);
+    }
+
+    @GetMapping("/eventos")
+    public List<AgendaEventoDTO> getEventos(
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicio,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFim,
+        @RequestParam(required = false) Long profissionalId,
+        @RequestParam(required = false) StatusAgendamento status,
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return agendaService.getEventos(
+            dataInicio,
+            dataFim,
+            profissionalId,
+            status,
+            (Usuario) authentication.getPrincipal()
+        );
     }
 }
 // import org.springframework.web.bind.annotation.RequestMapping;

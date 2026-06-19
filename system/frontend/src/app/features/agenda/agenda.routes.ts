@@ -1,18 +1,10 @@
 import { Routes } from '@angular/router';
-import { AgendaListComponent } from './components/agenda-list/agenda-list.component';
+import { AgendaPerfilComponent } from './agenda-perfil.component';
 
-export const AgendaRoutes: Routes = [{
+export const AgendaRoutes: Routes = [
+  {
     path: '',
-    children: [
-        {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: ''
-        },
-        {
-            path: '',
-            component: AgendaListComponent,
-            data: { breadcrumb: 'Lista de Clientes' }
-        },
-    ]
-}]
+    component: AgendaPerfilComponent,
+    data: { breadcrumb: 'Agenda' }
+  }
+]

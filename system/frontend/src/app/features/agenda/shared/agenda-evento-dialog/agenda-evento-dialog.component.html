@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>Agendamento</h2>
+
+<mat-dialog-content class="agenda-dialog-content">
+  <section class="summary">
+    <div>
+      <span class="label">Cliente</span>
+      <strong>{{ evento.nomeCliente }}</strong>
+    </div>
+
+    <mat-chip>{{ capitalizarTexto(evento.status) }}</mat-chip>
+  </section>
+
+  <section class="details-grid">
+    <div>
+      <span class="label">Início</span>
+      <strong>{{ textToDateTime(evento.dataHoraInicio) }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Fim</span>
+      <strong>{{ textToDateTime(evento.dataHoraFim) }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Valor</span>
+      <strong>{{ textToCurrency(evento.valorTotal) }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Desconto</span>
+      <strong>{{ textToCurrency(evento.desconto) }}</strong>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section class="sec-services">
+    <div class="services">
+      <h3>Serviços</h3>
+      <div class="service-row" *ngFor="let servico of evento.servicos">
+        <mat-icon>event_available</mat-icon>
+        <div>
+          <strong>{{ servico.nomeServico }}</strong>
+          <span>{{ servico.nomeProfissional }} · {{ textToDateTime(servico.dataHoraInicio) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-actions">
+      <button
+        class="btn-icon btn-icon--success"
+        matTooltip="Marcar como concluído"
+        (click)="onAction('concluir')" 
+        *ngIf="hasAction('concluir') && evento.status !== 'CONCLUIDO'">
+        <mat-icon class="icon-outlined">check_circle</mat-icon>
+      </button>
+      <button
+        class="btn-icon btn-icon--danger"
+        matTooltip="Cancelar agendamento"
+        (click)="onAction('cancelar')"
+        *ngIf="hasAction('cancelar') && evento.status !== 'CANCELADO'">
+        <mat-icon class="icon-outlined">cancel</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <section class="notes" *ngIf="evento.observacao">
+    <span class="label">Observação</span>
+    <p>{{ evento.observacao }}</p>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions class="agenda-dialog-actions">
+  <button mat-button mat-dialog-close>Fechar</button>
+  <button mat-flat-button color="primary" (click)="onAction('editar')" *ngIf="hasAction('editar')">
+    Editar
+  </button>
+</mat-dialog-actions>

@@ -18,7 +18,7 @@
         </mat-form-field>
       </div>
 
-      <div class="form-row desconto-observacao">
+      <div class="form-row desconto-observacao" *ngIf="!agandamentoPassado">
         <mat-form-field appearance="outline">
           <mat-label>Desconto (R$)</mat-label>
           <input matInput type="number" formControlName="desconto" min="0" />
@@ -31,7 +31,7 @@
       </div>
     </form>
 
-    <div class="servicos-header">
+    <div class="servicos-header" *ngIf="!agandamentoPassado">
       <div>
         <span class="section-title">Serviços</span>
         <span class="section-subtitle">Adicione, remova ou substitua um serviço do agendamento</span>
@@ -50,7 +50,7 @@
             {{ servico.nomeProfissional }} · {{ textToDateTime(servico.dataHoraInicio) }}
           </span>
         </div>
-        <div class="servico-item-right">
+        <div class="servico-item-right" *ngIf="!agandamentoPassado">
           <span class="servico-item-valor">{{ textToCurrency(servico.valorServico) }}</span>
           <button class="btn-icon" matTooltip="Editar serviço" (click)="onEditServico(i)">
             <mat-icon class="icon-outlined">edit</mat-icon>

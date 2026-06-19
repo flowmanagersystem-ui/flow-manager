@@ -1,7 +1,7 @@
 import { delay } from 'rxjs';
 // Angular
 import { Component, Inject } from '@angular/core';
-import { CommonModule, Location  } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -33,6 +33,7 @@ import { Cliente } from '../../../../clientes/cliente.interface';
 import { AgendamentosService } from '../../../agendamentos.service';
 import { ClientesService } from '../../../../clientes/clientes.service';
 import { LoadingService } from '../../../../../shared/services/loading.service';
+import { AuthService } from '../../../../../core/auth/auth.service';
 
 
 @Component({
@@ -63,24 +64,26 @@ export class AgendamentoFormComponent {
   agendamento: Agendamento  
   formulario!: FormGroup
   paginaAtual = 0
+  isCliente = false
 
   constructor(    
     private fb: NonNullableFormBuilder,
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,     
-    private location : Location,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<FormDialogComponent>,
     private loadingService: LoadingService,    
     private agendamentosService: AgendamentosService,
     private clientesService: ClientesService,
+    private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: { record: Agendamento }
   ){
     this.agendamento = data.record;
   }
 
   ngOnInit(): void {
+    console.log('Agendamento recebido no form:', this.agendamento)
     this.formulario = this.fb.group({
       id:         [this.agendamento?.id],
       cliente:    [null, Validators.required],
@@ -94,6 +97,21 @@ export class AgendamentoFormComponent {
 
   onSubmit() {
     if (this.formulario.invalid || this.servicosAdicionados.length === 0) return
+
+    // Verificar se a mesmo dia e horario já existe um serviço adicionado
+    const existeConflito = this.servicosAdicionados.some(s => {
+      const dataHora = new Date(s.dataHoraInicio).getTime()
+      return this.servicosAdicionados.some(outro => {
+        if (s === outro) return false
+        const outroDataHora = new Date(outro.dataHoraInicio).getTime()
+        return dataHora === outroDataHora
+      })
+    })
+
+    if (existeConflito) {
+      this.onError('Existe mais de um serviço agendado para o mesmo dia e horário. Por favor, ajuste os horários dos serviços adicionados.')
+      return
+    }
    
     this.loadingService.show()
     
@@ -126,10 +144,25 @@ export class AgendamentoFormComponent {
 
   onCancel(){
     this.formulario.reset()
-    this.location.back()
+    this.dialogRef.close(false)
   }
 
   buscarClientes() {
+    this.isCliente = this.authService.getPerfil() === 'CLIENTE'
+
+    if (this.isCliente) {
+      this.clientes$ = this.clientesService.loadMe()
+        .pipe(
+          tap(cliente => this.formulario.get('cliente')?.setValue(cliente)),
+          map(cliente => [cliente]),
+          catchError(error => {
+            this.onError('Erro ao carregar cliente logado.')
+            return of([])
+          })
+        )
+      return
+    }
+
     this.clientes$ = this.clientesService.listAll(0, 100, '', true)
     .pipe(
       map(response => response.content),
@@ -171,9 +204,6 @@ export class AgendamentoFormComponent {
 
     const dialogRef = ErrorDialogComponent.open(this.dialog, { message: errorMsg, redirectTo })
 
-    dialogRef.afterClosed().subscribe(confirmed => {      
-      this.router.navigate([''], { relativeTo: this.route }) 
-    })
   }
 
   textToCurrency(value: number): string {

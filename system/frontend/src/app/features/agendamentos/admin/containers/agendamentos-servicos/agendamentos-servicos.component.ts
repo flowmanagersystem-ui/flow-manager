@@ -104,8 +104,8 @@ export class AgendamentosServicosComponent implements  OnDestroy,  OnInit {
   ngOnInit(): void {
     this.formulario = this.fb.group({
       servico:      [null, Validators.required],
-      profissional: [null, Validators.required],
-      data:         [null, Validators.required],
+      profissional: [{ value: null, disabled: true }, Validators.required],
+      data:         [{ value: null, disabled: true }, Validators.required],
       horario:      [null, Validators.required],    
     })
 
@@ -121,7 +121,7 @@ export class AgendamentosServicosComponent implements  OnDestroy,  OnInit {
   onSubmit() {
     if (this.formulario.invalid) return
 
-    const { servico, profissional, data, horario } = this.formulario.value
+    const { servico, profissional, data, horario } = this.formulario.getRawValue()
     const [hora, minuto] = horario.split(':').map(Number)
     
     const dataHoraInicio = this.formatarDataHoraCompleta(data, hora, minuto)
@@ -191,28 +191,37 @@ export class AgendamentosServicosComponent implements  OnDestroy,  OnInit {
         this.diasDisponiveis = []
         this.slots = [] 
 
-        if (!servico?.id) return
+    if (!servico?.id) {
+      this.formulario.get('profissional')!.disable()
+      return;
+    }
 
-        this.carregandoProfissionais = true
+    this.formulario.get('profissional')!.enable()
+
+    this.carregandoProfissionais = true
       
-        this.servicosService.listarProfissionaisPorServico(servico.id)
-          .pipe(
-            finalize(() => this.carregandoProfissionais = false)
-          )
-          .subscribe({
-            next: profs => this.profissionais = profs,
-            error: () => this.onError('Erro ao carregar profissionais.')
-          })      
-      });
+    this.servicosService.listarProfissionaisPorServico(servico.id)
+        .pipe(
+          finalize(() => this.carregandoProfissionais = false)
+        )
+        .subscribe({
+          next: profs => this.profissionais = profs,
+          error: () => this.onError('Erro ao carregar profissionais.')
+        })      
+    });
 
-    // profissional → busca dias disponíveis dos próximos 3 meses
     this.formulario.get('profissional')!.valueChanges
       .subscribe((prof: Profissional) => {
         this.resetCampos(['horario', 'data'])
         this.diasDisponiveis = []
         this.slots = []
 
-        if (!prof?.id) return;
+        if (!prof?.id) {
+          this.formulario.get('data')!.disable()
+          return
+        }
+
+        this.formulario.get('data')!.enable()
 
         const servico = this.formulario.get('servico')!.value as Servico
         const hoje = new Date()
@@ -361,7 +370,7 @@ export class AgendamentosServicosComponent implements  OnDestroy,  OnInit {
     const dialogRef = ErrorDialogComponent.open(this.dialog, { message: errorMsg, redirectTo })
 
     dialogRef.afterClosed().subscribe(confirmed => {      
-      this.router.navigate(['/agendamentos'], { relativeTo: this.route }) // Mudar para rota home ou outra rota adequada
+      this.router.navigate(['/agendamentos'], { relativeTo: this.route }) 
     })
   }
 

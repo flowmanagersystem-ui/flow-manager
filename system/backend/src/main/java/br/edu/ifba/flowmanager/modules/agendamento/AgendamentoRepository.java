@@ -45,6 +45,28 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
         Pageable pageable
     );
 
+    @Query("""
+        SELECT DISTINCT a FROM Agendamento a
+        JOIN FETCH a.cliente c
+        JOIN FETCH c.usuario
+        LEFT JOIN FETCH a.servicos s
+        LEFT JOIN FETCH s.profissional p
+        LEFT JOIN FETCH p.usuario
+        LEFT JOIN FETCH s.servico
+        WHERE (:clienteId IS NULL OR c.id = :clienteId)
+        AND (:profissionalId IS NULL OR s.profissional.id = :profissionalId)
+        AND (:status IS NULL OR a.status = :status)
+        AND (:dataInicio IS NULL OR a.dataHora >= :dataInicio)
+        AND (:dataFim IS NULL OR a.dataHora <= :dataFim)
+    """)
+    List<Agendamento> findEventosAgenda(
+        @Param("clienteId") Long clienteId,
+        @Param("profissionalId") Long profissionalId,
+        @Param("status") StatusAgendamento status,
+        @Param("dataInicio") LocalDateTime dataInicio,
+        @Param("dataFim") LocalDateTime dataFim
+    );
+
     // ── conflito de horário por data real ─────────────────────
     // verifica sobreposição de horário para um profissional
     // usando data_hora_inicio e data_hora_fim reais

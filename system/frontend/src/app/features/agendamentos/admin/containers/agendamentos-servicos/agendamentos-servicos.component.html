@@ -29,8 +29,7 @@
         <div class="form-row">                           
           <mat-form-field class="form-group" appearance="outline">
               <mat-label class="form-label">Profissional</mat-label>
-              <mat-select formControlName="profissional" placeholder="Selecione o profissional"
-                [disabled]="!formulario.get('servico')?.value">
+              <mat-select formControlName="profissional" placeholder="Selecione o profissional">
 
                   <mat-option *ngIf="carregandoProfissionais" disabled>
                     <mat-progress-spinner diameter="16" style="display: block; margin-right: 8px;">
