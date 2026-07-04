@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTooltip } from "@angular/material/tooltip";
 
 // Services
+import { AuthService } from '../../auth/auth.service';
 import { BreadcrumbService } from '../breadcrumb.service';
 import { ThemeService } from '../../../shared/services/theme.service';
 
@@ -41,16 +42,24 @@ import { ThemeService } from '../../../shared/services/theme.service';
 export class LayoutComponent implements OnInit{
   public themeService = inject(ThemeService)
 
-  userName: string = 'Admin Demo';
-  role: string = 'Administrator';
+  userName: string = '';
+  role: string = '';
   themeIcon: string = 'light_mode';
   toggleSidebar: boolean = true;
   toggleSidebarIcon: string = 'arrow_back_ios';
   year: number = new Date().getFullYear();
 
-  constructor(public breadcrumbService: BreadcrumbService) {}
+  constructor(
+    public breadcrumbService: BreadcrumbService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    const usuario = this.authService.getUsuarioLogado()
+
+    this.userName = usuario?.nome || 'Usuário'
+    this.role = usuario?.perfil || ''
+
     const currentcolorTheme = this.themeService.getPreferredColorTheme()
 
     this.themeService.setColorTheme(currentcolorTheme)
@@ -82,6 +91,16 @@ export class LayoutComponent implements OnInit{
       this.toggleSidebar = true;
       this.toggleSidebarIcon = 'arrow_forward_ios';
     }
+  }
+
+  podeVer(perfis: string[]): boolean {
+    const perfil = this.authService.getPerfil()
+
+    return !!perfil && perfis.includes(perfil)
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

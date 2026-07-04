@@ -628,34 +628,91 @@ body {
   flex: 1;
 }
 
-.tbl {
+.tbl-container {
   width: 100%;
-  border-collapse: collapse;
 }
 
-.tbl th {
-  text-align: left;
-  padding: 12px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
+.tbl thead {
+  display: none; 
+}
+
+.tbl,
+.tbl tbody{
+  display: block;
+  width: 100%;
+}
+
+.tbl tr{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.tbl tbody tr {
+  flex-direction: column;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
   background: var(--bg);
 }
 
 .tbl td {
-  padding: 12px 16px;
-  font-size: 13px;
-  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border) !important;
 
-  a{
-    color: inherit;
+  a { color: inherit; }
+
+  // &:last-child {
+  //   border-bottom: none;
+  // }
+
+  &::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--text-muted);
+    margin-right: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
+
+// .tbl {
+//   width: 100%;
+//   border-collapse: collapse;
+// }
+
+// .tbl th {
+//   text-align: left;
+//   padding: 12px 16px;
+//   font-size: 12px;
+//   font-weight: 600;
+//   text-transform: uppercase;
+//   letter-spacing: .5px;
+//   color: var(--text-muted);
+//   border-bottom: 1px solid var(--border);
+//   background: var(--bg);
+//   white-space: nowrap;  /* evita quebra de linha no header */
+// }
+
+// .tbl td {
+//   padding: 12px 16px;
+//   font-size: 13px;
+//   border-bottom: 1px solid var(--border);
+
+//   a{
+//     color: inherit;
+//   }
+// }
+
 .tbl-actions {
-  display: flex;
+  display: flex ;
   gap: 6px;
   justify-content: flex-end;
 
@@ -698,6 +755,10 @@ body {
   border: 1px solid var(--border);
 }
 
+.badge-danger {
+  background: var(--danger-light);
+  color: var(--danger);
+}
 // ******************************* SNACKBAR *********************************************
 
 .mat-mdc-snack-bar-container {
@@ -738,9 +799,6 @@ body {
   margin: auto;
 }
 
-.display-none{
-  display: inherit;
-}
 // ***********************************************************************************************
 // ********************************** LIST COMPONENT *********************************************
 // ***********************************************************************************************
@@ -1044,29 +1102,82 @@ body {
 }
 
 
-
-
-
-
-/* Celulares (sm) */
-@media (max-width: 600px) {}
-
 /* md */
 @media (min-width: 768px) {
-    .stats-group{
-        gap: 12px;
+  .stats-group{
+    gap: 12px;
 
-        .stat-card{
-            padding: 14px 16px;
-            gap: 12px; 
+    .stat-card{
+      padding: 14px 16px;
+      gap: 12px; 
 
-            .stat-icon{
-                width: 38px;
-                height: 38px;
-            }
-        }
+      .stat-icon{
+        width: 38px;
+        height: 38px;
+      }
     }
+  }
 
+  .tbl thead {
+    display: table-header-group;
+  }
+
+  .tbl-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tbl,
+  .tbl tbody,
+  .tbl tr {
+    display: revert; 
+  }
+
+  .tbl thead tr {
+    position: static; 
+  }
+
+  .tbl {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+  }
+
+  .tbl th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    white-space: nowrap;
+  }
+
+  .tbl .tbl-item {
+    display: table-cell;
+  }
+
+  .tbl td {
+    padding: 12px 16px;
+    font-size: 13px;
+    border-radius: 0;
+
+    &::before {
+      content: none; /* remove as labels do mobile */
+    }
+  }
+
+  .tbl-actions {
+    margin-top: 1px;
+  }
+
+  .tbl tbody tr {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+  }
 }
 
 /* lg */
@@ -1125,55 +1236,8 @@ body {
     }
   }
 
-  thead tr{
-    th{
-      display: none;
-    }
-
-    :first-child, :last-child {
-      display: table-cell;
-    }
-  }
-
-  tbody tr{
-    td{
-      display: none;
-    }
-
-    :first-child, :last-child {
-      display: table-cell;
-    }
-  }
-
   .table-toolbar-search input:placeholder-shown{
     display: none;
   }
 
-  .display-none{
-    display: none;  
-  }
-
-}
-
-/* Tablets (md) */
-@media (max-width: 768px) {
-  
-//   .sidebar{
-//     width: var(--sidebar-w-sm);
-
-//     &.collapsed {
-//       width: var(--sidebar-w);
-//     }
-//   }
-// }
-
-// // /* Desktops (lg) */
-// @media (min-width: 1024px) {
-// .sidebar{
-//     width: var(--sidebar-w);
-
-//     &.collapsed {
-//       width: var(--sidebar-w-sm);
-//     }
-//   }
 }

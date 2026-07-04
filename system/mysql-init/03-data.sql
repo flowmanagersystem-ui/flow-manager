@@ -4,239 +4,279 @@ SET character_set_connection = utf8mb4;
 
 START TRANSACTION;
 
+-- Senha: root
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Admin', 'Administrador', 'admin@email.com', 'ADMIN', 'root', 1, '(77) 9 8841-3654');
+        VALUES ('Admin', 'Administrador', 'admin@email.com', 'ADMIN', '$2b$10$Viw0IuyyYvC689qSJ/pqI.RpiKYhc0wHGPKrMjypFupcxTEiPR3yW', 1, '(77) 9 8841-3654');
 
+-- Senha: senha123
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Alice', 'Silva', 'alice@email.com', 'CLIENTE', 'senha123', 1, '(77) 9 9965-3177');
+        VALUES ('Alice', 'Silva', 'alice@email.com', 'CLIENTE', '$2b$10$PcHgxwx5kK7K4Y/6vax16ey3OlZIPUBTLd//JQMOMTXVTpVMgcg2m', 1, '(77) 9 9965-3177');
 
         SET @usuario_id = LAST_INSERT_ID();        
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha456
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Bob', 'Santos', 'bob@email.com', 'CLIENTE', 'senha456', 1, '(77) 9 98803-7942');
+        VALUES ('Bob', 'Santos', 'bob@email.com', 'CLIENTE', '$2b$10$dEbvRW4rraCCMr7g1jsIMe4XEE7cI/TvfZ9R/Fx67nrGTn5km.6uK', 1, '(77) 9 98803-7942');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha789
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Ana', 'Silva', 'ana@email.com', 'CLIENTE', 'senha789', 1, '(77) 9 9952-3168');
+        VALUES ('Ana', 'Silva', 'ana@email.com', 'CLIENTE', '$2b$10$E2XK/basvemngut8gNHnReDaSN8HHHPA0RnYMBer6OUy.Gw3LPtqO', 1, '(77) 9 9952-3168');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha012
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Carlos', 'Melo', 'carlos@email.com', 'CLIENTE', 'senha012', 1, '(77) 9 8841-3654');
+        VALUES ('Carlos', 'Melo', 'carlos@email.com', 'CLIENTE', 'b.BlgXlFZ0ye.Yt4hau2jBaDXRqCZ.37t7SNcW6Is2gTJpGda6', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha345
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Marina', 'Luz', 'marina@email.com', 'CLIENTE', 'senha345', 0, '(77) 9 8841-3654');
+        VALUES ('Marina', 'Luz', 'marina@email.com', 'CLIENTE', 'bMwl5Vo8kKZxt/Iu9y9dT.tZjgc.d8mYN2IwvxE.s3717tTQBNazW', 0, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha678
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Pedro', 'Ramos', 'pedro@email.com', 'CLIENTE', 'senha678', 1, '(77) 9 8841-3654');
+        VALUES ('Pedro', 'Ramos', 'pedro@email.com', 'CLIENTE', 'b.mbc59QVcZldHutrG/y8z6A7hGsUdkIy', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha901      
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Luisa', 'Torres', 'luisa@email.com', 'CLIENTE', 'senha901', 1, '(77) 9 8841-3654');
+        VALUES ('Luisa', 'Torres', 'luisa@email.com', 'CLIENTE', '$2b$10$Unf3wBOrNA1/xF/xw3zln.YCbh0wuNOnx4CmQRUJDGNwlWRaIyfE2', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha234
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Roberto', 'Lima', 'roberto@email.com', 'CLIENTE', 'senha234', 1, '(77) 9 8841-3654');
+        VALUES ('Roberto', 'Lima', 'roberto@email.com', 'CLIENTE', '$2b$10$.26pviSW.uJb8W1R3A5dROvq5kbVhlRj3XG9Ipq6YAY/J33gCi3x6', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha567
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Fernanda', 'Costa', 'fernanda@email.com', 'CLIENTE', 'senha567', 1, '(77) 9 8841-3654');
+        VALUES ('Fernanda', 'Costa', 'fernanda@email.com', 'CLIENTE', '$2b$10$3ihz3pE/BGoRkOP7NrLtx.Mu.vBHVet6io0c2NWkzLEFrUr6ogjQm', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha890
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Thiago', 'Borges', 'thiago@email.com', 'CLIENTE', 'senha890', 0, '(77) 9 8841-3654');
+        VALUES ('Thiago', 'Borges', 'thiago@email.com', 'CLIENTE', '$2b$10$qg7ueP3m/wmjqzzarNTgeO9vADX3TXCZ/D6HXdX.NHfsnJELznCpO', 0, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha123
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Cláudia', 'Faria', 'claudia@email.com', 'CLIENTE', 'senha123', 1, '(77) 9 8841-3654');
+        VALUES ('Claudia', 'Faria', 'claudia@email.com', 'CLIENTE', '$2b$10$PcHgxwx5kK7K4Y/6vax16ey3OlZIPUBTLd//JQMOMTXVTpVMgcg2m', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha456
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Diego', 'Monteiro', 'diego@email.com', 'CLIENTE', 'senha456', 1, '(77) 9 8841-3654');
+        VALUES ('Diego', 'Monteiro', 'diego@email.com', 'CLIENTE', '$2b$10$dEbvRW4rraCCMr7g1jsIMe4XEE7cI/TvfZ9R/Fx67nrGTn5km.6uK', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha789
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Patrícia', 'Nunes', 'patricia@email.com', 'CLIENTE', 'senha789', 1, '(77) 9 8841-3654');
+        VALUES ('Patricia', 'Nunes', 'patricia@email.com', 'CLIENTE', '$2b$10$E2XK/basvemngut8gNHnReDaSN8HHHPA0RnYMBer6OUy.Gw3LPtqO', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha012
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Lucas', 'Andrade', 'lucas@email.com', 'CLIENTE', 'senha012', 1, '(77) 9 8841-3654');
+        VALUES ('Lucas', 'Andrade', 'lucas@email.com', 'CLIENTE', 'b.BlgXlFZ0ye.Yt4hau2jBaDXRqCZ.37t7SNcW6Is2gTJpGda6', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha345
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Juliana', 'Reis', 'juliana@email.com', 'CLIENTE', 'senha345', 1, '(77) 9 8841-3654');
+        VALUES ('Juliana', 'Reis', 'juliana@email.com', 'CLIENTE', 'bMwl5Vo8kKZxt/Iu9y9dT.tZjgc.d8mYN2IwvxE.s3717tTQBNazW', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha678
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Bruno', 'Carvalho', 'bruno@email.com', 'CLIENTE', 'senha678', 0, '(77) 9 8841-3654');
+        VALUES ('Bruno', 'Carvalho', 'bruno@email.com', 'CLIENTE', 'b.mbc59QVcZldHutrG/y8z6A7hGsUdkIy', 0, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha901
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Natália', 'Souza', 'natalia@email.com', 'CLIENTE', 'senha901', 1, '(77) 9 8841-3654');
+        VALUES ('Natalia', 'Souza', 'natalia@email.com', 'CLIENTE', '$2b$10$Unf3wBOrNA1/xF/xw3zln.YCbh0wuNOnx4CmQRUJDGNwlWRaIyfE2', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha234
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Fábio', 'Gomes', 'fabio@email.com', 'CLIENTE', 'senha234', 1, '(77) 9 8841-3654');
+        VALUES ('Fabio', 'Gomes', 'fabio@email.com', 'CLIENTE', '$2b$10$.26pviSW.uJb8W1R3A5dROvq5kbVhlRj3XG9Ipq6YAY/J33gCi3x6', 1, '(77) 9 8841-3654');
         
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha567
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Renata', 'Pinto', 'renata@email.com', 'CLIENTE', 'senha567', 1, '(77) 9 8841-3654');
+        VALUES ('Renata', 'Pinto', 'renata@email.com', 'CLIENTE', '$2b$10$3ihz3pE/BGoRkOP7NrLtx.Mu.vBHVet6io0c2NWkzLEFrUr6ogjQm', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha890
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Marcelo', 'Dias', 'marcelo@email.com', 'CLIENTE', 'senha890', 0, '(77) 9 8841-3654');
+        VALUES ('Marcelo', 'Dias', 'marcelo@email.com', 'CLIENTE', '$2b$10$qg7ueP3m/wmjqzzarNTgeO9vADX3TXCZ/D6HXdX.NHfsnJELznCpO', 0, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha123
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Aline', 'Castro', 'aline@email.com', 'CLIENTE', 'senha123', 1, '(77) 9 8841-3654');
+        VALUES ('Aline', 'Castro', 'aline@email.com', 'CLIENTE', '$2b$10$PcHgxwx5kK7K4Y/6vax16ey3OlZIPUBTLd//JQMOMTXVTpVMgcg2m', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha456
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Rodrigo', 'Ferreira', 'rodrigo@email.com', 'CLIENTE', 'senha456', 1, '(77) 9 8841-3654');
+        VALUES ('Rodrigo', 'Ferreira', 'rodrigo@email.com', 'CLIENTE', '$2b$10$dEbvRW4rraCCMr7g1jsIMe4XEE7cI/TvfZ9R/Fx67nrGTn5km.6uK', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha789
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Camila', 'Santos', 'camila@email.com', 'CLIENTE', 'senha789', 1, '(77) 9 8841-3654');
+        VALUES ('Camila', 'Santos', 'camila@email.com', 'CLIENTE', '$2b$10$E2XK/basvemngut8gNHnReDaSN8HHHPA0RnYMBer6OUy.Gw3LPtqO', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha012
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Eduardo', 'Lima', 'eduardo@email.com', 'CLIENTE', 'senha012', 1, '(77) 9 8841-3654');
+        VALUES ('Eduardo', 'Lima', 'eduardo@email.com', 'CLIENTE', 'b.BlgXlFZ0ye.Yt4hau2jBaDXRqCZ.37t7SNcW6Is2gTJpGda6', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha345
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Beatriz', 'Oliveira', 'beatriz@email.com', 'CLIENTE', 'senha345', 1, '(77) 9 8841-3654');
+        VALUES ('Beatriz', 'Oliveira', 'beatriz@email.com', 'CLIENTE', 'bMwl5Vo8kKZxt/Iu9y9dT.tZjgc.d8mYN2IwvxE.s3717tTQBNazW', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha678      
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Gabriel', 'Costa', 'gabriel@email.com', 'CLIENTE', 'senha678', 1, '(77) 9 8841-3654');
+        VALUES ('Gabriel', 'Costa', 'gabriel@email.com', 'CLIENTE', 'b.mbc59QVcZldHutrG/y8z6A7hGsUdkIy', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha901
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Letícia', 'Martins', 'leticia@email.com', 'CLIENTE', 'senha901', 1, '(77) 9 8841-3654');
+        VALUES ('Leticia', 'Martins', 'leticia@email.com', 'CLIENTE', '$2b$10$Unf3wBOrNA1/xF/xw3zln.YCbh0wuNOnx4CmQRUJDGNwlWRaIyfE2', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha234
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Vitor', 'Pereira', 'vitor@email.com', 'CLIENTE', 'senha234', 1, '(77) 9 8841-3654');
+        VALUES ('Vitor', 'Pereira', 'vitor@email.com', 'CLIENTE', '$2b$10$.26pviSW.uJb8W1R3A5dROvq5kbVhlRj3XG9Ipq6YAY/J33gCi3x6', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha567
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Sabrina', 'Cunha', 'sabrina@email.com', 'CLIENTE', 'senha567', 1, '(77) 9 8841-3654');
+        VALUES ('Sabrina', 'Cunha', 'sabrina@email.com', 'CLIENTE', '$2b$10$3ihz3pE/BGoRkOP7NrLtx.Mu.vBHVet6io0c2NWkzLEFrUr6ogjQm', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha890
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Felipe', 'Ribeiro', 'felipe@email.com', 'CLIENTE', 'senha890', 1, '(77) 9 8841-3654');
+        VALUES ('Felipe', 'Ribeiro', 'felipe@email.com', 'CLIENTE', '$2b$10$qg7ueP3m/wmjqzzarNTgeO9vADX3TXCZ/D6HXdX.NHfsnJELznCpO', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha123      
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Débora', 'Alves', 'debora@email.com', 'CLIENTE', 'senha123', 1, '(77) 9 8841-3654');
+        VALUES ('Debora', 'Alves', 'debora@email.com', 'CLIENTE', '$2b$10$PcHgxwx5kK7K4Y/6vax16ey3OlZIPUBTLd//JQMOMTXVTpVMgcg2m', 1, '(77) 9 8841-3654');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO cliente (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha456
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Dayana', 'Alves', 'dayana@salao.com', 'PROFISSIONAL', 'senha901', 1, '(47) 9 9001-0001');
+        VALUES ('Dayana', 'Alves', 'dayana@salao.com', 'PROFISSIONAL', '$2a$10$ov1JwvtjsPqbYqLcUGC6/eh8XuQxHHo09LNvDgJ/yZfdH/xSoryc.', 1, '(47) 9 9001-0001');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha789
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('João', 'Souza', 'joao@salao.com', 'PROFISSIONAL', 'senha902', 1, '(47) 9 9002-0002');
+        VALUES ('Jo', 'Souza', 'joao@salao.com', 'PROFISSIONAL', 'b', 1, '(47) 9 9002-0002');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha012
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Sofia', 'Oliveira', 'sofia@salao.com', 'PROFISSIONAL', 'senha903', 1, '(47) 9 9003-0003');
+        VALUES ('Sofia', 'Oliveira', 'sofia@salao.com', 'PROFISSIONAL', 'b.sk53eW1K26oxW02zPq4i5ntu', 1, '(47) 9 9003-0003');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha345
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Carla', 'Mendes', 'carla@salao.com', 'PROFISSIONAL', 'senha904', 1, '(47) 9 9004-0004');
+        VALUES ('Carla', 'Mendes', 'carla@salao.com', 'PROFISSIONAL', 'bN9q0dVWelgyU.2F4tW7nOcoVlp0xlHYSaTDLmaG9sbKORJbXwNCG', 1, '(47) 9 9004-0004');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha678
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Natália', 'Costa', 'natalia@salao.com', 'PROFISSIONAL', 'senha905', 1, '(47) 9 9005-0005');
+        VALUES ('Natalia', 'Costa', 'natalia@salao.com', 'PROFISSIONAL', 'b.FBvcBdb1eD7JXvYvPVou..8ZTxGov2x.Ge4y/bGrthKUY4cXVz2', 1, '(47) 9 9005-0005');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha901
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Roberta', 'Lima', 'roberta@salao.com', 'PROFISSIONAL', 'senha906', 1, '(47) 9 9006-0006');
+        VALUES ('Roberta', 'Lima', 'roberta@salao.com', 'PROFISSIONAL', 'bzZtn6Cff1d5kcbbFNiEmunyCRXe71WQQXf5.PLpehY3ohnVNy1Iq', 1, '(47) 9 9006-0006');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha234
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Marcela', 'Freitas', 'marcela@salao.com', 'PROFISSIONAL', 'senha907', 1, '(47) 9 9007-0007');
+        VALUES ('Marcela', 'Freitas', 'marcela@salao.com', 'PROFISSIONAL', '$2b$10$AaJ3tSOPWULOVgqYEsb/P.njmp9V9gcrXsYFrBDJ2K9XBVqxJxH3a', 1, '(47) 9 9007-0007');
         
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);
 
+-- Senha: senha567
 INSERT INTO usuario (nome, sobrenome, email, perfil, senha, ativo, telefone) 
-        VALUES ('Paulo', 'Ribeiro', 'paulo@salao.com', 'PROFISSIONAL', 'senha908', 1, '(47) 9 9008-0008');
+        VALUES ('Paulo', 'Ribeiro', 'paulo@salao.com', 'PROFISSIONAL', 'b', 1, '(47) 9 9008-0008');
 
         SET @usuario_id = LAST_INSERT_ID();
         INSERT INTO profissional (usuario_id) VALUES (@usuario_id);

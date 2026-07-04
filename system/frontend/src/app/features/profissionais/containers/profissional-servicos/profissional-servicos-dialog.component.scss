@@ -1,0 +1,143 @@
+.form-dialog-header{display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--bg);
+  padding: 20px 36px;
+  margin: 0;
+
+  .form-dialog-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .form-dialog-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+}
+
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.resumo {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+// ── categorias ──────────────────────────────────────────────
+
+.categoria-grupo {
+  margin-bottom: 1.25rem;
+}
+
+.categoria-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0 4px 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.categoria-icon {
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
+
+// ── serviços ─────────────────────────────────────────────────
+
+.servicos-list {
+  padding: 0 !important;
+}
+
+.servico-item {
+  border-radius: var(--radius) !important;
+  margin-bottom: 5px;
+  height: auto !important;
+
+  &:hover {
+    background: var(--primary-light);
+  }
+}
+
+.servico-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  margin-bottom: 3px;
+}
+
+.servico-nome {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.servico-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.servico-valor {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.servico-duracao {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+
+  mat-icon {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+  }
+}
+
+// ── badges de alteração ───────────────────────────────────────
+
+.badge-alteracao {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+mat-dialog-actions {
+  padding: 0.75rem 1.5rem 1.25rem !important;
+  gap: 8px;
+  justify-content: flex-end;
+
+  button {
+    min-width: 120px;
+
+    mat-spinner {
+      display: inline-block;
+      margin: 0 auto;
+    }
+  }
+}

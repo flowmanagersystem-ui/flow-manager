@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifba.flowmanager.modules.profissional.dto.ProfissionalResponseDTO;
 import br.edu.ifba.flowmanager.modules.servico.dto.ServicoRequestDTO;
 import br.edu.ifba.flowmanager.modules.servico.dto.ServicoResponseDTO;
 import jakarta.validation.Valid;
@@ -59,6 +60,11 @@ public class ServicoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         servicoService.delete(id);
+    }
+
+    @GetMapping("/{servicoId}/profissionais")   
+    public List<ProfissionalResponseDTO> listarProfissionais(@PathVariable Long servicoId) {
+        return servicoService.listarProfissionaisPorServico(servicoId);
     }
 
     @GetMapping("/verificar-duplicidade")

@@ -8,9 +8,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +20,8 @@ import org.springframework.http.HttpStatus;
 
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestDTO;
 import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteResponseDTO;
+import br.edu.ifba.flowmanager.modules.cliente.dto.ClienteRequestUpdateDTO;
+import br.edu.ifba.flowmanager.modules.usuario.Usuario;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,16 +31,31 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+    // @GetMapping
+    // public Page<ClienteResponseDTO> listAll(
+    //     @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
+    // ) {
+    //     return clienteService.listAll(pageable);
+    // }
     @GetMapping
     public Page<ClienteResponseDTO> listAll(
+        @RequestParam(required = false) String filtro,
+        @RequestParam(required = false, defaultValue = "false") Boolean apenasAtivos,
         @PageableDefault(size = 10, sort = "usuario.nome") Pageable pageable
     ) {
-        return clienteService.listAll(pageable);
+        return clienteService.listAll(filtro, apenasAtivos, pageable);
     }
 
     @GetMapping("/{id}")
     public ClienteResponseDTO findById(@PathVariable Long id) {
         return clienteService.findById(id);
+    }
+
+    @GetMapping("/me")
+    public ClienteResponseDTO findMe(
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return clienteService.findByUsuarioLogado((Usuario) authentication.getPrincipal());
     }
 
     @PostMapping
@@ -47,8 +64,8 @@ public class ClienteController {
         return clienteService.create(dto);
     }
 
-    @PutMapping("/{id}")
-    public ClienteResponseDTO update(@PathVariable Long id, @RequestBody @Validated ClienteRequestDTO dto) {
+    @PatchMapping("/{id}")
+    public ClienteResponseDTO update(@PathVariable Long id, @RequestBody @Validated ClienteRequestUpdateDTO dto) {
         return clienteService.update(id, dto);
     }
 
@@ -58,7 +75,6 @@ public class ClienteController {
         clienteService.delete(id);
     }
 
-    // endpoint para o validador assíncrono do Angular
     @GetMapping("/verificar-email")
     public Map<String, Boolean> verificarEmail(
         @RequestParam String email,

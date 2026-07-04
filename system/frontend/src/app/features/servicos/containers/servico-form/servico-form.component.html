@@ -30,7 +30,7 @@
             <div class="form-row">
                 <mat-form-field class="form-group" appearance="outline">
                     <mat-label class="form-label">Descrição</mat-label>
-                    <textarea class="form-control" rows="3" placeholder="Descrição do serviço oferecido" formControlName="descricao" matInput #input ></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Descrição do serviço oferecido" formControlName="descricao" style="background-color: inherit;" matInput #input ></textarea>
                     <mat-error class="input-message" [control]="$any(formulario.get('descricao'))" [label]="'descricao'">  </mat-error>
                 </mat-form-field>
 

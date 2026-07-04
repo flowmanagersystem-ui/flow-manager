@@ -239,7 +239,7 @@ export class FormValidations{
     return null;
   }
 
-  static validarCaracterESpaco(control: FormControl){
+  static validarCaracterEspaco(control: FormControl){
     const valor = control.value
     if (valor && /\s/.test(valor)) {
       return { caracterEspaco: true };

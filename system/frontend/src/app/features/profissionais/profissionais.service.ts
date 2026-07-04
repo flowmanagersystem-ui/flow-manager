@@ -6,6 +6,8 @@ import { environment } from '../../../environments/environment.development';
 
 import { Profissional } from './profissional.interface';
 import { Page } from '../../shared/interfaces/page.interface';
+import { Servico } from '../servicos/servico.interface';
+import { HorarioAtendimento } from './containers/profissionais-horarios/horario-atendimento.interface';
 
 
 @Injectable({
@@ -17,8 +19,8 @@ export class ProfissionaisService {
 
   constructor(private http: HttpClient) { }
 
-  listAll(page: number = 0, size: number = 10) {
-    return this.http.get<Page<Profissional>>(`${this.API}?page=${page}&size=${size}`)
+  listAll(page: number = 0, size: number = 10, filtro: string = '') {
+    return this.http.get<Page<Profissional>>(`${this.API}?page=${page}&size=${size}&filtro=${filtro}`)
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console
@@ -58,5 +60,52 @@ export class ProfissionaisService {
 
     return this.http.get<{ existe: boolean }>(`${this.API}/verificar-email${params}`)
       .pipe(map(res => res.existe))
+  }
+
+
+  // Adições para gerenciamento de serviços vinculados a um profissional
+  listarServicos(profissionalId: number) {
+  return this.http.get<Servico[]>(`${this.API}/${profissionalId}/servicos`)
+  .pipe(
+    first(),
+  );
+  }
+
+  adicionarServico(profissionalId: number, servicoId: number) {
+    return this.http.post(`${this.API}/${profissionalId}/servicos/${servicoId}`, {})
+    .pipe(
+      first()
+    );
+  }
+
+  removerServico(profissionalId: number, servicoId: number) {
+    return this.http.delete(`${this.API}/${profissionalId}/servicos/${servicoId}`)
+    .pipe(
+      first()
+    );
+  }
+
+  // Adições para gerenciamento de horários de atendimento vinculados a um profissional
+  listarHorarios(profissionalId: number) {
+    return this.http.get<HorarioAtendimento[]>(`${this.API}/${profissionalId}/horarios`)      
+      .pipe(
+        // tap(console.log),
+        first()
+      );
+  }
+
+  adicionarHorario(profissionalId: number, dto: HorarioAtendimento) {
+    return this.http.post<HorarioAtendimento>(`${this.API}/${profissionalId}/horarios`, dto)
+      .pipe(first());
+  }
+
+  atualizarHorario(profissionalId: number, horarioId: number, dto: HorarioAtendimento) {
+    return this.http.put<HorarioAtendimento>(`${this.API}/${profissionalId}/horarios/${horarioId}`, dto)
+      .pipe(first());
+  }
+
+  removerHorario(profissionalId: number, horarioId: number) {
+    return this.http.delete(`${this.API}/${profissionalId}/horarios/${horarioId}`)
+      .pipe(first());
   }
 }

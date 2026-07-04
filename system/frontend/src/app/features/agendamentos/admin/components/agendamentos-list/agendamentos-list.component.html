@@ -1,0 +1,209 @@
+<div class="screen">
+    <div class="page-header">
+        <div>
+            <div class="page-title">{{ title }}</div>
+            <div class="page-subtitle">{{ subtitle }}</div>
+        </div>
+        <button class="btn btn-primary" (click)="onAdd()">
+            <mat-icon>add</mat-icon>
+            <span>Novo agendamento</span>
+        </button>
+    </div>
+
+    <div class="stats-group">
+  
+        <div class="card stat-card stat-card--green">
+            <div class="stat-icon">
+                <mat-icon class="icon-outlined ">hexagon</mat-icon>
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">Total de serviços</span>
+                <span class="stat-value">{{ totalElements }}</span>
+            </div>
+        </div>
+
+        <div class="card stat-card stat-card--purple">
+            <div class="stat-icon">
+            <mat-icon class="icon-outlined ">category</mat-icon>
+            </div>
+            <div class="stat-info">
+            <span class="stat-label">Categorias</span>
+            <span class="stat-value">{{ totalCategorias }}</span>
+            </div>
+        </div>
+
+        <div class="card stat-card stat-card--orange">
+            <div class="stat-icon">
+            <mat-icon class="icon-outlined ">attach_money</mat-icon>
+            </div>
+            <div class="stat-info">
+            <span class="stat-label">Ticket médio</span>
+            <span class="stat-value">{{ ticketMedio }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+
+        <div class="filter-bar-search">            
+            <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
+            <input type="text" matInput placeholder="Buscar por serviço, categoria ou descrição..." (keyup)="applyFilter($event)" #input />
+        </div>
+    
+        <div class="filter-bar-selects">
+            <select name="" id="" class="filter-bar--select ">
+                <option value="nome">A–Z (Nome)</option>
+                <option value="categoria">A–Z (Categoria)</option>
+            </select>
+
+            <select name="" id="" class="filter-bar--select ">
+                <option value="todos">Todas as categorias</option>
+                <option value="barbeiro">Barbeiro</option>
+                <option value="cabeleireiro">Cabeleireiro</option>
+                <option value="manicure">Manicure</option>
+            </select>
+            
+            <div class="filter-bar--view-toggle">
+                <button class="filter-bar__view-btn on" [class.on]="viewMode" mat-icon-button aria-label="Cards" (click)="onToggleViewNode()">
+                    <mat-icon  class="icon-outlined">dataset</mat-icon>
+                </button>
+                <button class="filter-bar__view-btn" [class.on]="!viewMode" mat-icon-button aria-label="Tabela"  (click)="onToggleViewNode()">
+                    <mat-icon class="icon-outlined">lists</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards-mediuns" *ngIf="viewMode; else modoTabela">
+        <div class="card-medium-grid">
+            <mat-card class="medium-card" *ngFor="let agendamento of agendamentos">
+                <mat-card-header class="medium-card-header">
+                    <mat-card-title class="medium-card-title">{{ agendamento.nomeCliente }}</mat-card-title>
+                    <mat-card-subtitle class="medium-card-subtitle">{{ agendamento.dataHora }}</mat-card-subtitle>
+                    <span class="badge badge-success">Ativo</span>
+                </mat-card-header>
+                <mat-card-content class="medium-card-content">
+                    <div class="medium-card-row">
+                        <mat-icon class="medium-card-icon icon-outlined">email</mat-icon>
+                        <span>{{ agendamento.nomeCliente }}</span>
+                    </div>
+                    <div class="medium-card-row">
+                        <mat-icon class="medium-card-icon icon-outlined">phone</mat-icon>
+                        <span>{{ agendamento.nomeCliente }}</span>
+                    </div>                    
+                    <div class="medium-card-row">
+                        <mat-icon class="medium-card-icon icon-outlined">phone</mat-icon>
+                        <span>{{ agendamento.nomeCliente }}</span>
+                    </div>
+                    
+                    <div class="medium-card-row">
+                        <mat-icon class="medium-card-icon icon-outlined">phone</mat-icon>
+                        <span>{{ agendamento.nomeCliente }}</span>
+                    </div>
+
+                </mat-card-content>
+                <mat-card-actions class="medium-card-actions">
+                    <button class="medium-card-actions-icon" (click)="onDetails(agendamento)">
+                        <mat-icon class="icon-outlined">info</mat-icon>
+                        Detalhes
+                    </button>
+                    <button class="medium-card-actions-icon" (click)="onEdit(agendamento)">
+                        <mat-icon class="icon-outlined">edit</mat-icon>
+                        Editar
+                    </button>
+                    <button class="medium-card-actions-icon btn-delete" (click)="onRemove(agendamento)">
+                        <mat-icon class="icon-outlined">delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div> 
+
+    <ng-template #modoTabela>
+        <div class="tbl-container">
+            <table class="tbl" mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="cliente">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header data-label="Cliente"> Cliente </th>
+                    <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                        <strong>{{ agendamento.nomeCliente }}</strong> 
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="servico">
+                <th mat-header-cell *matHeaderCellDef data-label="Serviço"> Serviço </th>
+                <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                    <div class="chips">
+                    <span class="chip" *ngFor="let s of primeirosServicos(agendamento)">
+                        {{ s.nomeServico }}
+                    </span>
+                    <span class="chip-more"
+                        *ngIf="agendamento.servicos.length > 2"
+                        [matTooltip]="servicosRestantes(agendamento)">
+                        +{{ agendamento.servicos.length - 2 }}
+                    </span>
+                    </div>
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="profissional">
+                <th mat-header-cell *matHeaderCellDef data-label="Profissional"> Profissional </th>
+                <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                    <ng-container *ngIf="profissionaisUnicos(agendamento) as profs">
+                    <span class="muted">{{ profs[0] }}</span>
+                    <span class="chip-more"
+                        *ngIf="profs.length > 1"
+                        [matTooltip]="profs.slice(1).join(', ')">
+                        +{{ profs.length - 1 }}
+                    </span>
+                    </ng-container>
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="dataHora">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header data-label="Data e Hora"> Data e Hora </th>
+                    <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                        {{ textToDateTime(agendamento.dataHora) }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header data-label="Valor"> Valor </th>
+                    <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                        {{ textToCurrency(agendamento.valorTotal) }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header data-label="Status"> Status </th>
+                    <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                        {{ capitalizarTexto(agendamento.status) }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell style="text-align: center;" *matHeaderCellDef data-label="Ações"> Ações </th>
+                    <td class="tbl-item" mat-cell *matCellDef="let agendamento">
+                        <div class="tbl-actions">
+                            <button class="btn-icon" (click)="onEdit(agendamento)">
+                                <mat-icon class="icon-outlined">edit</mat-icon>
+                            </button>
+                            <button class="btn-icon" (click)="onRemove(agendamento)">
+                                <mat-icon class="icon-outlined">delete</mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell lista-vazia" colspan="4" *ngIf="input.value == '' && dataSource.filteredData.length == 0">
+                    {{ listaVazia }}
+                    </td>
+                    <td class="mat-cell filtro-nao-encontrado" colspan="4" *ngIf="input.value.length > 0">
+                    {{ noResults }}  <strong>{{ input.value }}</strong>.
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <mat-paginator class="pagination" aria-label="Navegação da tabela"
+            [length]="totalElements" 
+            [pageSize]="10" 
+            [pageIndex]="paginaAtual"
+            (page)="pageChange.emit($event)">
+        </mat-paginator>
+    </ng-template> 
+</div>

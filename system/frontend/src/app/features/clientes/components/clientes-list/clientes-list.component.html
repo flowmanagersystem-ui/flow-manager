@@ -13,18 +13,24 @@
         <div class="table-toolbar">
             <div class="table-toolbar-search">
                 <mat-icon class="icon-outlined search-icon" matPrefix>search</mat-icon>
-                <input type="text" matInput  (keyup)="applyFilter($event)" #input placeholder="Buscar por nome, e-mail, telefone..." />
+                <input type="text" placeholder="Buscar por nome, e-mail, telefone..." autofocus                
+                    #input 
+                    matInput  
+                    [formControl]="filtroControl"
+                    (keyup)="applyFilter($event)"/>
             </div>
-            <span class="badge badge-info">{{ dataSource.filteredData.length }} {{ dataSource.filteredData.length == 1 ? info : info + 's' }}</span>
+
+            <span class="badge badge-info">{{ totalElements }} {{ totalElements == 1 ? info : info + 's' }}</span>
+
             <table class="tbl" mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="nome">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-                    <td mat-cell *matCellDef="let cliente"> <strong>{{ cliente.nome }} {{ cliente.sobrenome }}</strong> </td>
+                    <td class="tbl-item" mat-cell *matCellDef="let cliente"> <strong>{{ cliente.nome }} {{ cliente.sobrenome }}</strong> </td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
-                    <td mat-cell *matCellDef="let cliente">
+                    <td class="tbl-item" mat-cell *matCellDef="let cliente">
                         <a [href]="'mailto:' + cliente.email">
                             {{ cliente.email }}
                         </a>
@@ -33,7 +39,7 @@
 
                 <ng-container matColumnDef="telefone">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
-                    <td mat-cell *matCellDef="let cliente">
+                    <td class="tbl-item" mat-cell *matCellDef="let cliente">
                         <a [href]="'tel:' + cliente.telefone">
                             {{ cliente.telefone }}
                         </a>
@@ -42,7 +48,7 @@
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                    <td mat-cell *matCellDef="let cliente">
+                    <td class="tbl-item" mat-cell *matCellDef="let cliente">
                         <span class="badge" [ngClass]="{
                             'badge-success': cliente.status === 'Ativo',
                             'badge-gray': cliente.status === 'Inativo'
@@ -54,13 +60,15 @@
 
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell style="text-align: center;" *matHeaderCellDef> Ações </th>
-                    <td mat-cell class="tbl-actions" style="justify-content: center;" *matCellDef="let  cliente">
-                        <button class="btn-icon" (click)="onEdit(cliente)">
-                            <mat-icon class="icon-outlined">edit</mat-icon>
-                        </button>
-                        <button class="btn-icon" (click)="onRemove(cliente)">
-                            <mat-icon class="icon-outlined">delete</mat-icon>
-                        </button>
+                    <td mat-cell *matCellDef="let  cliente">
+                        <div class="tbl-actions">
+                            <button class="btn-icon" (click)="onEdit(cliente)">
+                                <mat-icon class="icon-outlined">edit</mat-icon>
+                            </button>
+                            <button class="btn-icon" (click)="onRemove(cliente)">
+                                <mat-icon class="icon-outlined">delete</mat-icon>
+                            </button>
+                        </div>
                     </td>
                 </ng-container>
 

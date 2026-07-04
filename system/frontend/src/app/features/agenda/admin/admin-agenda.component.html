@@ -1,0 +1,43 @@
+<section class="agenda-page">
+  <div class="agenda-header">
+    <div>
+      <h1>Agenda</h1>
+      <p>Visualização geral dos agendamentos por mês, semana e dia.</p>
+    </div>
+  </div>
+
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Profissional</mat-label>
+      <mat-select [(value)]="profissionalSelecionado" (selectionChange)="onFiltroChange()">
+        <mat-option [value]="null">Todos</mat-option>
+        <mat-option *ngFor="let profissional of profissionais" [value]="profissional.id">
+          {{ profissional.nome }} {{ profissional.sobrenome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [(value)]="statusSelecionado" (selectionChange)="onFiltroChange()">
+        <mat-option [value]="null">Todos</mat-option>
+        <mat-option *ngFor="let status of statusOptions" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-stroked-button type="button" (click)="onLimparFiltros()">
+      <mat-icon>filter_alt_off</mat-icon>
+      Limpar
+    </button>
+  </div>
+
+  <mat-card class="calendar-card">
+    <div class="loading-overlay" *ngIf="loading">
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
+
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </mat-card>
+</section>

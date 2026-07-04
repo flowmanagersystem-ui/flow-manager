@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// ProfissionalEspecialidadeId.java
 @Embeddable
 @EqualsAndHashCode
 @NoArgsConstructor

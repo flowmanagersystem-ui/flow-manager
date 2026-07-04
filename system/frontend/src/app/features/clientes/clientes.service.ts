@@ -17,8 +17,10 @@ export class ClientesService {
 
   constructor(private http: HttpClient) { }
 
-  listAll(page: number = 0, size: number = 10) {
-    return this.http.get<Page<Cliente>>(`${this.API}?page=${page}&size=${size}`)
+  listAll(page: number = 0, size: number = 10, filtro: string = '', apenasAtivos: boolean = false) {
+    return this.http.get<Page<Cliente>>(
+      `${this.API}?page=${page}&size=${size}&filtro=${filtro}&apenasAtivos=${apenasAtivos}`
+    )
     .pipe(
       first(),
       // Saber o que o servidor está rescebendo pelo console
@@ -49,6 +51,11 @@ export class ClientesService {
 
   loadById(id: number){
     return this.http.get<Cliente>(`${this.API}/${id}`)
+  }
+
+  loadMe(){
+    return this.http.get<Cliente>(`${this.API}/me`)
+      .pipe(first())
   }
 
   validarEmailExistente(email: string, clienteId: string) {

@@ -1,9 +1,9 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, map, tap, of, finalize } from 'rxjs';
+import { Observable, catchError, map, tap, of, finalize, debounceTime, distinctUntilChanged } from 'rxjs';
 
 // Material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -18,6 +18,8 @@ import { ErrorDialogComponent } from '../../../../shared/components/error-dialog
 import { ProfissionalFormComponent } from '../profissional-form/profissional-form.component';
 import { FormDialogComponent, ModoFormT } from '../../../../shared/components/form-dialog/form-dialog.component';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ProfissionalServicosDialogComponent } from '../profissional-servicos/profissional-servicos-dialog.component';
+import { HorarioAtendimentoDialogComponent } from '../profissionais-horarios/horario-atendimento-dialog.component';
 
 // Interfaces
 import { Profissional, Status } from '../../profissional.interface';
@@ -25,7 +27,7 @@ import { Profissional, Status } from '../../profissional.interface';
 // Services
 import { LoadingService } from '../../../../shared/services/loading.service';
 import { ProfissionaisService } from '../../profissionais.service';
-
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-profissionais',
@@ -44,11 +46,15 @@ import { ProfissionaisService } from '../../profissionais.service';
   styleUrl: './profissionais.component.scss'
 })
 export class ProfissionaisComponent {
+  @Input() filtroChange = new EventEmitter<string>()
+  
   profissionais$: Observable<Profissional[]> | null = null
   totalElements = 0
   paginaAtual = 0
   totalAtivos = 0
   totalEspecialidades = 0
+  filtroAtual = ''
+  filtroControl = new FormControl('')
 
   constructor(
     private profissionaisService: ProfissionaisService,
@@ -61,6 +67,17 @@ export class ProfissionaisComponent {
   ) {}
 
   ngOnInit(){
+    this.filtroControl.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+
+      this.filtroAtual = filtro ?? ''
+
+      this.refresh(0, this.filtroAtual)
+
+    })
+  
     this.refresh()
   }
 
@@ -141,9 +158,11 @@ export class ProfissionaisComponent {
     }) 
   }
 
-  refresh(page = 0) {    
+  refresh(page = 0, filtro = this.filtroAtual) {    
+    
     this.paginaAtual = page
-    this.profissionais$ = this.profissionaisService.listAll(page)
+
+    this.profissionais$ = this.profissionaisService.listAll(page, 10, filtro)
     .pipe(
       tap(response => this.totalElements = response.totalElements), 
       tap(response => this.totalAtivos = response.content.filter((p: Profissional) => p.status == Status.ATIVO).length),
@@ -158,6 +177,36 @@ export class ProfissionaisComponent {
 
   onPageChange(event: PageEvent) {
     this.refresh(event.pageIndex)
+  }
+
+  onManageServices(profissional: Profissional) {
+    const dialogRef = this.dialog.open(ProfissionalServicosDialogComponent, {
+      width: '560px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
+      data: {
+        profissionalId: profissional.id,
+        nomeProfissional: `${profissional.nome} ${profissional.sobrenome}`
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(alterado => {
+      if (alterado) {
+        this.snackBar.open('Serviços atualizados com sucesso!', '', { duration: 4000 });
+      }
+    })
+  }
+
+  onManageSchedules(profissional: Profissional) {
+    this.dialog.open(HorarioAtendimentoDialogComponent, {
+      width: '520px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
+      data: {
+        profissionalId: profissional.id,
+        nomeProfissional: `${profissional.nome} ${profissional.sobrenome}`
+      }
+    });
   }
 
   onError(errorMsg: string, redirectTo?: string) {  

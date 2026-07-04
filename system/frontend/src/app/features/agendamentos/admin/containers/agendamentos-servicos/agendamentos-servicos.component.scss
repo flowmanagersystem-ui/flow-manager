@@ -1,0 +1,177 @@
+.form-dialog-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--bg);
+  padding: 20px 36px;
+  margin: 0;
+
+  .form-dialog-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .form-dialog-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+}
+
+
+.select-bar{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+
+  .form-label{
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .time .list-item{
+    border-radius: 10px;
+  }
+
+  .disabled{
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+    cursor: not-allowed;
+
+    &:hover{
+      background-color: transparent;
+      color: var(--text-muted);
+    }
+  }
+
+  .selected{
+    background-color: var(--primary);
+    color: #fff;
+  }
+}
+
+.lista-servicos{
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.list-item{
+  ::ng-deep .mdc-form-field{
+    margin: 0;
+  }
+
+  ::ng-deep .mdc-radio{
+    display: none;
+  }
+
+  ::ng-deep .mdc-label{
+    padding: 2px 9px;
+    border-radius: 20px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 13px;
+    transition: .2s;
+  }
+
+  &:hover{
+    ::ng-deep .mdc-label{
+      background-color: var(--primary);
+      color: #fff;
+    }
+  }
+
+  &.mat-mdc-radio-checked{
+    ::ng-deep .mdc-label{
+      background-color: var(--primary);
+      color: #fff;
+    }
+  }
+
+  // dia indisponível
+  &.indisponivel {
+    ::ng-deep .mdc-label {
+      border-color: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+ 
+    pointer-events: none;
+  }
+}
+
+// ── slots de horário ──────────────────────────────────────────
+ 
+.horarios-wrap {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+// ── estados vazios ────────────────────────────────────────────
+ 
+.estado-vazio {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+ 
+  mat-icon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+// ── detalhes das opções ─────────────────────────────────────
+.option-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+.loading-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+
+// ── campo de data ─────────────────────────────────────────────
+.campo-data {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.calendario {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+
+  // dias disponíveis ficam com cor primária
+  ::ng-deep .mat-calendar-body-cell-content {
+    border-radius: var(--radius);
+  }
+
+  // dia selecionado
+  ::ng-deep .mat-calendar-body-selected {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  // dia atual
+  ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: var(--primary);
+  }
+}

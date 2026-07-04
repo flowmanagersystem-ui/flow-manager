@@ -1,10 +1,10 @@
 // Angular
 import { Component, Inject } from '@angular/core';
 import { CommonModule, Location  } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncValidatorFn, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { timer, switchMap, map, catchError, of, finalize, tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 
 // Material
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';

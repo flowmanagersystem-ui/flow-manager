@@ -90,7 +90,7 @@ export class ClienteFormComponent {
       sobrenome: [this.cliente?.sobrenome || '', [Validators.required, Validators.minLength(3)]],
       email: [this.cliente?.email || '', [Validators.required, Validators.email], this.validarEmailDuplicado.bind(this)],
       telefone: [this.cliente?.telefone || '', [Validators.required, FormValidations.telMinLength, FormValidations.telMaxLength]],
-      senha: [this.cliente?.senha || '', [Validators.required, Validators.minLength(6), Validators.maxLength(20), FormValidations.validarCaracterESpaco]],
+      senha: ['', [Validators.minLength(6), Validators.maxLength(20), FormValidations.validarCaracterEspaco]],
       status: [this.cliente?.status || '', [Validators.required]],
     })    
   }  

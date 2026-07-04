@@ -9,9 +9,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Interfaces
 import { Profissional } from '../../profissional.interface';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profissionais-list',
@@ -19,6 +21,7 @@ import { Profissional } from '../../profissional.interface';
   imports: [
     // Angular
     CommonModule,
+    ReactiveFormsModule,
     // Angular Material
     MatIconModule,
     MatInputModule,
@@ -26,7 +29,8 @@ import { Profissional } from '../../profissional.interface';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule,
 
   ],
   templateUrl: './profissionais-list.component.html',
@@ -38,6 +42,7 @@ export class ProfissionaisListComponent {
   info = 'profissional'
   listaVazia = 'Não há profissionais cadastrados neste momento.'
   noResults = `Nenhum resultado encontrado com o filtro `
+  filtro = ''
   viewMode: boolean = false
 
   selectedAZ = 'nome'
@@ -54,10 +59,13 @@ export class ProfissionaisListComponent {
   @Input() paginaAtual = 0
   @Input() totalAtivos = 0
   @Input() totalEspecialidades = 0
+  @Input() filtroControl!: FormControl
   @Input() set profissionais(data: Profissional[]) { this.dataSource.data = data}
   @Output() pageChange = new EventEmitter<PageEvent>()
   @Output() add: EventEmitter<boolean> = new EventEmitter(false)
   @Output() edit: EventEmitter<Profissional> = new EventEmitter(false)
+  @Output() manageServices: EventEmitter<Profissional> = new EventEmitter(false)
+  @Output() manageSchedules: EventEmitter<Profissional> = new EventEmitter(false)
   @Output() remove: EventEmitter<Profissional> = new EventEmitter(false)
 
   // Para os cards
@@ -69,14 +77,6 @@ export class ProfissionaisListComponent {
   constructor(private renderer: Renderer2) {
     this.dataSource = new MatTableDataSource(this.profissionais)
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value    
-    this.dataSource.filter = filterValue.trim().toLowerCase()
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage()
-    }
-  }  
 
   onAdd(){
     this.add.emit(true)
@@ -92,6 +92,14 @@ export class ProfissionaisListComponent {
 
   onRemove(profissional: Profissional){
     this.remove.emit(profissional)
+  }
+
+  onManageServices(profissional: Profissional) {
+    this.manageServices.emit(profissional)
+  }
+
+  onManageSchedules(profissional: Profissional) {
+    this.manageSchedules.emit(profissional)
   }
 
   onToggleViewNode(){

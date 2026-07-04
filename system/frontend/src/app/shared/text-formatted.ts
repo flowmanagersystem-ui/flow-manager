@@ -53,12 +53,25 @@ export class TextFormatted {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
   }
 
-  static secondsToTime(totalSeconds: number): string {
-    // Entrada -> 125 -- Saída: "02:05" (representa 2 minutos e 5 segundos)
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
+  static secondsToTime(totalMinutes: number): string {
+    if (totalMinutes < 60) {
+      return `${totalMinutes} min`
+    }
 
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    const hours = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+
+    if(minutes === 0) {
+      return `${hours} h`
+    }    
+
+    return `${hours}:${minutes.toString().padStart(2, '0')} h`
+  }
+
+  static timeToHourMinute(value: string): string {
+    // Entrada -> 10:00:00 -- Saída: 10:00
+    const [hours, minutes] = value.split(':').map(Number)
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
   }
 
   static textToCurrency(value: number): string {
@@ -67,6 +80,18 @@ export class TextFormatted {
       style: 'currency',
       currency: 'BRL'
     })
+  }
+
+  static textToDateTime(value: string): string {
+    // Entrada -> "2024-06-30T14:30:00" -- Saída: "30/06/2024 14:30"
+    const date = new Date(value)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`
   }
 }
 

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { ServicosComponent } from './containers/servicos/servicos.component';
 
 
-export const servicosRoutes: Routes = [{
+export const ServicosRoutes: Routes = [{
     path: '',
     children: [
         {

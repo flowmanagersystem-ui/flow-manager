@@ -1,0 +1,206 @@
+.form-dialog-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: var(--bg);
+  padding: 20px 36px;
+  margin: 0;
+
+  .form-dialog-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .form-dialog-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+}
+
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: var(--font-size-md);
+}
+
+.icons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+// ── grade semanal ─────────────────────────────────────────────
+
+.dia-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+}
+
+.dia-label {
+  padding-top: 8px;
+}
+
+.dia-nome {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dia-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--border);
+}
+
+// ── slot ──────────────────────────────────────────────────────
+
+.slot {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+.slot-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+}
+
+.slot-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+.slot-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.btn-sm {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+
+  &:hover { background: var(--primary-light); color: var(--primary); }
+}
+
+.btn-danger:hover {
+  background: var(--danger-light) !important;
+  color: var(--danger) !important;
+}
+
+// ── form inline ───────────────────────────────────────────────
+
+.slot-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+
+  input[type="time"] {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 8px;
+    font-size: var(--font-size-md);
+    color: var(--text);
+    background: var(--bg);
+    width: 110px;
+
+    &:focus { outline: none; border-color: var(--primary); }
+  }
+}
+
+.ate {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.btn-confirm {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &:hover { opacity: 0.9; }
+}
+
+// ── sem atendimento ───────────────────────────────────────────
+
+.badge-off {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: inline-block;
+}
+
+// ── adicionar ─────────────────────────────────────────────────
+
+.btn-add {
+  background: none;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  .icon-add{
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+mat-dialog-actions {
+  padding: 12px 24px 20px !important;
+  justify-content: flex-end;
+}
