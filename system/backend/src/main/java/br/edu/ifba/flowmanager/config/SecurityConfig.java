@@ -53,6 +53,10 @@ public class SecurityConfig {
                 .requestMatchers("/", "/api/auth/login", "/api/auth/refresh").permitAll()
                 .requestMatchers("/api/auth/login", "/api/auth/cadastro").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                // Regra específica ANTES da genérica: cliente autenticado pode ler os próprios dados
+                .requestMatchers(HttpMethod.GET, "/api/clientes/me").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
+
                 .requestMatchers(HttpMethod.GET, "/api/clientes/**").hasRole("ADMIN")
                 .requestMatchers("/api/clientes/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/profissionais/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
