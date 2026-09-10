@@ -42,6 +42,10 @@ export class AgendamentosService {
     return this.create(record)
   }
 
+  reagendar(id: number, servicos: { servicoId: number; profissionalId: number; dataHoraInicio: string }[]) {
+    return this.http.patch<Agendamento>(`${this.API}/${id}/reagendar`, { servicos })
+  }
+
   private create(record: Agendamento){
     return this.http.post<Agendamento>(this.API, record)
   }

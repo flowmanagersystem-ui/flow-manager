@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoReagendamentoDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoServicoDTO;
@@ -167,6 +168,31 @@ public class AgendamentoService {
         return toDTO(agendamentoRepository.save(agendamento));
     }
 
+    @Transactional
+    public AgendamentoResponseDTO reagendar(
+        Long id,
+        AgendamentoReagendamentoDTO dto,
+        Usuario usuarioLogado
+    ) {
+        validarAcessoAoAgendamento(id, usuarioLogado);
+
+        Agendamento agendamento = buscarOuLancar(id);
+
+        if (agendamento.getStatus() != StatusAgendamento.AGENDADO) {
+            throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Só é possível remarcar agendamentos com status AGENDADO."
+            );
+        }
+
+        agendamento.getServicos().clear();
+        agendamento.setDataHora(dto.servicos().get(0).dataHoraInicio());
+
+        BigDecimal valorTotal = processarServicos(agendamento, dto.servicos(), id);
+        agendamento.setValorTotal(valorTotal);
+
+        return toDTO(agendamentoRepository.save(agendamento));
+    }
     // ── delete ────────────────────────────────────────────────
 
     @Transactional

@@ -16,7 +16,7 @@ import { TextFormatted } from '../../../../shared/text-formatted';
 import { AgendaEventoExtendedProps } from '../agenda-evento.interface';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-export type AgendaEventoDialogAction = 'editar' | 'concluir' | 'cancelar';
+export type AgendaEventoDialogAction = 'editar' | 'concluir' | 'cancelar' | 'remarcar';
 
 export interface AgendaEventoDialogData {
   evento: AgendaEventoExtendedProps;
@@ -53,7 +53,7 @@ export class AgendaEventoDialogComponent {
   }
 
   get actions(): AgendaEventoDialogAction[] {
-    return 'evento' in this.data ? (this.data.actions || []) : ['editar', 'cancelar']
+    return 'evento' in this.data ? (this.data.actions || []) : ['editar', 'cancelar', 'remarcar']
   }
 
   hasAction(action: AgendaEventoDialogAction): boolean {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoReagendamentoDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoRequestDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoResponseDTO;
 import br.edu.ifba.flowmanager.modules.agendamento.dto.AgendamentoStatusRequestDTO;
@@ -66,6 +67,15 @@ public class AgendamentoController {
         org.springframework.security.core.Authentication authentication
     ) {
         return agendamentoService.create(dto, (Usuario) authentication.getPrincipal());
+    }
+
+    @PatchMapping("/{id}/reagendar")
+    public AgendamentoResponseDTO reagendar(
+        @PathVariable Long id,
+        @RequestBody @Valid AgendamentoReagendamentoDTO dto,
+        org.springframework.security.core.Authentication authentication
+    ) {
+        return agendamentoService.reagendar(id, dto, (Usuario) authentication.getPrincipal());
     }
 
     @PatchMapping("/{id}")
