@@ -16,6 +16,10 @@ import { AgendamentosService } from '../../agendamentos/agendamentos.service';
 import { AgendaService } from '../agenda.service';
 import { AgendaEvento, AgendaEventoExtendedProps } from '../shared/agenda-evento.interface';
 import { AgendaEventoDialogComponent } from '../shared/agenda-evento-dialog/agenda-evento-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-profissional-agenda',
@@ -26,6 +30,10 @@ import { AgendaEventoDialogComponent } from '../shared/agenda-evento-dialog/agen
     MatCardModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './profissional-agenda.component.html',
   styleUrl: './profissional-agenda.component.scss'
@@ -34,6 +42,9 @@ export class ProfissionalAgendaComponent {
   eventos: AgendaEvento[] = []
   loading = false
   periodoAtual?: { dataInicio: Date; dataFim: Date }
+
+  statusOptions = Object.values(Status)
+  statusSelecionado: Status | null = null
 
   calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, interactionPlugin],
@@ -68,6 +79,15 @@ export class ProfissionalAgendaComponent {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) {}
+
+  onFiltroChange() {
+    this.carregarEventos()
+  }
+
+  onLimparFiltros() {
+    this.statusSelecionado = null
+    this.carregarEventos()
+  }
 
   private onDatesSet(info: DatesSetArg) {
     this.periodoAtual = {
@@ -104,7 +124,9 @@ export class ProfissionalAgendaComponent {
     if (!this.periodoAtual) return
 
     this.loading = true
-    this.agendaService.getEventos(this.periodoAtual)
+    this.agendaService.getEventos({
+      ...this.periodoAtual,
+      status: this.statusSelecionado || undefined})
       .pipe(finalize(() => this.loading = false))
       .subscribe({
         next: eventos => {

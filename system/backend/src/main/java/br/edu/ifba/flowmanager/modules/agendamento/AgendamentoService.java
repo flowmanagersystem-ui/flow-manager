@@ -1,6 +1,7 @@
 package br.edu.ifba.flowmanager.modules.agendamento;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +23,9 @@ import br.edu.ifba.flowmanager.modules.profissional.Profissional;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalRepository;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoId;
 import br.edu.ifba.flowmanager.modules.profissional.ProfissionalServicoRepository;
+import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.DiaSemana;
+import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.HorarioAtendimento;
+import br.edu.ifba.flowmanager.modules.profissional.horarioAtendimento.HorarioAtendimentoRepository;
 import br.edu.ifba.flowmanager.modules.servico.Servico;
 import br.edu.ifba.flowmanager.modules.servico.ServicoRepository;
 import br.edu.ifba.flowmanager.modules.usuario.Usuario;
@@ -38,6 +42,7 @@ public class AgendamentoService {
     private final ProfissionalRepository profissionalRepository;
     private final ProfissionalServicoRepository profissionalServicoRepository;
     private final ServicoRepository servicoRepository;
+    private final HorarioAtendimentoRepository horarioAtendimentoRepository;
 
     // ── listagem ──────────────────────────────────────────────
 
@@ -235,7 +240,23 @@ public class AgendamentoService {
             LocalDateTime dataHoraInicio = s.dataHoraInicio();
             LocalDateTime dataHoraFim = dataHoraInicio.plusMinutes(servico.getDuracao());
 
-            // verifica conflito com horários reais
+            // ── NOVO: valida se o horário está dentro da jornada de atendimento ──
+            DiaSemana diaSemana = converterDiaSemana(dataHoraInicio.getDayOfWeek());
+            List<HorarioAtendimento> horarios = horarioAtendimentoRepository
+                .findByProfissionalIdAndDiaSemana(s.profissionalId(), diaSemana);
+
+            boolean dentroDoExpediente = horarios.stream().anyMatch(h ->
+                !dataHoraInicio.toLocalTime().isBefore(h.getHoraInicio())
+                && !dataHoraFim.toLocalTime().isAfter(h.getHoraFim())
+            );
+
+            if (!dentroDoExpediente) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format("Horário fora do expediente de %s.",
+                        profissional.getUsuario().getNome()));
+            }
+
+            // verifica conflito com horários reais (já existia)
             if (agendamentoRepository.existeConflito(
                 s.profissionalId(), dataHoraInicio, dataHoraFim, excludeId)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -257,7 +278,6 @@ public class AgendamentoService {
             total = total.add(servico.getValor());
         }
 
-        // aplica desconto
         BigDecimal desconto = agendamento.getDesconto() != null
             ? agendamento.getDesconto() : BigDecimal.ZERO;
 
@@ -329,5 +349,17 @@ public class AgendamentoService {
             a.getValorTotal(),
             servicos
         );
+    }
+
+    private DiaSemana converterDiaSemana(DayOfWeek diaSemana) {
+        return switch (diaSemana) {
+            case MONDAY    -> DiaSemana.SEG;
+            case TUESDAY   -> DiaSemana.TER;
+            case WEDNESDAY -> DiaSemana.QUA;
+            case THURSDAY  -> DiaSemana.QUI;
+            case FRIDAY    -> DiaSemana.SEX;
+            case SATURDAY  -> DiaSemana.SAB;
+            case SUNDAY    -> DiaSemana.DOM;
+        };
     }
 }
