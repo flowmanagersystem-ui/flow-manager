@@ -1,0 +1,124 @@
+{
+  "titulo_trabalho": "BeleSys – Sistema de gestão multiplataforma para salões de beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir que administradores realizem novos agendamentos.",
+      "trecho_origem": "o sistema exibe um formulário de cadastro de agendamento... salva o agendamento e o exibe na agenda"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir a visualização de agendamentos cadastrados.",
+      "trecho_origem": "o sistema recupera os agendamentos e os exibe"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir a atualização de agendamentos existentes.",
+      "trecho_origem": "o administrador realiza as alterações necessárias... o sistema salva as mudanças"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir o cancelamento de agendamentos.",
+      "trecho_origem": "o administrador confirme ou cancele agendamentos"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir a confirmação de agendamentos.",
+      "trecho_origem": "o administrador confirme ou cancele agendamentos"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve apresentar a agenda em visualizações diária, semanal e mensal.",
+      "trecho_origem": "visualização interativa de calendário... diária, semanal e mensal"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir o controle da agenda individual por profissional.",
+      "trecho_origem": "controle de agenda individual por profissional"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve validar conflitos de horários ao criar agendamentos.",
+      "trecho_origem": "validação para impedir a sobreposição de horários"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir que funcionários visualizem apenas seus agendamentos.",
+      "trecho_origem": "funcionários visualizam apenas os atendimentos atribuídos a eles"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir a visualização detalhada de um agendamento.",
+      "trecho_origem": "visualizem detalhes de um agendamento específico"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve atualizar o status do agendamento (agendado, cancelado, concluído).",
+      "trecho_origem": "status pode assumir três valores: Agendado, Finalizado, Cancelado"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve enviar lembretes automáticos de agendamentos via WhatsApp.",
+      "trecho_origem": "enviar lembretes via WhatsApp para os clientes automaticamente"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir o cadastro de funcionários.",
+      "trecho_origem": "administradores cadastrem novos funcionários"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir o cadastro de serviços.",
+      "trecho_origem": "administradores cadastrem novos serviços"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir a geração de relatórios financeiros.",
+      "trecho_origem": "gerar relatórios financeiros com faturamento por período"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve possuir interface responsiva para diferentes dispositivos.",
+      "categoria": "usabilidade",
+      "trecho_origem": "interface responsiva... dispositivos móveis e desktops"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve garantir facilidade de uso e navegação intuitiva.",
+      "categoria": "usabilidade",
+      "trecho_origem": "participantes conseguiram navegar com facilidade"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve criptografar senhas antes do armazenamento.",
+      "categoria": "segurança",
+      "trecho_origem": "criptografia de senhas com bcrypt"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve restringir o acesso apenas a usuários autenticados.",
+      "categoria": "segurança",
+      "trecho_origem": "protegido para acesso apenas a usuários autenticados"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve controlar permissões com base no perfil do usuário.",
+      "categoria": "segurança",
+      "trecho_origem": "níveis de acesso diferenciados"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve garantir confiabilidade evitando conflitos de agendamento.",
+      "categoria": "confiabilidade",
+      "trecho_origem": "impedir a sobreposição de horários"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve executar envio automático de lembretes em horários programados.",
+      "categoria": "desempenho",
+      "trecho_origem": "node-cron... disparo automático"
+    }
+  ]
+}

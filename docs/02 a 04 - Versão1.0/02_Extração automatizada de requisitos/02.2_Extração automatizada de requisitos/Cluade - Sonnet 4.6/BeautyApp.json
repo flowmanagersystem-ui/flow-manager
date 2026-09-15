@@ -1,0 +1,175 @@
+{
+  "titulo_trabalho": "BeautyApp - Aplicativo para Agendamento de Serviços de Beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir que o cliente crie um agendamento selecionando empresa, profissional, serviço, data e horário disponível.",
+      "trecho_origem": "Ambos os tipos de usuários podem criar agendamentos, sendo necessário informar a empresa, o profissional e o serviço desejado. Após preencher estes dados, é solicitado para que ele selecione uma data e depois um horário, e por último, confirmar o agendamento."
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve exibir apenas os horários disponíveis para a data selecionada no processo de agendamento.",
+      "trecho_origem": "logo em seguida é fornecido um dropdown com as opções de horários disponíveis na data selecionada."
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve solicitar confirmação do cliente antes de finalizar um agendamento.",
+      "trecho_origem": "Usuário deverá confirmar o agendamento para concluir o processo."
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir que o cliente exclua um agendamento existente, mediante confirmação.",
+      "trecho_origem": "Clicar no ícone da lixeira / Confirmar decisão / Sistema exclui o agendamento."
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve exibir, para o usuário do tipo empresa, os agendamentos marcados para o dia atual.",
+      "trecho_origem": "Caso o usuário seja do tipo empresa, será mostrada a tela HomePageEmpresa, onde nela são exibidos os agendamentos que estão marcados para o dia atual."
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir que o cliente visualize todos os seus agendamentos criados.",
+      "trecho_origem": "o usuário do tipo cliente pode ver os dados do seu perfil, verificar os agendamentos criados para ele."
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve impedir a finalização de um agendamento quando campos obrigatórios não forem preenchidos, notificando o usuário.",
+      "trecho_origem": "Algum campo não for preenchido, sistema não deixa finalizar o cadastro do agendamento e solicita que todos os campos sejam preenchidos corretamente."
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve limpar os campos do formulário de agendamento quando o cliente negar a confirmação do agendamento.",
+      "trecho_origem": "Negando a confirmação do agendamento, os campos preenchidos anteriormente são limpos."
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir o cadastro de usuário do tipo cliente informando nome, CPF, e-mail e senha.",
+      "trecho_origem": "Para que o usuário do tipo Cliente possa cadastrar-se no aplicativo, são necessárias as seguintes informações: Nome, CPF, E-mail, Senha."
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir que o administrador cadastre usuários do tipo empresa informando nome, CNPJ, descrição, endereço, telefone, e-mail, senha e imagem.",
+      "trecho_origem": "o profissional/empresa deve entrar em contato com o administrador do sistema para que o mesmo possa realizar o cadastro."
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir que o usuário realize login com e-mail e senha.",
+      "trecho_origem": "Após realizado o cadastro do usuário no aplicativo, é possível fazer login para gerenciar os agendamentos."
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir que o usuário encerre sua sessão (logout) mediante confirmação.",
+      "trecho_origem": "Na tela de Login clicar em 'Logout' / Confirmar decisão / Sistema encerra sessão."
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve direcionar o usuário para a tela correspondente ao seu tipo (cliente ou empresa) após o login bem-sucedido.",
+      "trecho_origem": "Após realizado o login, o sistema verifica qual o tipo de usuário, se é Cliente ou Empresa, e dependendo do tipo do usuário, é mostrada uma tela específica."
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir que o cliente edite seu nome de usuário.",
+      "trecho_origem": "Na primeira versão do BeautyApp, será permitida a alteração somente do nome do usuário do tipo Cliente."
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir que a empresa edite nome, descrição, endereço e telefone do seu perfil.",
+      "trecho_origem": "Na primeira versão do BeautyApp, serão permitidas as alterações para o usuário do tipo Empresa, o nome do usuário, a descrição, o endereço e telefone."
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir que a empresa cadastre profissionais informando o nome.",
+      "trecho_origem": "Digitar o nome do Profissional / Confirmar alterações / Sistema salva as alterações."
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve permitir que a empresa exclua profissionais cadastrados, mediante confirmação.",
+      "trecho_origem": "Clicar no ícone de deletar / Confirmar alterações / Sistema salva as alterações."
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve permitir que a empresa cadastre horários disponíveis para cada profissional a partir de uma lista de horários padrão.",
+      "trecho_origem": "é exibida uma popup com os horários padrões cadastrados no aplicativo... Selecione o horario / Confirmar."
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve permitir que a empresa exclua horários cadastrados para um profissional, mediante confirmação.",
+      "trecho_origem": "Caso o usuário queira remover o horário, basta clicar no ícone da lixeira e confirmar a ação."
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve permitir que a empresa cadastre serviços para cada profissional, informando o tipo de serviço e o valor cobrado.",
+      "trecho_origem": "é exibida uma popup com os serviços padrões cadastrados no aplicativo e o campo para que seja selecionado o valor cobrado para aquele serviço."
+    },
+    {
+      "id": "RF21",
+      "descricao": "O sistema deve permitir que a empresa exclua serviços cadastrados para um profissional, mediante confirmação.",
+      "trecho_origem": "Caso o usuário queira remover o horário, basta clicar no ícone da lixeira e confirmar a ação: Excluir servicos / Deseja realmente excluir o servicos."
+    },
+    {
+      "id": "RF22",
+      "descricao": "O sistema deve exibir na tela inicial do cliente a lista de empresas cadastradas, com nome, descrição, endereço, telefone e imagem.",
+      "trecho_origem": "abaixo são apresentadas as empresas/profissionais da área de beleza e estética que possuem cadastro na plataforma. Nessas informações constam nome da empresa/profissional, descrição como os serviços prestados, endereço e telefone para contato."
+    },
+    {
+      "id": "RF23",
+      "descricao": "O sistema deve impedir o cadastro de usuário com e-mail já existente, notificando o usuário.",
+      "trecho_origem": "E-mail já existente, sistema informa que já possui cadastro com aqueles dados."
+    },
+    {
+      "id": "RF24",
+      "descricao": "O sistema deve notificar o usuário quando as credenciais de login estiverem incorretas.",
+      "trecho_origem": "Usuário ou senha incorretos, sistema notifica o usuário e solicita a inserção de dados corretos."
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve criptografar os dados trafegados entre o cliente e o servidor por meio do protocolo SSL.",
+      "categoria": "Segurança",
+      "trecho_origem": "entregando uma conexão segura por uso do protocolo Security Sockets Layer (SSL) que é responsável por criptografar os dados trafegados entre o usuário e o servidor."
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve restringir operações de leitura e escrita no banco de dados a usuários autenticados.",
+      "categoria": "Segurança",
+      "trecho_origem": "somente os usuários autenticados poderão fazer registros e obter dados do banco."
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve ser capaz de escalar proporcionalmente ao crescimento no número de usuários e dados armazenados.",
+      "categoria": "Escalabilidade",
+      "trecho_origem": "Uma vantagem desse banco é sua escalabilidade, pois conforme a aplicação vai crescendo ele consegue aumentar proporcionalmente à necessidade."
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve estar disponível para acesso em dispositivos com sistemas operacionais Android e iOS.",
+      "categoria": "Disponibilidade",
+      "trecho_origem": "permite que com um único código-fonte, a mesma aplicação seja desenvolvida tanto para sistemas operacionais Android quanto para IOS."
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve apresentar interface simples e intuitiva, garantindo fluidez no processo de agendamento.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "um software simples e intuitivo que realiza agendamentos para empresas na área de beleza e estética... facilidade de uso, velocidade e fluidez do processo de agendar."
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve solicitar confirmação do usuário antes de executar operações de exclusão de dados.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "Confirmar decisão / Sistema exclui o agendamento. (padrão recorrente em todos os casos de uso de exclusão)"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve persistir e sincronizar os dados em tempo real por meio de banco de dados em nuvem.",
+      "categoria": "Confiabilidade",
+      "trecho_origem": "Cloud Firestore, que é um armazenamento em tempo real."
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve ser desenvolvido com processo iterativo e incremental, permitindo a incorporação de melhorias a cada ciclo de feedback dos usuários.",
+      "categoria": "Manutenibilidade",
+      "trecho_origem": "A aplicação será desenvolvida com uma metodologia ágil onde é melhorada a cada feedback do cliente."
+    }
+  ]
+}

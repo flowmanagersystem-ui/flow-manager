@@ -1,0 +1,28 @@
+ID;Tipo;Descrição;Categoria;Trecho do Texto
+RF01;Funcional;Permitir cadastro de cliente;;Usuário preenche os campos
+RF02;Funcional;Permitir login no sistema;;Inserir dados para login
+RF03;Funcional;Permitir logout;;Sistema encerra sessão
+RF04;Funcional;Permitir editar perfil;;Alterar os dados necessários
+RF05;Funcional;Cadastrar profissionais;;Digitar o nome do profissional
+RF06;Funcional;Editar profissionais;;Editar o profissional desejado
+RF07;Funcional;Excluir profissionais;;Clicar no ícone de deletar
+RF08;Funcional;Cadastrar serviços;;Cadastrar ou Excluir o Serviço
+RF09;Funcional;Definir horários disponíveis;;Cadastrar ou Excluir Horário
+RF10;Funcional;Visualizar empresas;;Apresentadas empresas/profissionais
+RF11;Funcional;Criar agendamento;;Criar novo agendamento
+RF12;Funcional;Selecionar empresa/profissional/serviço;;Selecionar empresa, profissional e serviço
+RF13;Funcional;Selecionar data;;Selecionar uma data
+RF14;Funcional;Selecionar horário;;Horários disponíveis
+RF15;Funcional;Confirmar agendamento;;Confirmar o agendamento
+RF16;Funcional;Validar campos obrigatórios;;Sistema não deixa finalizar
+RF17;Funcional;Excluir agendamento;;Sistema exclui o agendamento
+RF18;Funcional;Visualizar agendamentos do cliente;;Verificar agendamentos
+RF19;Funcional;Visualizar agendamentos da empresa;;Verificar agendamentos
+RF20;Funcional;Controlar agenda;;Controle do seu dia
+RNF01;Não Funcional;Sistema intuitivo;Usabilidade;software simples e intuitivo
+RNF02;Não Funcional;Boa performance;Desempenho;velocidade e fluidez
+RNF03;Não Funcional;Comunicação segura;Segurança;uso do protocolo SSL
+RNF04;Não Funcional;Acesso autenticado;Segurança;somente usuários autenticados
+RNF05;Não Funcional;Escalabilidade;Escalabilidade;aumentar conforme necessidade
+RNF06;Não Funcional;Multiplataforma;Disponibilidade;Android, IOS, web
+RNF07;Não Funcional;Confiabilidade dos dados;Confiabilidade;gerenciamento de dados

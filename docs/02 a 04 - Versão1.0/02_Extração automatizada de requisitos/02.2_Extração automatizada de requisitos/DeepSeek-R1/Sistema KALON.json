@@ -1,0 +1,192 @@
+{
+"titulo_trabalho": "Sistema informatizado para agendamento de serviços: estudo de caso em um salão de beleza no município de Franco da Rocha",
+"requisitos_funcionais": [
+{
+"id": "RF01",
+"descricao": "O sistema deve permitir o cadastro de clientes, incluindo nome completo, telefone e outras informações pessoais.",
+"trecho_origem": "cadastrar clientes (figura 6) / 'cadastro das clientes' (página 11)"
+},
+{
+"id": "RF02",
+"descricao": "O sistema deve permitir a edição e exclusão de cadastros de clientes.",
+"trecho_origem": "editar ou excluir o cadastro de clientes (página 11)"
+},
+{
+"id": "RF03",
+"descricao": "O sistema deve permitir o agendamento de serviços para clientes.",
+"trecho_origem": "agendamento de serviços (página 11)"
+},
+{
+"id": "RF04",
+"descricao": "O sistema deve permitir a seleção de serviços disponíveis durante o agendamento.",
+"trecho_origem": "seleção de serviços (página 11)"
+},
+{
+"id": "RF05",
+"descricao": "O sistema deve permitir a confirmação de agendamentos realizados.",
+"trecho_origem": "confirmação de agendamento (página 11)"
+},
+{
+"id": "RF06",
+"descricao": "O sistema deve permitir o cancelamento de agendamentos.",
+"trecho_origem": "cancelamento de agendamento (página 11)"
+},
+{
+"id": "RF07",
+"descricao": "O sistema deve manter um histórico de serviços prestados para cada cliente.",
+"trecho_origem": "histórico de serviços (página 11)"
+},
+{
+"id": "RF08",
+"descricao": "O sistema deve permitir o gerenciamento de funcionários (cadastro, edição, exclusão).",
+"trecho_origem": "cadastrar funcionários (página 11) e funcionalidades de administrador (página 13)"
+},
+{
+"id": "RF09",
+"descricao": "O sistema deve exibir as solicitações de agendamento feitas pelos clientes através de formulário externo (JotForm).",
+"trecho_origem": "O menu de solicitações apresenta todas as solicitações de agendamento realizadas pelo formulário elaborado na plataforma JotForm (página 12)"
+},
+{
+"id": "RF10",
+"descricao": "O sistema deve permitir que cada funcionário visualize apenas os seus próprios agendamentos (agenda pessoal).",
+"trecho_origem": "Apresenta apenas as clientes agendadas por um determinado usuário (página 12)"
+},
+{
+"id": "RF11",
+"descricao": "O sistema deve exibir um calendário com todos os agendamentos, permitindo visualização por dia, semana ou mês.",
+"trecho_origem": "o calendário, onde são apresentados todos os agendamentos, sendo que o usuário pode escolher como quer visualizar os agendamentos realizados, por exemplo, por dia, semana ou mês (página 13)"
+},
+{
+"id": "RF12",
+"descricao": "O sistema deve oferecer funcionalidades administrativas como cadastrar funcionários, visualizar todos os agendamentos e gerenciar serviços.",
+"trecho_origem": "A aplicação também possui o menu suspenso com funcionalidades específicas para o administrador, por exemplo, cadastrar funcionário, todos os agendamentos e serviços (página 13)"
+},
+{
+"id": "RF13",
+"descricao": "O sistema deve enviar uma pesquisa de satisfação para o cliente após a realização do serviço.",
+"trecho_origem": "é encaminhado para a cliente uma pesquisa de satisfação elaborada na plataforma JotForm (página 9) / 'pesquisa de satisfação enviada após o serviço realizado' (página 5)"
+},
+{
+"id": "RF14",
+"descricao": "O sistema deve enviar notificações de alerta aos clientes sobre a necessidade de manutenção ou retorno de procedimentos.",
+"trecho_origem": "encaminhar notificações de alerta para a manutenção de algum procedimento realizado anteriormente (página 5)"
+},
+{
+"id": "RF15",
+"descricao": "O sistema deve integrar-se com WhatsApp para envio de mensagens.",
+"trecho_origem": "WhatsApp – Integração por meio do encaminhamento de mensagens (página 15)"
+},
+{
+"id": "RF16",
+"descricao": "O sistema deve integrar-se com JotForm para receber solicitações de agendamento e respostas de pesquisa de satisfação.",
+"trecho_origem": "Jotform – Integração por meio de formulários de solicitação de agendamento e pesquisa de satisfação (página 15)"
+},
+{
+"id": "RF17",
+"descricao": "O sistema deve armazenar dados em Google Sheets como repositório.",
+"trecho_origem": "Google Sheets – Integração por meio da transferência de dados entre os formulários e planilhas empregadas como repositório de dados (página 15)"
+},
+{
+"id": "RF18",
+"descricao": "O sistema deve gerar relatórios e indicadores gerenciais através de integração com Power BI, incluindo painéis de agendamentos e pesquisa de satisfação.",
+"trecho_origem": "Para a análise de dados utilizou-se da ferramenta Power BI para a elaboração dos principais indicadores que são obtidos por meio do repositório de dados gerado a partir da aplicação. Foram elaborados dois painéis de Business Intelligence (página 15)"
+},
+{
+"id": "RF19",
+"descricao": "O sistema deve exigir autenticação de usuário para acesso.",
+"trecho_origem": "acesso ao aplicativo é realizado mediante autenticação (página 14)"
+},
+{
+"id": "RF20",
+"descricao": "O sistema deve controlar o acesso às funcionalidades com base em perfis (administrador e funcionário).",
+"trecho_origem": "O controle de acesso é realizado somente pelo usuário administrador, ou seja, é de inteira responsabilidade do administrador atribuir as funcionalidades de acordo com o perfil do usuário (página 14, adaptado)"
+},
+{
+"id": "RF21",
+"descricao": "O sistema deve permitir a personalização da identidade visual (logotipo, cores, nome).",
+"trecho_origem": "interface inicial da aplicação, na qual é possível visualizar o logotipo que caracteriza a identidade visual do aplicativo (página 11); atribuir um nome que fosse adequado para a aplicação e que fizesse referência direta à essência do negócio, ou seja, o nome KALON (página 18)"
+},
+{
+"id": "RF22",
+"descricao": "O sistema deve ser responsivo, adaptando-se a diferentes tamanhos de tela.",
+"trecho_origem": "A aplicação é totalmente responsiva ao seu layout, sendo capaz de se adaptar a diferentes tipos de tela e dispositivos (página 14)"
+},
+{
+"id": "RF23",
+"descricao": "O sistema deve estar disponível 24 horas por dia, 7 dias por semana.",
+"trecho_origem": "disponível 24 horas por dia, 7 dias por semana (página 14)"
+},
+{
+"id": "RF24",
+"descricao": "O sistema deve ser compatível com os sistemas operacionais Android e iOS.",
+"trecho_origem": "compatível com os sistemas operacionais Android e iOS (página 14)"
+},
+{
+"id": "RF25",
+"descricao": "O sistema deve ter carregamento rápido das telas.",
+"trecho_origem": "velocidade no carregamento (página 14)"
+}
+],
+"requisitos_nao_funcionais": [
+{
+"id": "RNF01",
+"descricao": "O sistema deve garantir a proteção dos dados através de autenticação de usuário.",
+"categoria": "Segurança",
+"trecho_origem": "Para a proteção dos dados, o acesso ao aplicativo é realizado mediante autenticação (página 14)"
+},
+{
+"id": "RNF02",
+"descricao": "O sistema deve controlar o acesso às funcionalidades baseado em perfis de usuário.",
+"categoria": "Segurança",
+"trecho_origem": "O controle de acesso é realizado somente pelo usuário administrador, ou seja, é de inteira responsabilidade do administrador atribuir as funcionalidades de acordo com o perfil do usuário (página 14)"
+},
+{
+"id": "RNF03",
+"descricao": "O sistema deve utilizar cookies e termo de política de privacidade conforme padrões da plataforma.",
+"categoria": "Segurança",
+"trecho_origem": "Quanto aos requisitos de segurança são: autenticação, controle de acesso, cookies e termo de política de privacidade (página 14)"
+},
+{
+"id": "RNF04",
+"descricao": "O sistema deve estar disponível 24 horas por dia, 7 dias por semana.",
+"categoria": "Disponibilidade",
+"trecho_origem": "disponível 24 horas por dia, 7 dias por semana (página 14)"
+},
+{
+"id": "RNF05",
+"descricao": "O sistema deve apresentar design atrativo com cores de contraste adequado.",
+"categoria": "Usabilidade",
+"trecho_origem": "Apresenta um design atrativo, com cores que indicam um contraste adequado (página 14)"
+},
+{
+"id": "RNF06",
+"descricao": "O sistema deve possuir elementos visuais de fácil identificação e leitura.",
+"categoria": "Usabilidade",
+"trecho_origem": "além de elementos visuais de fácil identificação e leitura (página 14)"
+},
+{
+"id": "RNF07",
+"descricao": "O sistema deve ser intuitivo e de fácil uso, considerando a experiência do usuário.",
+"categoria": "Usabilidade",
+"trecho_origem": "houve o cuidado para que o uso da ferramenta fosse realizado de forma intuitiva, levando em conta a experiência do usuário (página 18)"
+},
+{
+"id": "RNF08",
+"descricao": "O sistema deve ter velocidade de carregamento adequada.",
+"categoria": "Desempenho",
+"trecho_origem": "velocidade no carregamento (página 14)"
+},
+{
+"id": "RNF09",
+"descricao": "O sistema deve ser compatível com os sistemas operacionais Android e iOS.",
+"categoria": "Compatibilidade",
+"trecho_origem": "compatível com os sistemas operacionais Android e iOS (página 14)"
+},
+{
+"id": "RNF10",
+"descricao": "O sistema deve ser responsivo, adaptando-se a diferentes tamanhos de tela.",
+"categoria": "Usabilidade",
+"trecho_origem": "totalmente responsiva ao seu layout (página 14)"
+}
+]
+}

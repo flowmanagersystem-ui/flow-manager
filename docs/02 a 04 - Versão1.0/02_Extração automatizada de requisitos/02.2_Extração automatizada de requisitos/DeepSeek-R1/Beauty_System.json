@@ -1,0 +1,218 @@
+{
+"titulo_trabalho": "Sistema para Gerenciamento de Salão de Beleza",
+"requisitos_funcionais": [
+{
+"id": "RF01",
+"descricao": "O sistema deve permitir o cadastro de clientes com os seguintes dados: nome, RG, CPF, sexo, data de nascimento, rua, número, bairro, complemento, estado, cidade, CEP e telefone.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados mais específicos do cliente, como nome, RG, CPF, sexo, data de nascimento, rua, número, bairro, complemento, estado, cidade, CEP e telefone. (página 9)"
+},
+{
+"id": "RF02",
+"descricao": "O sistema deve permitir a consulta de clientes cadastrados, exibindo uma lista com todos os clientes e possibilitando a aplicação de filtros.",
+"trecho_origem": "Neste módulo ainda contém uma lista com todos os clientes cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um cliente, bem como realizar filtros de consulta. (página 9)"
+},
+{
+"id": "RF03",
+"descricao": "O sistema deve permitir a alteração dos dados de um cliente cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um cliente (página 9)"
+},
+{
+"id": "RF04",
+"descricao": "O sistema deve permitir a exclusão de um cliente cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um cliente (página 9)"
+},
+{
+"id": "RF05",
+"descricao": "O sistema deve permitir o agendamento de horários para clientes, armazenando datas e horários em uma agenda.",
+"trecho_origem": "O sistema contem função junto a um banco de dados, de armazenar uma agenda com datas e horários de modo que cada um tenha controle das tarefas a serem executadas durante o (página 9-10) e Agendamento de clientes: faz o agendamento dos clientes. (página 12)"
+},
+{
+"id": "RF06",
+"descricao": "O sistema deve permitir o controle da agenda, exibindo as tarefas a serem executadas em cada data e horário.",
+"trecho_origem": "controle das tarefas a serem executadas (página 10)"
+},
+{
+"id": "RF07",
+"descricao": "O sistema deve permitir o cadastro de serviços com os seguintes dados: nome, duração máxima, descrição e valor.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados mais específicos do serviço, como nome, duração máxima, descrição e valor. (página 10)"
+},
+{
+"id": "RF08",
+"descricao": "O sistema deve permitir a consulta de serviços cadastrados, exibindo uma lista e possibilitando filtros.",
+"trecho_origem": "Neste módulo ainda irá conter uma lista com todos os serviços cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um serviço, bem como realizar filtros de consulta. (página 10)"
+},
+{
+"id": "RF09",
+"descricao": "O sistema deve permitir a alteração dos dados de um serviço cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um serviço (página 10)"
+},
+{
+"id": "RF10",
+"descricao": "O sistema deve permitir a exclusão de um serviço cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um serviço (página 10)"
+},
+{
+"id": "RF11",
+"descricao": "O sistema deve permitir o cadastro de produtos com os seguintes dados: nome, preço de compra, preço de venda, descrição, fornecedor e tipo do produto.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados mais específicos do produto, como nome, preço de compra, preço de venda, descrição, fornecedor e o tipo do produto. (página 10)"
+},
+{
+"id": "RF12",
+"descricao": "O sistema deve permitir o cadastro de tipos de produto.",
+"trecho_origem": "módulo de cadastro de produtos e tipo produto (página 10)"
+},
+{
+"id": "RF13",
+"descricao": "O sistema deve permitir a consulta de produtos cadastrados, exibindo uma lista e possibilitando filtros.",
+"trecho_origem": "Neste módulo ainda contém uma lista com todos os produtos/tipo de produto cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um produto/tipo de produto, bem como realizar filtros de consulta. (página 10)"
+},
+{
+"id": "RF14",
+"descricao": "O sistema deve permitir a alteração dos dados de um produto cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um produto (página 10)"
+},
+{
+"id": "RF15",
+"descricao": "O sistema deve permitir a exclusão de um produto cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um produto (página 10)"
+},
+{
+"id": "RF16",
+"descricao": "O sistema deve permitir o registro de compras de produtos, associando quantidade, produto e fornecedor para controle de estoque.",
+"trecho_origem": "Em relação a compra é cadastrada a quantidade em unidade interligada ao nome do produto e fornecedor para fins de controlar o estoque de maneira simples e segura (página 10)"
+},
+{
+"id": "RF17",
+"descricao": "O sistema deve permitir o registro de vendas de produtos e/ou serviços, com os seguintes dados: cliente, quantidade, valor unitário, forma de pagamento e funcionário/profissional que realizou o serviço, podendo incluir desconto.",
+"trecho_origem": "a venda será composta produtos e/ou serviços vendidos/prestados com ou sem desconto, cliente, quantidade, valor unitário, forma de pagamento e funcionário/profissional que realizou o serviço (página 10)"
+},
+{
+"id": "RF18",
+"descricao": "O sistema deve controlar o estoque de produtos, sendo atualizado automaticamente com base nas compras e vendas registradas.",
+"trecho_origem": "o módulo de compra e o de venda alimenta o estoque de produtos. (página 10)"
+},
+{
+"id": "RF19",
+"descricao": "O sistema deve permitir o cadastro de funcionários com os seguintes dados: nome, RG, CPF, sexo, data de nascimento, rua, número, bairro, complemento, estado, cidade, CEP e telefone.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados mais específicos do funcionário, como nome, RG, CPF, sexo, data de nascimento, rua, número, bairro, complemento, estado, cidade, CEP e telefone. (página 10)"
+},
+{
+"id": "RF20",
+"descricao": "O sistema deve permitir a consulta de funcionários cadastrados, exibindo uma lista e possibilitando filtros.",
+"trecho_origem": "Neste módulo ainda contém uma lista com todos os funcionários cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um funcionário, bem como realizar filtros de consulta. (página 10)"
+},
+{
+"id": "RF21",
+"descricao": "O sistema deve permitir a alteração dos dados de um funcionário cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um funcionário (página 10)"
+},
+{
+"id": "RF22",
+"descricao": "O sistema deve permitir a exclusão de um funcionário cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um funcionário (página 10)"
+},
+{
+"id": "RF23",
+"descricao": "O sistema deve permitir o cadastro de fornecedores com os seguintes dados: nome, razão social, CNPJ, inscrição municipal, inscrição estadual, observações, rua, número, bairro, complemento, estado, cidade, telefone, e-mail e site.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados mais específicos do fornecedor, como nome, razão social, CNPJ, inscrição municipal, inscrição estadual, observações, rua, número, bairro, complemento, estado, cidade, telefone, e-mail e site. (página 11)"
+},
+{
+"id": "RF24",
+"descricao": "O sistema deve permitir a consulta de fornecedores cadastrados, exibindo uma lista e possibilitando filtros.",
+"trecho_origem": "Neste módulo ainda contém uma lista com todos os fornecedores cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um fornecedor, bem como realizar filtros de consulta. (página 11)"
+},
+{
+"id": "RF25",
+"descricao": "O sistema deve permitir a alteração dos dados de um fornecedor cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um fornecedor (página 11)"
+},
+{
+"id": "RF26",
+"descricao": "O sistema deve permitir a exclusão de um fornecedor cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um fornecedor (página 11)"
+},
+{
+"id": "RF27",
+"descricao": "O sistema deve permitir o cadastro de usuários do sistema, associando um funcionário, nome de usuário e senha, para controle de acesso.",
+"trecho_origem": "Será armazenado um espaço na memória que contenha dados como funcionário, usuário e senha. Esses dados são utilizados para registrar e controlar o acesso ao sistema permitindo ou não o acesso ao mesmo. (página 11)"
+},
+{
+"id": "RF28",
+"descricao": "O sistema deve permitir a consulta de usuários cadastrados, exibindo uma lista e possibilitando filtros.",
+"trecho_origem": "Neste módulo ainda contém uma lista com todos os usuários cadastrados no sistema para consulta, sendo possível inserir, alterar e excluir um usuário, bem como realizar filtros de consulta. (página 11)"
+},
+{
+"id": "RF29",
+"descricao": "O sistema deve permitir a alteração dos dados de um usuário cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um usuário (página 11)"
+},
+{
+"id": "RF30",
+"descricao": "O sistema deve permitir a exclusão de um usuário cadastrado.",
+"trecho_origem": "sendo possível inserir, alterar e excluir um usuário (página 11)"
+},
+{
+"id": "RF31",
+"descricao": "O sistema deve permitir a realização de backup da base de dados.",
+"trecho_origem": "O sistema proporciona a opção de Backup e Restaurar Backup da base de dados para que se faça uma cópia de segurança de tudo o que foi cadastrado (página 11)"
+},
+{
+"id": "RF32",
+"descricao": "O sistema deve permitir a restauração de backup da base de dados.",
+"trecho_origem": "Restaurar Backup da base de dados (página 11)"
+},
+{
+"id": "RF33",
+"descricao": "O sistema deve emitir relatórios de clientes, agendamentos, estoque de produtos, compras, vendas, aniversariantes do mês e fluxo de caixa.",
+"trecho_origem": "O sistema emite relatório de informações completas dos dados após selecionar o tipo de relatório como clientes, agendamentos, estoque de produtos, compra, venda, aniversariantes do mês, fluxo de caixa e imprimi-los. (página 11)"
+},
+{
+"id": "RF34",
+"descricao": "O sistema deve permitir o controle financeiro diário, incluindo abertura e fechamento de caixa, registro de entradas e saídas, e exibição de extrato e saldo.",
+"trecho_origem": "abertura e fechamento de caixa de modo que o próprio sistema tenha armazenado. O programa está capacitado a armazenar a renda e também exibir o valor de capital que entrou e saiu do respectivo dia, permitindo completa visibilidade ao extrato e saldo do caixa (página 10)"
+},
+{
+"id": "RF35",
+"descricao": "O sistema deve permitir o gerenciamento de comissões de funcionários.",
+"trecho_origem": "comissões de funcionários (tabela 03, página 8)"
+}
+],
+"requisitos_nao_funcionais": [
+{
+"id": "RNF01",
+"descricao": "O sistema deve exigir autenticação de usuário por meio de login e senha para acesso às funcionalidades.",
+"categoria": "Segurança",
+"trecho_origem": "pessoa não autorizada não pode ter acesso ao sistema, seja para consulta e/ou escrita (página 13)"
+},
+{
+"id": "RNF02",
+"descricao": "O sistema deve garantir que apenas usuários autorizados possam realizar operações de consulta e escrita, conforme permissões associadas ao cadastro de usuário.",
+"categoria": "Segurança",
+"trecho_origem": "pessoa não autorizada não pode ter acesso ao sistema, seja para consulta e/ou escrita (página 13)"
+},
+{
+"id": "RNF03",
+"descricao": "O sistema deve fornecer funcionalidade de backup e restauração da base de dados para garantir a recuperação de informações em caso de perda acidental.",
+"categoria": "Confiabilidade",
+"trecho_origem": "Backup e Restaurar Backup da base de dados para que se faça uma cópia de segurança de tudo o que foi cadastrado, evitando perdas acidentais. (página 11)"
+},
+{
+"id": "RNF04",
+"descricao": "O sistema deve ser desenvolvido em linguagem Java, garantindo portabilidade entre diferentes sistemas operacionais (Windows, Linux, Mac OS).",
+"categoria": "Portabilidade",
+"trecho_origem": "Java é muito utilizada tanto para sistemas web, desktop, mobile e periféricos em geral, pode ser utilizado para diversos tipos de desenvolvimento de projeto, abrangendo desde serviços a aplicações web e gratuita. (quadro 1, página 6)"
+},
+{
+"id": "RNF05",
+"descricao": "O sistema deve possuir interface simples e de fácil utilização, visando atender usuários com pouca experiência em informática.",
+"categoria": "Usabilidade",
+"trecho_origem": "de forma rápida, segura e ao mesmo tempo simples, atendendo os recursos tecnológicos e humanos (página 9)"
+},
+{
+"id": "RNF06",
+"descricao": "O sistema deve utilizar o banco de dados MySQL, que é open-source e oferece desempenho consistente, alta confiabilidade e facilidade de uso.",
+"categoria": "Tecnologia",
+"trecho_origem": "MySQL é open-source e sua popularidade por causa de seu desempenho consistente, rápido, alta confiabilidade e facilidade de uso. (quadro 1, página 6)"
+}
+]
+}

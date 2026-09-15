@@ -1,0 +1,192 @@
+{
+  "titulo_trabalho": "Sistema informatizado para agendamento de serviços: estudo de caso em um salão de beleza no município de Franco da Rocha",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir que a cliente preencha um formulário de solicitação de agendamento informando nome completo, telefone, serviço desejado, preferência de dia e período de atendimento.",
+      "trecho_origem": "O processo tem início com a cliente preenchendo um formulário de solicitação de agendamento na plataforma JotForm com suas informações pessoais, incluindo nome completo, número de telefone, serviço desejado, preferência de dia e do período de atendimento."
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve verificar a disponibilidade de horários para atendimento da cliente.",
+      "trecho_origem": "Após o envio do formulário, a funcionária verifica a disponibilidade para atender a cliente."
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve oferecer outras opções de horários disponíveis quando o horário solicitado não estiver disponível.",
+      "trecho_origem": "Se o horário solicitado não estiver disponível, a equipe entrará em contato para oferecer outras opções de horários disponíveis."
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve cadastrar a cliente após confirmação de disponibilidade de horário.",
+      "trecho_origem": "Caso o horário solicitado esteja disponível, a cliente é cadastrada no sistema e uma funcionária entrará em contato para confirmar o agendamento."
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir a edição e exclusão do cadastro de clientes.",
+      "trecho_origem": "Ao lado é apresentado o menu de clientes, no qual é possível cadastrar, editar ou excluir o cadastro de clientes."
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve confirmar o agendamento por meio de contato com a cliente.",
+      "trecho_origem": "uma funcionária entrará em contato para confirmar o agendamento."
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir o cancelamento de agendamentos.",
+      "trecho_origem": "A aplicação possui como requisitos funcionais: cadastro das clientes, agendamento de serviços, seleção de serviços, confirmação de agendamento, cancelamento de agendamento, histórico de serviços e gerenciamento de funcionários."
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir o reagendamento de serviços.",
+      "trecho_origem": "as clientes destes empreendimentos também são beneficiadas com a implantação da ferramenta, pois conseguem ter um contato direto com o estabelecimento e remarcar seus agendamentos, se necessário."
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve exibir, para cada usuário, apenas os agendamentos associados àquele profissional (Sua Agenda).",
+      "trecho_origem": "O segundo menu é nomeado como sua agenda. Apresenta apenas as clientes agendadas por um determinado usuário."
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve listar todas as solicitações de agendamento recebidas via formulário externo.",
+      "trecho_origem": "O menu de solicitações apresenta todas as solicitações de agendamento realizadas pelo formulário elaborado na plataforma JotForm."
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir que o usuário aceite ou negue solicitações de agendamento.",
+      "trecho_origem": "As funcionalidades incluem cadastrar e agendar clientes, cadastrar funcionários, visualizar, aceitar ou negar solicitações de agendamento."
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve exibir um calendário com todos os agendamentos, com opções de visualização por dia, semana ou mês.",
+      "trecho_origem": "O último menu de navegação é o calendário, onde são apresentados todos os agendamentos, sendo que o usuário pode escolher como quer visualizar os agendamentos realizados, por exemplo, por dia, semana ou mês."
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve registrar o check-in da cliente no dia e horário do atendimento.",
+      "trecho_origem": "O processo se inicia com o check-in do agendamento no salão, verificando se a cliente compareceu no dia e horário agendados."
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir o agendamento de retorno da cliente ao término da realização de um serviço.",
+      "trecho_origem": "No dia e horário agendados, o serviço é executado e a cliente tem a opção de agendar um retorno caso deseje."
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve enviar automaticamente uma pesquisa de satisfação à cliente após a conclusão do serviço.",
+      "trecho_origem": "Assim que finalizado o serviço, é encaminhado para a cliente uma pesquisa de satisfação elaborada na plataforma JotForm, para que a cliente preencha com suas informações pessoais e sua opinião sobre a qualidade do serviço prestado."
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir a visualização das respostas das pesquisas de satisfação.",
+      "trecho_origem": "Depois de enviada a pesquisa, a resposta pode ser visualizada na aplicação em software."
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve enviar notificações/alertas à cliente indicando o prazo de manutenção de procedimentos realizados anteriormente.",
+      "trecho_origem": "além de encaminhar notificações de alerta para a manutenção de algum procedimento realizado anteriormente, fazendo com que o cliente se sinta cada vez mais próximo e importante para empresa."
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve permitir o cadastro de funcionários pelo usuário administrador.",
+      "trecho_origem": "A aplicação também possui o menu suspenso com funcionalidades específicas para o administrador, por exemplo, cadastrar funcionário, todos os agendamentos e serviços."
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve oferecer funcionalidades exclusivas ao administrador, tais como visualização de todos os agendamentos e gerenciamento de serviços.",
+      "trecho_origem": "A aplicação também possui o menu suspenso com funcionalidades específicas para o administrador, por exemplo, cadastrar funcionário, todos os agendamentos e serviços."
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve exibir o histórico de serviços realizados por cliente.",
+      "trecho_origem": "A aplicação possui como requisitos funcionais: cadastro das clientes, agendamento de serviços, seleção de serviços, confirmação de agendamento, cancelamento de agendamento, histórico de serviços e gerenciamento de funcionários."
+    },
+    {
+      "id": "RF21",
+      "descricao": "O sistema deve gerar um relatório gerencial de agendamentos contendo indicadores de quantidade de clientes cadastradas, serviços mais requisitados, quantidade e status dos agendamentos e ranking de clientes por frequência de agendamentos.",
+      "trecho_origem": "O painel apresenta indicadores referentes à quantidade de clientes cadastradas, aos serviços mais requisitados no período filtrado, à quantidade e status dos agendamentos e uma breve lista das clientes, que é exibida em ordem de maior índice de agendamentos realizados."
+    },
+    {
+      "id": "RF22",
+      "descricao": "O sistema deve gerar um painel de Business Intelligence com indicadores da pesquisa de satisfação, incluindo avaliação do atendimento, qualidade do serviço, forma de agendamento e nota atribuída ao salão.",
+      "trecho_origem": "Já no segundo painel, de nome Pesquisa de Satisfação, é possível observar e analisar as respostas da pesquisa de satisfação realizada com as clientes que realizaram algum serviço, com o intuito de aprofundar o entendimento sobre a visão das clientes acerca do atendimento recebido e dos serviços prestados."
+    },
+    {
+      "id": "RF23",
+      "descricao": "O sistema deve integrar-se com o WhatsApp para encaminhamento de mensagens às clientes.",
+      "trecho_origem": "WhatsApp – Integração por meio do encaminhamento de mensagens."
+    },
+    {
+      "id": "RF24",
+      "descricao": "O sistema deve integrar-se com a plataforma JotForm para recebimento de solicitações de agendamento e respostas de pesquisa de satisfação.",
+      "trecho_origem": "Jotform – Integração por meio de formulários de solicitação de agendamento e pesquisa de satisfação."
+    },
+    {
+      "id": "RF25",
+      "descricao": "O sistema deve integrar-se com o Google Sheets como repositório de dados para armazenamento e transferência de informações entre formulários e painéis.",
+      "trecho_origem": "Google Sheets – Integração por meio da transferência de dados entre os formulários e planilhas empregadas como repositório de dados."
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve ser compatível com os sistemas operacionais Android e iOS.",
+      "categoria": "Compatibilidade",
+      "trecho_origem": "O aplicativo é compatível com os sistemas operacionais Android e iOS."
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve estar disponível 24 horas por dia, 7 dias por semana.",
+      "categoria": "Disponibilidade",
+      "trecho_origem": "está disponível 24 horas por dia, 7 dias por semana."
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve apresentar design atrativo, com cores de contraste adequado e elementos visuais de fácil identificação e leitura.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "Apresenta um design atrativo, com cores que indicam um contraste adequado, além de elementos visuais de fácil identificação e leitura."
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve ser intuitivo e de fácil uso, levando em conta a experiência do usuário.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "Também houve o cuidado para que o uso da ferramenta fosse realizado de forma intuitiva, levando em conta a experiência do usuário."
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O acesso ao sistema deve ser protegido por autenticação via login e senha.",
+      "categoria": "Segurança",
+      "trecho_origem": "Para a proteção dos dados, o acesso ao aplicativo é realizado mediante autenticação, em que o usuário administrador deve entrar com login e senha para obter acesso a todas as funcionalidades."
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve implementar controle de acesso diferenciado entre perfis de usuário, sendo o administrador responsável por atribuir funcionalidades a cada perfil.",
+      "categoria": "Segurança",
+      "trecho_origem": "O controle de acesso é realizado somente pelo usuário administrador, ou seja, é de inteira responsabilidade do administrador atribuir as funcionalidades de acordo com usuário."
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve utilizar cookies para captação de dados conforme as diretrizes do Google.",
+      "categoria": "Segurança",
+      "trecho_origem": "A plataforma utiliza cookies para a captação dos dados, de acordo com o que é pré determinado pelo Google."
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve apresentar um termo de política de privacidade especificando quais dados são captados e como são utilizados.",
+      "categoria": "Segurança",
+      "trecho_origem": "o termo de política de privacidade foi elaborado pelo grupo, especificando quais dados são captados e como são utilizados pelo aplicativo."
+    },
+    {
+      "id": "RNF09",
+      "descricao": "O sistema deve ser totalmente responsivo, adaptando seu layout a diferentes tipos de tela e dispositivos.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "A aplicação é totalmente responsiva ao seu layout, sendo capaz de se adaptar a diferentes tipos de tela e dispositivos."
+    },
+    {
+      "id": "RNF10",
+      "descricao": "O sistema deve apresentar velocidade de carregamento adequada.",
+      "categoria": "Desempenho",
+      "trecho_origem": "A aplicação é totalmente responsiva ao seu layout, sendo capaz de se adaptar a diferentes tipos de tela e dispositivos, com velocidade no carregamento."
+    }
+  ]
+}

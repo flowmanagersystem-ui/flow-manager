@@ -1,0 +1,112 @@
+{
+  "titulo_trabalho": "BeleSys Sistema de gestão multiplataforma para salões de beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve autenticar usuários (administradores e funcionários) validando seu e-mail e senha.",
+      "trecho_origem": "\"O sistema deve permitir que funcionários e administradores façam login validando seus respectivos e-mail e senha.\" (Página 14)"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir que usuários autenticados redefinam sua senha.",
+      "trecho_origem": "\"O sistema deve permitir que funcionários e administradores redefinam sua senha.\" (Página 14)"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir que administradores cadastrem, editem, excluam e visualizem funcionários.",
+      "trecho_origem": "\"O sistema deve permitir que administradores cadastrem novos funcionários / editem e excluam funcionários / listem todos os funcionários\" (Páginas 14, 20-21)"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir que administradores cadastrem, editem, excluam e visualizem serviços.",
+      "trecho_origem": "\"O sistema deve permitir que administradores cadastrem novos serviços / editem e excluam serviços / listem todos os serviços oferecidos.\" (Páginas 14, 22-23)"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir que o administrador realize novos agendamentos, informando cliente, serviços, profissional, data, hora e observações.",
+      "trecho_origem": "\"O sistema permite que administradores realizem novos agendamentos.\" (Página 15) / \"Neste modal, ao realizar um novo agendamento, deve ser inserido todos os dados necessários para o agendamento, como o cliente, dados de contato do cliente, data e hora, serviço a ser feito, funcionário atribuído, valores e observações.\" (Página 33)"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve validar a disponibilidade do profissional, impedindo a criação ou atualização de um agendamento em um horário já ocupado.",
+      "trecho_origem": "\"No processo de criação do agendamento há uma validação para impedir a sobreposição de horários, verificando se um funcionário já possui um atendimento para aquele mesmo dia e horário\" (Página 28)"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve apresentar a agenda de atendimentos em visualizações diária, semanal e mensal.",
+      "trecho_origem": "\"O sistema deve apresentar a agenda em diferentes visualizações: diária, semanal e mensal.\" (Página 15)"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir que um usuário do tipo funcionário visualize apenas os agendamentos que lhe foram atribuídos.",
+      "trecho_origem": "\"O sistema permite que um usuário do tipo funcionário visualize os agendamentos vinculados a ele.\" (Página 15)"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir que administradores e funcionários visualizem os detalhes de um agendamento específico.",
+      "trecho_origem": "\"O sistema permite que administradores e funcionários visualizem detalhes de um agendamento específico.\" (Página 15)"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir que o administrador atualize os dados de um agendamento existente.",
+      "trecho_origem": "(Fluxo de eventos \"Atualizar Agendamento\") (Página 19)"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir que o administrador cancele um agendamento, alterando seu status.",
+      "trecho_origem": "\"O sistema permite que o administrador confirme ou cancele agendamentos.\" (Página 15)"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir que o administrador marque um agendamento como concluído, alterando seu status.",
+      "trecho_origem": "\"Finalizado, quando o atendimento é concluído\" (Página 29) / Tarefa 5 do teste de usabilidade: \"Marcar o atendimento como concluído\" (Página 36)"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve enviar automaticamente lembretes via WhatsApp para clientes com agendamentos próximos.",
+      "trecho_origem": "\"O sistema deve identificar agendamentos próximos e enviar lembretes via WhatsApp para os clientes automaticamente.\" (Página 15)"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir que administradores gerem relatórios financeiros com base em um período especificado.",
+      "trecho_origem": "\"O sistema deve permitir aos administradores gerarem relatórios financeiros com faturamento por período.\" (Página 15)"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve restringir o acesso às funcionalidades com base no tipo de usuário (administrador ou funcionário).",
+      "trecho_origem": "\"Os usuários são segmentados por níveis de acesso: enquanto o administrador tem acesso completo a todos os recursos do sistema, os funcionários visualizam apenas os atendimentos atribuídos a eles.\" (Página 3)"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve criptografar as senhas dos usuários antes de armazená-las no banco de dados.",
+      "categoria": "Segurança",
+      "trecho_origem": "\"Para proteção de dados sensíveis, implementou-se criptografia de senhas com bcrypt\" (Página 13)"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve proteger o acesso às suas funcionalidades, permitindo entrada apenas a usuários autenticados.",
+      "categoria": "Segurança",
+      "trecho_origem": "\"O sistema deverá ser protegido para acesso apenas a usuários autenticados.\" (Página 15)"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve ser projetado com uma interface intuitiva e de fácil navegação para seus usuários.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "\"Criar uma interface intuitiva e acessível para administradores e funcionários.\" (Página 9)"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve fornecer feedback imediato ao usuário sobre suas ações, utilizando elementos interativos como modais.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "\"o SweetAlert2 foi utilizado para a exibição de modais interativos que, de acordo com Nielsen (1994), atende aos princípios de feedback imediato e controle do usuário\" (Página 13)"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve ser responsivo, garantindo compatibilidade e usabilidade em dispositivos móveis e desktops.",
+      "categoria": "Usabilidade / Disponibilidade",
+      "trecho_origem": "\"O sistema deve ter seu design responsivo para funcionar em qualquer dispositivo.\" (Página 15)"
+    }
+  ]
+}

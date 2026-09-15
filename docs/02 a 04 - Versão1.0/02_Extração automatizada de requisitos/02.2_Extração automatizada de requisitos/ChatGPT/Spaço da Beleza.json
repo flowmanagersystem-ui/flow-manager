@@ -1,0 +1,130 @@
+{
+  "titulo_trabalho": "Plataforma Web para Gerenciamento de Salão de Beleza de Microempreendedores",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir ao cliente visualizar a agenda com serviços disponíveis.",
+      "trecho_origem": "visualizar a agenda com os serviços disponíveis"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir ao cliente selecionar um serviço para agendamento.",
+      "trecho_origem": "selecionar qualquer dos serviços cadastrados"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir ao cliente selecionar uma data disponível.",
+      "trecho_origem": "selecionar qualquer uma das datas disponíveis"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir ao cliente selecionar um horário disponível.",
+      "trecho_origem": "selecionar qualquer uma das horas disponíveis"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir ao cliente realizar um agendamento.",
+      "trecho_origem": "realizar um agendamento"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir ao proprietário visualizar os agendamentos realizados.",
+      "trecho_origem": "visualizar todos os agendamentos feitos por seus clientes"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir ao proprietário excluir agendamentos.",
+      "trecho_origem": "excluir qualquer agendamento"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir cadastrar horários de atendimento.",
+      "trecho_origem": "cadastrar horários os quais estará disponível para trabalho"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir editar horários cadastrados.",
+      "trecho_origem": "editar qualquer dado dos horários cadastrados"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir excluir horários cadastrados.",
+      "trecho_origem": "excluir qualquer horário"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir visualizar horários cadastrados.",
+      "trecho_origem": "visualizar todos os horários cadastrados"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir associar serviços a horários disponíveis.",
+      "trecho_origem": "serviços disponíveis no dia"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir cadastrar serviços.",
+      "trecho_origem": "cadastrar qualquer novo serviço"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir visualizar serviços disponíveis.",
+      "trecho_origem": "visualizar todos os serviços cadastrados"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir gerenciar clientes.",
+      "trecho_origem": "gerenciamento de clientes"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve ser responsivo para desktop e dispositivos móveis.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "interfaces adaptativas ao tipo de dispositivo"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve funcionar como aplicação web acessível online.",
+      "categoria": "Disponibilidade",
+      "trecho_origem": "funcionar de forma completamente online"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O tempo de carregamento das interfaces deve ser de até 7 segundos.",
+      "categoria": "Desempenho",
+      "trecho_origem": "carregamento de até 7 segundos"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve restringir o acesso a funcionalidades administrativas.",
+      "categoria": "Segurança",
+      "trecho_origem": "apenas usuários proprietários devem possuir acesso"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve exigir autenticação para acesso às funcionalidades.",
+      "categoria": "Segurança",
+      "trecho_origem": "apenas devem ser exibidas para usuários autenticados"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve priorizar uma interface intuitiva e de fácil uso.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "facilidade de uso e interface intuitiva"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve garantir proteção e privacidade dos dados dos usuários.",
+      "categoria": "Segurança",
+      "trecho_origem": "criptografia, controle de acesso e proteção contra ameaças"
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve ser escalável para suportar crescimento.",
+      "categoria": "Escalabilidade",
+      "trecho_origem": "escalabilidade do MongoDB"
+    }
+  ]
+}

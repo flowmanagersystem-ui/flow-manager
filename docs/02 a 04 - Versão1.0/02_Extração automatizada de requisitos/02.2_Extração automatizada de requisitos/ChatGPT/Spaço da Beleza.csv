@@ -1,0 +1,21 @@
+ID;Tipo;Descrição;Categoria;Trecho do Texto
+RF01;Funcional;O sistema deve permitir visualizar agenda de serviços;;visualizar a agenda com os serviços disponíveis
+RF02;Funcional;O sistema deve permitir selecionar serviço;;selecionar qualquer dos serviços cadastrados
+RF03;Funcional;O sistema deve permitir selecionar data disponível;;selecionar qualquer uma das datas disponíveis
+RF04;Funcional;O sistema deve permitir selecionar horário disponível;;selecionar qualquer uma das horas disponíveis
+RF05;Funcional;O sistema deve permitir realizar agendamento;;realizar um agendamento
+RF06;Funcional;O sistema deve permitir visualizar agendamentos;;visualizar todos os agendamentos feitos
+RF07;Funcional;O sistema deve permitir excluir agendamentos;;excluir qualquer agendamento
+RF08;Funcional;O sistema deve permitir cadastrar horários;;cadastrar horários disponível para trabalho
+RF09;Funcional;O sistema deve permitir editar horários;;editar horários cadastrados
+RF10;Funcional;O sistema deve permitir excluir horários;;excluir horários
+RF11;Funcional;O sistema deve permitir visualizar horários;;visualizar horários cadastrados
+RF12;Funcional;O sistema deve associar serviços a horários;;serviços disponíveis no dia
+RNF01;Não Funcional;Responsividade do sistema;Usabilidade;interfaces adaptativas
+RNF02;Não Funcional;Sistema web online;Disponibilidade;funcionar online
+RNF03;Não Funcional;Tempo de resposta até 7s;Desempenho;carregamento até 7 segundos
+RNF04;Não Funcional;Controle de acesso administrativo;Segurança;apenas proprietários acessam
+RNF05;Não Funcional;Autenticação obrigatória;Segurança;usuários autenticados
+RNF06;Não Funcional;Interface intuitiva;Usabilidade;facilidade de uso
+RNF07;Não Funcional;Proteção de dados;Segurança;criptografia e proteção
+RNF08;Não Funcional;Escalabilidade do sistema;Escalabilidade;uso de MongoDB escalável

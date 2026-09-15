@@ -1,0 +1,145 @@
+{
+  "titulo_trabalho": "BeleSys – Sistema de gestão multiplataforma para salões de beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir que o administrador crie um agendamento informando cliente, telefone de contato (WhatsApp), data, hora, serviço(s), funcionário responsável, desconto e observações.",
+      "trecho_origem": "Neste modal, ao realizar um novo agendamento, deve ser inserido todos os dados necessários para o agendamento, como o cliente, dados de contato do cliente, data e hora, serviço a ser feito, funcionário atribuído, valores e observações."
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve exibir os agendamentos em um calendário interativo com três modos de visualização: mensal, semanal e diária.",
+      "trecho_origem": "A primeira tela exibe por padrão, os agendamentos do mês atual, permitindo ao usuário escolher entre 3 diferentes modos de visualização: mensal, semanal e diária."
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve validar conflitos de horário, impedindo que um mesmo funcionário possua dois agendamentos para o mesmo dia e hora.",
+      "trecho_origem": "No processo de criação do agendamento há uma validação para impedir a sobreposição de horários, verificando se um funcionário já possui um atendimento para aquele mesmo dia e horário."
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir que o administrador edite os dados de um agendamento já registrado.",
+      "trecho_origem": "Quando este modal é utilizado para a edição de um agendamento, os dados já inseridos anteriormente serão exibidos, sendo necessário mudar apenas o necessário para o agendamento."
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir a atualização do status de um agendamento para 'Agendado', 'Concluído' ou 'Cancelado'.",
+      "trecho_origem": "O status pode assumir três valores: Agendado, que é o padrão para novos registros; Finalizado, quando o atendimento é concluído; Cancelado, quando não será realizado."
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir que funcionários visualizem apenas os agendamentos atribuídos a eles.",
+      "trecho_origem": "RF12: O sistema permite que um usuário do tipo funcionário visualize os agendamentos vinculados a ele."
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir que administradores e funcionários visualizem todos os detalhes de um agendamento específico.",
+      "trecho_origem": "RF13: O sistema permite que administradores e funcionários visualizem detalhes de um agendamento específico."
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve enviar automaticamente lembretes de agendamento via WhatsApp para os clientes, às 8h (para atendimentos a partir das 12h do mesmo dia) e às 20h (para atendimentos antes das 12h do dia seguinte).",
+      "trecho_origem": "Quando o sistema identifica que são 8h da manhã é feita uma busca no banco de dados por todos os agendamentos marcados para a partir das 12h do mesmo dia [...] A mesma lógica se aplica para o envio às 20h, onde o sistema busca os agendamentos do dia seguinte com horários antes das 12h."
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve registrar o envio de cada lembrete de agendamento.",
+      "trecho_origem": "3. O sistema registra o envio do lembrete."
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve calcular e exibir o valor total do agendamento com base nos serviços selecionados, aplicando descontos quando informados.",
+      "trecho_origem": "const totalServicos = servicosSelecionados.reduce((sum, s) => sum + parseFloat(s.preco), 0); const valorDesconto = parseFloat(desconto) || 0;"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir que funcionários e administradores realizem login utilizando e-mail e senha.",
+      "trecho_origem": "RF01: O sistema deve permitir que funcionários e administradores façam login validando seus respectivos e-mail e senha."
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir que funcionários e administradores redefinam suas senhas.",
+      "trecho_origem": "RF02: O sistema deve permitir que funcionários e administradores redefinam sua senha."
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir que o administrador cadastre, edite e exclua funcionários.",
+      "trecho_origem": "RF03: O sistema deve permitir que administradores cadastrem novos funcionários. RF04: O sistema deve permitir que administradores editem e excluam funcionários."
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir que o administrador liste todos os funcionários com opção de visualização detalhada.",
+      "trecho_origem": "RF05: O sistema deve permitir que administradores listem todos os funcionários, com opção de visualização detalhada."
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir que o administrador cadastre, edite, exclua e liste os serviços oferecidos pelo salão.",
+      "trecho_origem": "RF06: O sistema deve permitir que administradores cadastrem novos serviços. RF07: O sistema deve permitir que administradores editem e excluam serviços. RF08: O sistema deve permitir que administradores listem todos os serviços oferecidos."
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir que o administrador gere relatórios financeiros com base em um intervalo de datas, exibindo os atendimentos concluídos no período, com opção de incluir cancelados.",
+      "trecho_origem": "RF14: O sistema deve permitir aos administradores gerarem relatórios financeiros com faturamento por período."
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve permitir que o funcionário visualize suas comissões filtradas por período.",
+      "trecho_origem": "Ilustração 20 - Tela de comissões [tela exibindo 'Minhas Comissões' com filtro por período e total]."
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve restringir o acesso às funcionalidades com base no perfil do usuário, concedendo acesso total ao administrador e acesso restrito aos agendamentos atribuídos ao funcionário.",
+      "trecho_origem": "RNF-04: O sistema deve restringir o acesso às funcionalidades com base no tipo de usuário (funcionário ou administrador)."
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve criptografar as senhas dos usuários utilizando hash irreversível (bcrypt) antes de armazená-las no banco de dados.",
+      "categoria": "Segurança",
+      "trecho_origem": "Para garantir a segurança dos dados dos usuários, o sistema implementa a criptografia de senhas no banco de dados utilizando a biblioteca bcrypt."
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve autenticar os usuários por meio de tokens JWT, garantindo que apenas usuários autenticados acessem os recursos do sistema.",
+      "categoria": "Segurança",
+      "trecho_origem": "implementou-se criptografia de senhas com bcrypt e autenticação via tokens JWT (json web token), seguindo as diretrizes de segurança da Open Web Application Security Project (OWASP)."
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve seguir as diretrizes de segurança estabelecidas pela OWASP.",
+      "categoria": "Segurança",
+      "trecho_origem": "seguindo as diretrizes de segurança da Open Web Application Security Project (OWASP)."
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve possuir interface intuitiva e acessível, permitindo que usuários com diferentes níveis de familiaridade tecnológica naveguem e executem tarefas sem dificuldades relevantes.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "Os resultados mostraram que os participantes conseguiram navegar com facilidade, localizar informações com rapidez e compreender as funções sem maiores dificuldades."
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve possuir design responsivo, funcionando corretamente em dispositivos móveis e desktops.",
+      "categoria": "Portabilidade",
+      "trecho_origem": "RNF-01: O sistema deve ter seu design responsivo para funcionar em qualquer dispositivo."
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve garantir a integridade dos dados de agenda, impedindo o registro de agendamentos sobrepostos para o mesmo profissional no mesmo dia e horário.",
+      "categoria": "Confiabilidade",
+      "trecho_origem": "No processo de criação do agendamento há uma validação para impedir a sobreposição de horários, verificando se um funcionário já possui um atendimento para aquele mesmo dia e horário, evitando conflitos e protegendo um dos processos mais importantes de todo o sistema."
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve reaplicar o processo de criptografia sempre que a senha de um usuário for alterada, garantindo que nenhuma senha seja armazenada em texto puro.",
+      "categoria": "Segurança",
+      "trecho_origem": "Os hooks beforeCreate e beforeUpdate garantem que toda senha cadastrada ou alterada passe pelo processo de criptografia."
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve apresentar tempo de resposta satisfatório, não sendo percebido como lento pelos usuários.",
+      "categoria": "Desempenho",
+      "trecho_origem": "Ilustração 24 – Gráfico da pergunta 8: 'Este aplicativo é muito lento' – 100% das respostas: Não."
+    }
+  ]
+}

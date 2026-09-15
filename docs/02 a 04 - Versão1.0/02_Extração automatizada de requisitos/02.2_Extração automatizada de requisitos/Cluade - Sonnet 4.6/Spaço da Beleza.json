@@ -1,0 +1,209 @@
+{
+  "titulo_trabalho": "Plataforma Web para Gerenciamento de Salão de Beleza de Microempreendedores (Spaço da Beleza)",
+  "autor": "Miguel Pedro Garcia Ribeiro",
+  "instituicao": "Faculdade de Tecnologia de Franca - FATEC Franca",
+  "ano": 2023,
+  "dominio_principal": "Agendamento de serviços em salões de beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir ao usuário (proprietário ou cliente) acessar a plataforma mediante autenticação por e-mail e senha, com níveis de acesso diferenciados conforme o perfil do usuário.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao usuário acessar a plataforma através do seu usuário e senha, com acessos limitados a depender se o usuário é o proprietário do estabelecimento ou um cliente. (RF001)"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir ao cliente realizar cadastro informando nome completo, e-mail, telefone, senha e sexo, sendo todos os campos obrigatórios.",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao usuário realizar um cadastro preenchendo os dados nome, e-mail, telefone, senha e sexo. Os campos são obrigatórios. (RF002)"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir ao usuário solicitar a redefinição de senha por meio do e-mail cadastrado.",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao usuário solicitar uma redefinição da sua senha através do seu e-mail. (RF003)"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir ao proprietário visualizar todos os agendamentos realizados pelos clientes, apresentados em uma tabela com dias, horários, nomes dos clientes e serviços.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, visualizar todos os agendamentos feitos por seus clientes. (RF004)"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir ao proprietário excluir qualquer agendamento realizado por qualquer motivo.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, excluir qualquer agendamento por qualquer motivo que seja. (RF005)"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir ao proprietário visualizar todos os clientes cadastrados na plataforma.",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, visualizar todos os seus clientes cadastrados. (RF006)"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir ao proprietário excluir qualquer cliente cadastrado, exceto o próprio usuário administrador, e não deve exibir o administrador na listagem de clientes.",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, a exclusão de qualquer cliente já cadastrado. / O administrador possui a capacidade de exclusão de qualquer usuário, exceto o próprio usuário. (RF007 / RN001)"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir ao proprietário editar os dados de qualquer cliente cadastrado (nome, e-mail, telefone, sexo).",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, a edição de qualquer cliente já cadastrado. (RF008)"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir ao proprietário visualizar todos os serviços cadastrados e seus respectivos dados (nome, descrição, duração, preço e status).",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, visualizar todos os serviços cadastrados e que estão disponíveis para seus clientes. (RF009)"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir ao proprietário cadastrar novos serviços informando nome, descrição, preço e duração (em minutos ou horas).",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, cadastrar qualquer novo serviço que estará disponível para seus clientes, inserindo o nome do serviço, a descrição do serviço, o preço e sua duração em minutos ou horas. (RF010)"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir ao proprietário editar os dados de qualquer serviço cadastrado, incluindo nome, descrição, preço, duração e status (ativo/inativo).",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, editar qualquer dado de serviços que já esteja cadastrado no sistema. (RF011)"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir ao proprietário excluir qualquer serviço cadastrado.",
+      "dominio": "Secundário",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, excluir qualquer serviço que já esteja cadastrado no sistema. (RF012)"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir ao proprietário visualizar todos os horários de atendimento cadastrados.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, visualizar todos os horários cadastrados. (RF013)"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir ao proprietário cadastrar horários de atendimento especificando os dias da semana, os serviços disponíveis no dia e os horários de início e término.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, cadastrar horários os quais estará disponível para trabalho, inserindo os dias da semana que serão prestados atendimento, os serviços disponíveis no dia e por fim a hora de início e de término deste horário. (RF014)"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir ao proprietário editar os dados de qualquer horário de atendimento cadastrado (início, término, dias da semana e serviços).",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, editar qualquer dado dos horários cadastrados no sistema. (RF015)"
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir ao proprietário excluir qualquer horário de atendimento cadastrado.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao proprietário do salão, excluir qualquer horário que já esteja cadastrado no sistema. (RF016)"
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve permitir ao cliente autenticado visualizar a agenda com os serviços disponíveis para agendamento.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao cliente do salão, visualizar a agenda com os serviços disponíveis. (RF017)"
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve permitir ao cliente autenticado selecionar um serviço disponível para iniciar o processo de agendamento.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao cliente do salão, selecionar qualquer dos serviços cadastrados no sistema através do proprietário. O cliente deve estar cadastrado e ter acessado a página com seu e-mail e senha corretos. (RF018)"
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve permitir ao cliente selecionar uma data disponível para o agendamento, exibindo apenas datas vinculadas a horários de atendimento cadastrados para o serviço escolhido.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao cliente do salão, selecionar qualquer uma das datas disponíveis. Não devem aparecer datas em serviços que não estejam cadastrados em um horário. (RF019)"
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve permitir ao cliente selecionar uma hora disponível dentro da data escolhida para o agendamento.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao cliente do salão, selecionar qualquer uma das horas disponíveis na data selecionada. (RF020)"
+    },
+    {
+      "id": "RF21",
+      "descricao": "O sistema deve permitir ao cliente confirmar e concluir o agendamento somente após a seleção de serviço, data e hora, armazenando os dados no banco de dados e notificando o cliente.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "O sistema deve permitir ao cliente do salão realizar um agendamento, somente após ter selecionado um serviço, data e hora. (RF021)"
+    },
+    {
+      "id": "RF22",
+      "descricao": "O sistema deve exibir na agenda do cliente apenas serviços com status ativo.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "Na agenda disponibilizada para os clientes, devem ser apresentados apenas serviços com status ativo. (RN003)"
+    },
+    {
+      "id": "RF23",
+      "descricao": "O sistema deve exibir datas e horas disponíveis para agendamento somente para serviços que estejam vinculados a um horário de atendimento cadastrado.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "Na agenda disponibilizada para os clientes, devem ser apresentados datas e horas disponíveis somente para serviços que estão inseridos em um horário. (RN004)"
+    },
+    {
+      "id": "RF24",
+      "descricao": "O sistema deve permitir que apenas serviços com status ativo sejam adicionados a um horário de atendimento.",
+      "dominio": "Principal - Agendamento",
+      "trecho_origem": "Todos os serviços que serão acrescentados em algum dos horários cadastrados devem estar no estado ativo. (RN002)"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve apresentar interfaces responsivas e adaptadas para diferentes dispositivos, incluindo Desktop e Mobile.",
+      "categoria": "Portabilidade / Usabilidade",
+      "trecho_origem": "As interfaces do sistema devem ser adaptativas ao tipo de dispositivo utilizado pelo usuário, seja ele um Desktop ou Mobile. (RNF001)"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve funcionar completamente online como aplicação web, sendo compatível com o navegador Google Chrome.",
+      "categoria": "Compatibilidade / Disponibilidade",
+      "trecho_origem": "O sistema deve funcionar de forma completamente online na Web compatível com o principal navegador da atualidade, o Google Chrome. (RNF002)"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve utilizar como cores principais da interface rosa, roxo e branco (levemente azulado).",
+      "categoria": "Usabilidade / Interface",
+      "trecho_origem": "Por padrão as cores principais da aplicação devem ser: Rosa, Roxo e Branco (levemente azulado). (RNF003)"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve carregar interfaces e componentes em até 7 segundos.",
+      "categoria": "Desempenho",
+      "trecho_origem": "As interfaces e componentes responsivos da aplicação, necessitam de um carregamento de até 7 segundos. (RNF004)"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve restringir o acesso às páginas administrativas (agendamentos, clientes, serviços e horários) exclusivamente a usuários com perfil de proprietário.",
+      "categoria": "Segurança",
+      "trecho_origem": "Apenas usuários que são proprietários devem possuir acesso às páginas de agendamento, clientes, serviços e horários. (RNF005)"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve exibir todas as páginas — exceto login, cadastro e redefinição de senha — apenas para usuários autenticados.",
+      "categoria": "Segurança",
+      "trecho_origem": "Todas as páginas, exceto login, cadastro e redefinição de senhas, apenas devem ser exibidas para usuários autenticados. (RNF006)"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve implementar mecanismos de segurança como criptografia, controle de acesso e proteção contra ameaças cibernéticas para garantir integridade e privacidade dos dados.",
+      "categoria": "Segurança",
+      "trecho_origem": "Todas as medidas de segurança, como criptografia, controle de acesso e proteção contra ameaças cibernéticas, devem ser rigorosamente implementadas para garantir a integridade e a privacidade dos dados."
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve apresentar interface amigável e intuitiva, acessível a usuários com diferentes níveis de experiência tecnológica.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "priorizando a usabilidade do software, tornando-o intuitivo e acessível para todos os usuários, independentemente do nível de experiência tecnológica."
+    },
+    {
+      "id": "RNF09",
+      "descricao": "O sistema deve armazenar todos os dados na nuvem, garantindo escalabilidade e disponibilidade contínua.",
+      "categoria": "Escalabilidade / Disponibilidade",
+      "trecho_origem": "todos os dados da aplicação são armazenados na nuvem, utilizando o serviço de banco de dados MongoDB Atlas."
+    }
+  ]
+}

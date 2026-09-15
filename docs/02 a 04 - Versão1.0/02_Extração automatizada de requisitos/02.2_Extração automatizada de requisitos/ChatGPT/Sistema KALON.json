@@ -1,0 +1,187 @@
+{
+  "titulo_trabalho": "Sistema informatizado para agendamento de serviços",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir o cadastro de clientes.",
+      "trecho_origem": "cadastro das clientes"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir editar e excluir clientes.",
+      "trecho_origem": "cadastrar, editar ou excluir o cadastro de clientes"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir o agendamento de serviços.",
+      "trecho_origem": "agendamento de serviços"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir a seleção de serviços no agendamento.",
+      "trecho_origem": "seleção de serviços"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve receber solicitações de agendamento via formulário.",
+      "trecho_origem": "preenchendo um formulário de solicitação de agendamento"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve verificar a disponibilidade de horários.",
+      "trecho_origem": "verifica a disponibilidade para atender a cliente"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve sugerir horários alternativos quando não houver disponibilidade.",
+      "trecho_origem": "oferecer outras opções de horários disponíveis"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir confirmar agendamentos.",
+      "trecho_origem": "confirmar o agendamento"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir cancelar agendamentos.",
+      "trecho_origem": "cancelamento de agendamento"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir remarcar agendamentos.",
+      "trecho_origem": "remarcar seus agendamentos"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir visualizar a agenda por usuário.",
+      "trecho_origem": "Apresenta apenas as clientes agendadas por um determinado usuário"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir visualizar agendamentos em formato de calendário.",
+      "trecho_origem": "visualizar os agendamentos por dia, semana ou mês"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir visualizar solicitações de agendamento.",
+      "trecho_origem": "menu de solicitações apresenta todas as solicitações"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir aceitar ou negar solicitações de agendamento.",
+      "trecho_origem": "visualizar, aceitar ou negar solicitações de agendamento"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir cadastrar funcionários.",
+      "trecho_origem": "cadastrar funcionário"
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir gerenciar funcionários.",
+      "trecho_origem": "gerenciamento de funcionários"
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve registrar serviços prestados.",
+      "trecho_origem": "visualizar serviços prestados"
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve manter histórico de serviços.",
+      "trecho_origem": "histórico de serviços"
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve registrar o check-in do cliente no atendimento.",
+      "trecho_origem": "verificando se a cliente compareceu"
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve enviar pesquisa de satisfação ao cliente.",
+      "trecho_origem": "encaminhado para a cliente uma pesquisa de satisfação"
+    },
+    {
+      "id": "RF21",
+      "descricao": "O sistema deve permitir visualizar respostas da pesquisa de satisfação.",
+      "trecho_origem": "resposta pode ser visualizada na aplicação"
+    },
+    {
+      "id": "RF22",
+      "descricao": "O sistema deve gerar relatórios gerenciais.",
+      "trecho_origem": "apresentar os relatórios gerencias"
+    },
+    {
+      "id": "RF23",
+      "descricao": "O sistema deve gerar indicadores para apoio à decisão.",
+      "trecho_origem": "gerar indicadores relevantes ao processo de tomada de decisão"
+    },
+    {
+      "id": "RF24",
+      "descricao": "O sistema deve enviar notificações para manutenção de serviços.",
+      "trecho_origem": "encaminhar notificações de alerta para manutenção"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve ser compatível com Android e iOS.",
+      "categoria": "compatibilidade",
+      "trecho_origem": "compatível com os sistemas operacionais Android e iOS"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve estar disponível 24 horas por dia, 7 dias por semana.",
+      "categoria": "disponibilidade",
+      "trecho_origem": "disponível 24 horas por dia, 7 dias por semana"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve possuir design atrativo e de fácil leitura.",
+      "categoria": "usabilidade",
+      "trecho_origem": "design atrativo... fácil identificação e leitura"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve ser fácil de usar.",
+      "categoria": "usabilidade",
+      "trecho_origem": "facilidade de uso"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve proteger os dados dos usuários.",
+      "categoria": "segurança",
+      "trecho_origem": "proteção de dados"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve utilizar autenticação por login e senha.",
+      "categoria": "segurança",
+      "trecho_origem": "acesso mediante autenticação"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve possuir controle de acesso por perfil.",
+      "categoria": "segurança",
+      "trecho_origem": "controle de acesso... responsabilidade do administrador"
+    },
+    {
+      "id": "RNF08",
+      "descricao": "O sistema deve ser responsivo a diferentes dispositivos.",
+      "categoria": "usabilidade",
+      "trecho_origem": "totalmente responsiva"
+    },
+    {
+      "id": "RNF09",
+      "descricao": "O sistema deve ter alta velocidade de carregamento.",
+      "categoria": "desempenho",
+      "trecho_origem": "velocidade no carregamento"
+    },
+    {
+      "id": "RNF10",
+      "descricao": "O sistema deve minimizar a perda de dados.",
+      "categoria": "confiabilidade",
+      "trecho_origem": "minimizar o risco de perda de dados"
+    }
+  ]
+}

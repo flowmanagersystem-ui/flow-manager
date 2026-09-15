@@ -1,0 +1,28 @@
+ID;Tipo;Descrição;Categoria;Trecho do Texto
+RF01;Funcional;Permitir cadastro de agendamentos com data e horário;;armazenar uma agenda com datas e horários
+RF02;Funcional;Permitir inserir agendamentos;;inserir... um agendamento
+RF03;Funcional;Permitir alterar agendamentos;;alterar... um agendamento
+RF04;Funcional;Permitir excluir agendamentos;;excluir... um agendamento
+RF05;Funcional;Permitir buscar agendamentos;;buscar um agendamento
+RF06;Funcional;Associar cliente ao agendamento;;selecionar um cliente já cadastrado
+RF07;Funcional;Associar serviços ao agendamento;;lista de serviços cadastrados
+RF08;Funcional;Gerenciar agenda diária;;controle das tarefas do expediente
+RF09;Funcional;Cadastrar clientes;;cadastrar um cliente
+RF10;Funcional;Consultar/alterar/excluir clientes;;inserir, alterar e excluir cliente
+RF11;Funcional;Cadastrar serviços com duração e valor;;duração máxima, descrição e valor
+RF12;Funcional;Cadastrar funcionários;;cadastrar um funcionário
+RF13;Funcional;Controlar fluxo de caixa;;controle financeiro
+RF14;Funcional;Emitir relatórios;;emite relatório
+RF15;Funcional;Realizar backup e restauração;;Backup e Restaurar Backup
+RF16;Funcional;Controlar acesso por usuários;;controlar o acesso ao sistema
+RF17;Funcional;Permitir agendamento online; ;Possibilitar ao cliente fazer seu próprio agendamento
+RF18;Funcional;Permitir cancelamento de agendamento;;cancelamento
+RF19;Funcional;Permitir reagendamento;;reagendamento
+RF20;Funcional;Permitir escolha de profissional no agendamento;;escolha do profissional
+RNF01;Não Funcional;Rapidez no atendimento;Desempenho;forma rápida... agilizar o atendimento
+RNF02;Não Funcional;Facilidade de uso;Usabilidade;de maneira simples
+RNF03;Não Funcional;Controle de acesso seguro;Segurança;pessoa não autorizada não pode ter acesso
+RNF04;Não Funcional;Proteção contra perda de dados;Confiabilidade;evitando perdas acidentais
+RNF05;Não Funcional;Alta confiabilidade do banco de dados;Confiabilidade;alta confiabilidade
+RNF06;Não Funcional;Adequação a pequenos negócios;Escalabilidade;pequeno porte
+RNF07;Não Funcional;Execução em múltiplas plataformas;Portabilidade;linguagem multiplataforma

@@ -1,0 +1,149 @@
+{
+  "titulo_trabalho": "BeautyApp - Aplicativo para Agendamento de Serviços de Beleza",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir o cadastro de usuários do tipo cliente.",
+      "trecho_origem": "Usuário preenche os campos... será criada uma conta no aplicativo"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir autenticação de usuários por login e senha.",
+      "trecho_origem": "Inserir dados para fazer login"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir o encerramento de sessão (logout).",
+      "trecho_origem": "Sistema encerra sessão"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir que usuários editem seus dados cadastrais.",
+      "trecho_origem": "Alterar os dados necessários"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir o cadastro de profissionais por empresas.",
+      "trecho_origem": "Clicar no ícone de adicionar... digitar o nome do profissional"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir a edição de profissionais.",
+      "trecho_origem": "Editar o profissional desejado"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir a exclusão de profissionais.",
+      "trecho_origem": "Clicar no ícone de deletar"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve permitir o cadastro de serviços associados a profissionais.",
+      "trecho_origem": "Cadastrar ou Excluir o Serviço"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir definir horários disponíveis para cada profissional.",
+      "trecho_origem": "Cadastrar ou Excluir o Serviço / Horário"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir visualizar empresas e profissionais cadastrados.",
+      "trecho_origem": "São apresentadas as empresas/profissionais"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir a criação de agendamentos.",
+      "trecho_origem": "Criar um novo agendamento"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir selecionar empresa, profissional e serviço no agendamento.",
+      "trecho_origem": "Selecionar a empresa, o profissional e o serviço"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve permitir selecionar data para o agendamento.",
+      "trecho_origem": "Selecionar uma data"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir selecionar horários disponíveis.",
+      "trecho_origem": "Dropdown com as opções de horários disponíveis"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir confirmar o agendamento.",
+      "trecho_origem": "Confirmar o agendamento"
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve impedir a criação de agendamento com campos incompletos.",
+      "trecho_origem": "Sistema não deixa finalizar... solicita preenchimento"
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve permitir a exclusão de agendamentos.",
+      "trecho_origem": "Sistema exclui o agendamento"
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve permitir ao cliente visualizar seus agendamentos.",
+      "trecho_origem": "Verificar os agendamentos criados para ele"
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve permitir à empresa visualizar os agendamentos recebidos.",
+      "trecho_origem": "Verificar os agendamentos criados em seu nome"
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve permitir o controle da agenda por parte da empresa.",
+      "trecho_origem": "Controle do seu dia... quantidade de clientes agendados"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve ser simples e intuitivo para o usuário.",
+      "categoria": "Usabilidade",
+      "trecho_origem": "software simples e intuitivo"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve apresentar boa performance no processo de agendamento.",
+      "categoria": "Desempenho",
+      "trecho_origem": "velocidade e fluidez do processo de agendar"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve garantir segurança na comunicação de dados.",
+      "categoria": "Segurança",
+      "trecho_origem": "conexão segura por uso do protocolo SSL"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve permitir acesso apenas a usuários autenticados.",
+      "categoria": "Segurança",
+      "trecho_origem": "somente usuários autenticados poderão fazer registros"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve ser escalável conforme o crescimento da aplicação.",
+      "categoria": "Escalabilidade",
+      "trecho_origem": "banco... consegue aumentar proporcionalmente à necessidade"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve estar disponível em múltiplas plataformas (mobile/web).",
+      "categoria": "Disponibilidade",
+      "trecho_origem": "várias plataformas... Android, IOS, web"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve garantir confiabilidade no armazenamento de dados.",
+      "categoria": "Confiabilidade",
+      "trecho_origem": "gerenciamento de dados através de coleções"
+    }
+  ]
+}

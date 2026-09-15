@@ -1,0 +1,27 @@
+ID;Tipo;Descrição;Categoria;Trecho do Texto
+RF01;Funcional;O sistema deve permitir o cadastro de clientes;;cadastro das clientes
+RF03;Funcional;O sistema deve permitir o agendamento de serviços;;agendamento de serviços
+RF06;Funcional;O sistema deve verificar a disponibilidade de horários;;verifica a disponibilidade
+RF07;Funcional;O sistema deve sugerir horários alternativos;;oferecer outras opções
+RF08;Funcional;O sistema deve confirmar agendamentos;;confirmar o agendamento
+RF09;Funcional;O sistema deve cancelar agendamentos;;cancelamento de agendamento
+RF10;Funcional;O sistema deve remarcar agendamentos;;remarcar seus agendamentos
+RF12;Funcional;O sistema deve visualizar agenda em calendário;;dia, semana ou mês
+RF13;Funcional;O sistema deve visualizar solicitações de agendamento;;menu de solicitações
+RF14;Funcional;O sistema deve aceitar ou negar solicitações;;aceitar ou negar
+RF15;Funcional;O sistema deve cadastrar funcionários;;cadastrar funcionário
+RF18;Funcional;O sistema deve manter histórico de serviços;;histórico de serviços
+RF20;Funcional;O sistema deve enviar pesquisa de satisfação;;pesquisa de satisfação
+RF22;Funcional;O sistema deve gerar relatórios gerenciais;;relatórios gerenciais
+RF23;Funcional;O sistema deve gerar indicadores;;tomada de decisão
+
+RNF01;Não Funcional;Compatibilidade com Android e iOS;Compatibilidade;Android e iOS
+RNF02;Não Funcional;Disponibilidade 24/7;Disponibilidade;24 horas por dia
+RNF03;Não Funcional;Design atrativo;Usabilidade;design atrativo
+RNF04;Não Funcional;Facilidade de uso;Usabilidade;facilidade de uso
+RNF05;Não Funcional;Proteção de dados;Segurança;proteção de dados
+RNF06;Não Funcional;Autenticação por login e senha;Segurança;login e senha
+RNF07;Não Funcional;Controle de acesso;Segurança;controle de acesso
+RNF08;Não Funcional;Responsividade;Usabilidade;responsiva
+RNF09;Não Funcional;Velocidade de carregamento;Desempenho;velocidade
+RNF10;Não Funcional;Prevenção de perda de dados;Confiabilidade;perda de dados

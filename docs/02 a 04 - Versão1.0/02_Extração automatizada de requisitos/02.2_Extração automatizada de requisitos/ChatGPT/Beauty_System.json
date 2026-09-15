@@ -1,0 +1,149 @@
+{
+  "titulo_trabalho": "Sistema para Gerenciamento de Salão de Beleza – Beauty System",
+  "requisitos_funcionais": [
+    {
+      "id": "RF01",
+      "descricao": "O sistema deve permitir o cadastro de agendamentos com data e horário.",
+      "trecho_origem": "armazenar uma agenda com datas e horários"
+    },
+    {
+      "id": "RF02",
+      "descricao": "O sistema deve permitir inserir agendamentos.",
+      "trecho_origem": "é possível inserir... um agendamento"
+    },
+    {
+      "id": "RF03",
+      "descricao": "O sistema deve permitir alterar agendamentos.",
+      "trecho_origem": "alterar... um agendamento"
+    },
+    {
+      "id": "RF04",
+      "descricao": "O sistema deve permitir excluir agendamentos.",
+      "trecho_origem": "excluir... um agendamento"
+    },
+    {
+      "id": "RF05",
+      "descricao": "O sistema deve permitir buscar agendamentos.",
+      "trecho_origem": "buscar um agendamento"
+    },
+    {
+      "id": "RF06",
+      "descricao": "O sistema deve permitir associar um cliente ao agendamento.",
+      "trecho_origem": "opção de selecionar um cliente já cadastrado"
+    },
+    {
+      "id": "RF07",
+      "descricao": "O sistema deve permitir associar serviços ao agendamento.",
+      "trecho_origem": "lista de todos os serviços cadastrados no sistema"
+    },
+    {
+      "id": "RF08",
+      "descricao": "O sistema deve manter uma agenda organizada das tarefas diárias.",
+      "trecho_origem": "controle das tarefas a serem executadas durante o expediente"
+    },
+    {
+      "id": "RF09",
+      "descricao": "O sistema deve permitir o cadastro de clientes.",
+      "trecho_origem": "opção de cadastrar um cliente"
+    },
+    {
+      "id": "RF10",
+      "descricao": "O sistema deve permitir consultar, alterar e excluir clientes.",
+      "trecho_origem": "inserir, alterar e excluir um cliente"
+    },
+    {
+      "id": "RF11",
+      "descricao": "O sistema deve permitir o cadastro de serviços com duração e valor.",
+      "trecho_origem": "dados do serviço, como nome, duração máxima, descrição e valor"
+    },
+    {
+      "id": "RF12",
+      "descricao": "O sistema deve permitir o cadastro de funcionários.",
+      "trecho_origem": "opção de cadastrar um funcionário"
+    },
+    {
+      "id": "RF13",
+      "descricao": "O sistema deve controlar o fluxo de caixa.",
+      "trecho_origem": "controle financeiro (fluxo de caixa)"
+    },
+    {
+      "id": "RF14",
+      "descricao": "O sistema deve permitir a emissão de relatórios.",
+      "trecho_origem": "emite relatório de informações completas"
+    },
+    {
+      "id": "RF15",
+      "descricao": "O sistema deve permitir backup e restauração de dados.",
+      "trecho_origem": "Backup e Restaurar Backup da base de dados"
+    },
+    {
+      "id": "RF16",
+      "descricao": "O sistema deve permitir o cadastro de usuários com controle de acesso.",
+      "trecho_origem": "controlar o acesso ao sistema"
+    },
+    {
+      "id": "RF17",
+      "descricao": "O sistema deve permitir que o cliente realize agendamento online (futuro).",
+      "trecho_origem": "Possibilitar ao cliente fazer seu próprio agendamento"
+    },
+    {
+      "id": "RF18",
+      "descricao": "O sistema deve permitir o cancelamento de agendamentos (futuro).",
+      "trecho_origem": "permitirá ainda o... cancelamento"
+    },
+    {
+      "id": "RF19",
+      "descricao": "O sistema deve permitir o reagendamento de serviços (futuro).",
+      "trecho_origem": "permitirá ainda o reagendamento"
+    },
+    {
+      "id": "RF20",
+      "descricao": "O sistema deve permitir escolher o profissional no agendamento (futuro).",
+      "trecho_origem": "escolha do serviço, data, hora e o profissional"
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {
+      "id": "RNF01",
+      "descricao": "O sistema deve garantir rapidez no atendimento.",
+      "categoria": "desempenho",
+      "trecho_origem": "forma rápida... agilizar o atendimento"
+    },
+    {
+      "id": "RNF02",
+      "descricao": "O sistema deve ser simples de utilizar.",
+      "categoria": "usabilidade",
+      "trecho_origem": "de maneira simples"
+    },
+    {
+      "id": "RNF03",
+      "descricao": "O sistema deve garantir segurança no acesso às informações.",
+      "categoria": "segurança",
+      "trecho_origem": "pessoa não autorizada não pode ter acesso"
+    },
+    {
+      "id": "RNF04",
+      "descricao": "O sistema deve garantir integridade dos dados por meio de backup.",
+      "categoria": "confiabilidade",
+      "trecho_origem": "evitando perdas acidentais"
+    },
+    {
+      "id": "RNF05",
+      "descricao": "O sistema deve apresentar alta confiabilidade no armazenamento de dados.",
+      "categoria": "confiabilidade",
+      "trecho_origem": "alta confiabilidade e facilidade de uso (MySQL)"
+    },
+    {
+      "id": "RNF06",
+      "descricao": "O sistema deve ser compatível com pequenos estabelecimentos.",
+      "categoria": "escalabilidade",
+      "trecho_origem": "compatível com a realidade dos estabelecimentos de pequeno porte"
+    },
+    {
+      "id": "RNF07",
+      "descricao": "O sistema deve ser multiplataforma.",
+      "categoria": "portabilidade",
+      "trecho_origem": "linguagem multiplataforma"
+    }
+  ]
+}

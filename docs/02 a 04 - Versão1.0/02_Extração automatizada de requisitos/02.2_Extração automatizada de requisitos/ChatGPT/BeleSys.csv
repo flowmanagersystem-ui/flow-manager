@@ -1,0 +1,23 @@
+ID;Tipo;Descrição;Categoria;Trecho do Texto
+RF01;Funcional;O sistema deve permitir criar agendamentos;;formulário de cadastro de agendamento
+RF02;Funcional;O sistema deve permitir visualizar agendamentos;;recupera os agendamentos e os exibe
+RF03;Funcional;O sistema deve permitir atualizar agendamentos;;salva as mudanças
+RF04;Funcional;O sistema deve permitir cancelar agendamentos;;confirme ou cancele agendamentos
+RF05;Funcional;O sistema deve permitir confirmar agendamentos;;confirme ou cancele agendamentos
+RF06;Funcional;O sistema deve exibir agenda diária, semanal e mensal;;visualização interativa de calendário
+RF07;Funcional;O sistema deve controlar agenda por profissional;;controle de agenda individual
+RF08;Funcional;O sistema deve validar conflitos de horários;;impedir sobreposição de horários
+RF09;Funcional;O sistema deve permitir visualização por funcionário;;atendimentos atribuídos a eles
+RF10;Funcional;O sistema deve permitir visualizar detalhes do agendamento;;detalhes de um agendamento
+RF11;Funcional;O sistema deve atualizar status do agendamento;;Agendado, Finalizado, Cancelado
+RF12;Funcional;O sistema deve enviar lembretes automáticos;;lembretes via WhatsApp
+RF13;Funcional;O sistema deve cadastrar funcionários;;cadastrem novos funcionários
+RF14;Funcional;O sistema deve cadastrar serviços;;cadastrem novos serviços
+RF15;Funcional;O sistema deve gerar relatórios financeiros;;faturamento por período
+RNF01;Não Funcional;Interface responsiva;Usabilidade;dispositivos móveis e desktops
+RNF02;Não Funcional;Facilidade de uso;Usabilidade;navegar com facilidade
+RNF03;Não Funcional;Criptografia de senhas;Segurança;bcrypt
+RNF04;Não Funcional;Acesso autenticado;Segurança;usuários autenticados
+RNF05;Não Funcional;Controle de acesso por perfil;Segurança;níveis de acesso
+RNF06;Não Funcional;Evitar conflitos de agendamento;Confiabilidade;sobreposição de horários
+RNF07;Não Funcional;Execução automática de lembretes;Desempenho;node-cron
