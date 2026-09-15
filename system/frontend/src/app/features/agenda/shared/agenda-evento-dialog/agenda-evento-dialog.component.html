@@ -55,6 +55,13 @@
         <mat-icon class="icon-outlined">check_circle</mat-icon>
       </button>
       <button
+        class="btn-icon"
+        matTooltip="Remarcar agendamento"
+        (click)="onAction('remarcar')"
+        *ngIf="hasAction('remarcar') && evento.status === 'AGENDADO'">
+        <mat-icon class="icon-outlined">event_repeat</mat-icon>
+      </button>
+      <button
         class="btn-icon btn-icon--danger"
         matTooltip="Cancelar agendamento"
         (click)="onAction('cancelar')"

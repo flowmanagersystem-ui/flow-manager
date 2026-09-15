@@ -53,15 +53,21 @@ public class SecurityConfig {
                 .requestMatchers("/", "/api/auth/login", "/api/auth/refresh").permitAll()
                 .requestMatchers("/api/auth/login", "/api/auth/cadastro").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/api/clientes/me").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
+
                 .requestMatchers(HttpMethod.GET, "/api/clientes/**").hasRole("ADMIN")
                 .requestMatchers("/api/clientes/**").hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.PATCH, "/api/agendamentos/*/reagendar").hasAnyRole("ADMIN", "CLIENTE")
+
                 .requestMatchers(HttpMethod.GET, "/api/profissionais/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .requestMatchers("/api/profissionais/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/servicos/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .requestMatchers("/api/servicos/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/agendamentos/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .requestMatchers(HttpMethod.POST, "/api/agendamentos/**").hasAnyRole("ADMIN", "CLIENTE")
-                .requestMatchers(HttpMethod.PATCH, "/api/agendamentos/*/status").hasAnyRole("ADMIN", "PROFISSIONAL")
+                .requestMatchers(HttpMethod.PATCH, "/api/agendamentos/*/status").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .requestMatchers("/api/agendamentos/**").hasRole("ADMIN")
                 .requestMatchers("/api/agenda/**").hasAnyRole("ADMIN", "PROFISSIONAL", "CLIENTE")
                 .anyRequest().authenticated()

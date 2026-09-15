@@ -148,34 +148,40 @@ class AgendaService {
         int duracaoMinutos,
         Long profissionalId
     ) {
-        // busca serviços já agendados naquele dia
         LocalDateTime inicioDia = data.atStartOfDay();
         LocalDateTime fimDia = data.atTime(23, 59, 59);
- 
+
         List<AgendamentoServico> ocupados = agendamentoRepository
             .findServicosNoDia(profissionalId, inicioDia, fimDia);
- 
+
         List<SlotDTO> slots = new ArrayList<>();
- 
+
         for (HorarioAtendimento h : horarios) {
-            LocalTime atual = h.getHoraInicio();
+            LocalTime inicio = h.getHoraInicio();
             LocalTime fim = h.getHoraFim();
- 
+
+            // horário cruzando a meia-noite (ou mal configurado) não é suportado por LocalTime puro;
+            // ignorar em vez de entrar em loop infinito
+            if (!fim.isAfter(inicio)) {
+                continue;
+            }
+
+            LocalTime atual = inicio;
+
             while (!atual.plusMinutes(duracaoMinutos).isAfter(fim)) {
                 LocalDateTime slotInicio = data.atTime(atual);
                 LocalDateTime slotFim = slotInicio.plusMinutes(duracaoMinutos);
- 
-                // verifica sobreposição com agendamentos existentes
+
                 boolean ocupado = ocupados.stream().anyMatch(o ->
                     o.getDataHoraInicio().isBefore(slotFim) &&
                     o.getDataHoraFim().isAfter(slotInicio)
                 );
- 
+
                 slots.add(new SlotDTO(atual, !ocupado));
                 atual = atual.plusMinutes(duracaoMinutos);
             }
         }
- 
+
         return slots;
     }
  

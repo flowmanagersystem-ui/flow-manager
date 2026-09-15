@@ -85,7 +85,6 @@ export class AgendamentoFormComponent {
   ngOnInit(): void {
     this.isCliente = this.authService.getPerfil() === 'CLIENTE'
 
-    console.log('Agendamento recebido no form:', this.agendamento)
     this.formulario = this.fb.group({
       id:         [this.agendamento?.id],
       cliente:    [null, this.isCliente ? [] : Validators.required],

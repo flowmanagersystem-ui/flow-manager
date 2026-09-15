@@ -22,6 +22,8 @@ import { AgendaService } from '../agenda.service';
 import { AgendaEvento, AgendaEventoExtendedProps } from '../shared/agenda-evento.interface';
 import { AgendaEventoDialogComponent } from '../shared/agenda-evento-dialog/agenda-evento-dialog.component';
 
+import { RemarcarAgendamentoComponent } from '../../agendamentos/cliente/remarcar-agendamento.component';
+
 @Component({
   selector: 'app-cliente-agenda',
   standalone: true,
@@ -84,8 +86,6 @@ export class ClienteAgendaComponent {
       component: AgendamentoFormComponent,
     })
 
-    console.log('Dialog aberto para novo agendamento.')
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.carregarEventos()
@@ -109,13 +109,16 @@ export class ClienteAgendaComponent {
       maxWidth: '95vw',
       data: {
         evento,
-        actions: ['cancelar']
+        actions: ['remarcar', 'cancelar']
       }
     })
 
     dialogRef.afterClosed().subscribe(action => {
       if (action === 'cancelar') {
         this.cancelarAgendamento(evento.agendamentoId)
+      } 
+      if (action === 'remarcar') {
+        this.abrirRemarcacao(evento.agendamentoId)
       }
     })
   }
@@ -148,4 +151,31 @@ export class ClienteAgendaComponent {
         error: () => this.snackBar.open('Erro ao cancelar agendamento.', 'Fechar', { duration: 5000 })
       })
   }
+
+  private abrirRemarcacao(agendamentoId: number) {
+    const dialogRef = this.dialog.open(RemarcarAgendamentoComponent, {
+      width: '560px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
+    })
+
+    dialogRef.afterClosed().subscribe(servicos => {
+      if (!servicos) return
+
+      this.agendamentosService.reagendar(agendamentoId, servicos)
+        .subscribe({
+          next: () => {
+            this.snackBar.open('Agendamento remarcado com sucesso.', 'Fechar', { duration: 4000 })
+            this.carregarEventos()
+          },
+          error: (err) => {
+            const mensagem = err.status === 409
+              ? 'Horário indisponível para remarcação.'
+              : 'Erro ao remarcar agendamento.'
+            this.snackBar.open(mensagem, 'Fechar', { duration: 5000 })
+          }
+        })
+    })
+  }
+
 }
