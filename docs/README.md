@@ -8,6 +8,9 @@ Os arquivos estão organizados de acordo com as etapas da metodologia e contempl
 
 ```text
 docs/
+├── requisitos_consolidados.md
+├── matriz_rastreabilidade_requisitos.md
+│
 ├── 01 - Seleção do corpus/
 │   ├── BeautyApp.pdf
 │   ├── Beauty_System.pdf
@@ -40,6 +43,11 @@ docs/
     ├── consolidacao_dos_requistos.xlsx
     └── requistos_consolidados.xlsx
 ```
+
+## Documentos de apoio
+
+- [Requisitos consolidados](requisitos_consolidados.md): versão em Markdown dos requisitos originados nas planilhas de consolidação, disponibilizada para facilitar a leitura e a visualização.
+- [Matriz de rastreabilidade de requisitos](matriz_rastreabilidade_requisitos.md): rastreabilidade executada pelo Codex, relacionando cada requisito consolidado às evidências no código-fonte. O fechamento da análise confirmou a implementação de todos os 38 requisitos (36 funcionais e 2 não funcionais).
 
 ## Organização dos artefatos
 
